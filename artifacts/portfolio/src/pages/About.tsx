@@ -1,5 +1,6 @@
+import { useState, useRef } from "react";
 import { Link } from "wouter";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { PageTransition } from "@/components/ui/PageTransition";
 
@@ -32,6 +33,24 @@ const strengths = [
 ];
 
 export default function About() {
+  const [hovered, setHovered] = useState(false);
+  const [tilt, setTilt] = useState({ x: 0, y: 0 });
+  const imgRef = useRef<HTMLDivElement>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: imgRef,
+    offset: ["start end", "end start"],
+  });
+  const scrollRotateY = useTransform(scrollYProgress, [0, 0.5, 1], [18, 0, -18]);
+  const scrollSkewY = useTransform(scrollYProgress, [0, 0.5, 1], [4, 0, -4]);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width - 0.5;
+    const y = (e.clientY - rect.top) / rect.height - 0.5;
+    setTilt({ x: y * -16, y: x * 16 });
+  };
+
   return (
     <PageTransition className="pt-32 pb-0 min-h-screen">
 
@@ -41,18 +60,39 @@ export default function About() {
 
           {/* Image column */}
           <div className="lg:col-span-5 order-2 lg:order-1">
+            {/* Scroll skew wrapper */}
             <motion.div
-              initial={{ opacity: 0, rotate: -1.5, scale: 0.96 }}
-              animate={{ opacity: 1, rotate: 0, scale: 1 }}
+              ref={imgRef}
+              initial={{ opacity: 0, scale: 0.96 }}
+              animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-              className="relative rounded-[2.5rem] overflow-hidden aspect-[3/4] bg-muted shadow-2xl"
+              style={{ rotateY: scrollRotateY, skewY: scrollSkewY }}
             >
-              <img
-                src={`${import.meta.env.BASE_URL}images/profile.png`}
-                alt="Eve Kung — Product Designer"
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 bg-accent/10 mix-blend-multiply" />
+              {/* 3D tilt wrapper */}
+              <div style={{ perspective: "900px" }}>
+                <motion.div
+                  animate={{ rotateX: tilt.x, rotateY: tilt.y }}
+                  transition={{ duration: 0.12, ease: "linear" }}
+                  onMouseMove={handleMouseMove}
+                  onMouseEnter={() => setHovered(true)}
+                  onMouseLeave={() => { setHovered(false); setTilt({ x: 0, y: 0 }); }}
+                  className="relative cursor-pointer"
+                  style={{ transformStyle: "preserve-3d" }}
+                >
+                  <img
+                    src={`${import.meta.env.BASE_URL}images/profile.png`}
+                    alt="Eve Kung — Product Designer"
+                    className={`w-full h-auto block transition-opacity duration-300 ${hovered ? "opacity-0" : "opacity-100"}`}
+                    draggable={false}
+                  />
+                  <img
+                    src={`${import.meta.env.BASE_URL}images/profile-hover.png`}
+                    alt="Eve Kung with her cat"
+                    className={`w-full h-auto block absolute inset-0 transition-opacity duration-300 ${hovered ? "opacity-100" : "opacity-0"}`}
+                    draggable={false}
+                  />
+                </motion.div>
+              </div>
             </motion.div>
 
             <motion.div
