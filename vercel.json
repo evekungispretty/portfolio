@@ -1,8 +1,7 @@
 {
-  "buildCommand": "pnpm run build",
+  "buildCommand": "pnpm --filter @workspace/portfolio run build",
   "outputDirectory": "artifacts/portfolio/dist/public",
-  "framework": null,
-  "routes": [
+"routes": [
     { "handle": "filesystem" },
     { "src": "/(.*)", "dest": "/index.html" }
   ]
