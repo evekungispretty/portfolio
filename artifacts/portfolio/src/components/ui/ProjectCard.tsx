@@ -26,20 +26,12 @@ export function ProjectCard({ project, index, size = "default" }: ProjectCardPro
           className={`relative w-full overflow-hidden rounded-2xl lg:rounded-3xl isolate ${
             isLarge ? "aspect-[16/7]" : "aspect-[4/3]"
           } ${project.cardClass}`}
-          style={{ backgroundColor: `hsl(var(--card-tint, var(--muted)))` }}
         >
-          {/* Color tint background layer */}
-          <div
-            className="absolute inset-0 opacity-100"
-            style={{ backgroundColor: `hsl(var(--card-tint, var(--muted)))` }}
-          />
-
           {/* Project image */}
           <img
             src={project.imageUrl}
             alt={project.title}
-            className="absolute inset-0 w-full h-full object-cover transition-all duration-700 ease-out grayscale group-hover:grayscale-0 group-hover:scale-[1.05]"
-            style={{ mixBlendMode: "multiply" }}
+            className="absolute inset-0 w-full h-full object-cover transition-all duration-700 ease-out group-hover:scale-[1.05]"
           />
 
           {/* Subtle dark overlay on hover */}

@@ -93,13 +93,13 @@ export default function CaseStudy() {
   const currentIndex = projects.findIndex((p) => p.slug === slug);
   const project = projects[currentIndex];
 
+  const sectionIds = project?.caseStudy.map((s) => s.id) ?? [];
+  const activeId = useActiveSection(sectionIds);
+
   if (!project) return <NotFound />;
 
   const nextProject = projects[(currentIndex + 1) % projects.length];
   const prevProject = projects[(currentIndex - 1 + projects.length) % projects.length];
-
-  const sectionIds = project.caseStudy.map((s) => s.id);
-  const activeId = useActiveSection(sectionIds);
 
   return (
     <motion.div
