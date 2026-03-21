@@ -14,10 +14,8 @@ export function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-    window.addEventListener("scroll", handleScroll);
+    const handleScroll = () => setIsScrolled(window.scrollY > 50);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -28,29 +26,39 @@ export function Navbar() {
   }, [path]);
 
   return (
-    <header 
+    <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? "py-4" : "py-6"
+        isScrolled ? "py-3" : "py-5"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className={`
-          flex items-center justify-between px-6 py-4 rounded-full transition-all duration-500
-          ${isScrolled ? "bg-background/80 backdrop-blur-xl border border-border shadow-sm" : "bg-transparent"}
-        `}>
+        <div
+          className={`flex items-center justify-between px-5 py-3.5 rounded-full transition-all duration-500 ${
+            isScrolled
+              ? "bg-background/85 backdrop-blur-xl border border-border shadow-md shadow-black/5"
+              : "bg-transparent"
+          }`}
+        >
           {/* Logo / Name */}
-          <Link href="/" className="relative z-50 text-xl font-display font-bold text-foreground tracking-tight group overflow-hidden">
-            <span className="block transition-transform duration-300 group-hover:-translate-y-full">Jordan Lee.</span>
-            <span className="absolute inset-0 block transition-transform duration-300 translate-y-full group-hover:translate-y-0 text-accent dark:text-accent">Jordan Lee.</span>
+          <Link
+            href="/"
+            className="relative z-50 font-display font-bold text-foreground tracking-tight group overflow-hidden text-base"
+          >
+            <span className="block transition-transform duration-300 group-hover:-translate-y-full">
+              Eve Kung
+            </span>
+            <span className="absolute inset-0 block transition-transform duration-300 translate-y-full group-hover:translate-y-0 text-accent">
+              Eve Kung
+            </span>
           </Link>
 
           {/* Desktop Nav */}
-          <nav className="hidden md:flex items-center gap-1">
+          <nav className="hidden md:flex items-center gap-1" aria-label="Main navigation">
             {links.map((link) => {
               const [isActive] = useRoute(link.href);
               return (
-                <Link 
-                  key={link.label} 
+                <Link
+                  key={link.label}
                   href={link.href}
                   className="relative px-5 py-2 text-sm font-medium rounded-full transition-colors hover:text-foreground text-muted-foreground outline-none focus-visible:ring-2 ring-accent"
                 >
@@ -65,49 +73,51 @@ export function Navbar() {
                 </Link>
               );
             })}
-            
-            <Link 
+
+            <Link
               href="/contact"
-              className="ml-4 px-6 py-2.5 rounded-full bg-foreground text-background text-sm font-semibold hover:bg-accent hover:text-accent-foreground transition-colors duration-300 outline-none focus-visible:ring-2 ring-offset-2 ring-offset-background ring-foreground"
+              className="ml-4 px-5 py-2.5 rounded-full bg-foreground text-background text-sm font-semibold hover:bg-accent hover:text-white transition-all duration-300 outline-none focus-visible:ring-2 ring-offset-2 ring-offset-background ring-foreground"
             >
               Let's Talk
             </Link>
           </nav>
 
           {/* Mobile Menu Toggle */}
-          <button 
+          <button
             className="md:hidden relative z-50 p-2 text-foreground"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle menu"
+            aria-expanded={mobileMenuOpen}
           >
-            {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            {mobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
         </div>
       </div>
 
       {/* Mobile Menu Overlay */}
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0, y: "-100%" }}
-        animate={{ 
+        animate={{
           opacity: mobileMenuOpen ? 1 : 0,
-          y: mobileMenuOpen ? 0 : "-100%"
+          y: mobileMenuOpen ? 0 : "-100%",
         }}
         transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-        className="fixed inset-0 z-40 bg-background flex flex-col items-center justify-center gap-8 md:hidden"
+        className="fixed inset-0 z-40 bg-background flex flex-col items-center justify-center gap-6 md:hidden"
         style={{ pointerEvents: mobileMenuOpen ? "auto" : "none" }}
+        aria-hidden={!mobileMenuOpen}
       >
         {links.map((link) => (
-          <Link 
-            key={link.label} 
+          <Link
+            key={link.label}
             href={link.href}
             className="text-4xl font-display font-bold text-foreground hover:text-accent transition-colors"
           >
             {link.label}
           </Link>
         ))}
-        <Link 
+        <Link
           href="/contact"
-          className="mt-4 px-8 py-4 rounded-full bg-accent text-accent-foreground text-xl font-bold font-display"
+          className="mt-4 px-8 py-4 rounded-full bg-accent text-white text-xl font-bold font-display"
         >
           Let's Talk
         </Link>

@@ -1,34 +1,38 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Syne:wght@500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Syne:wght@500;600;700;800&display=swap');
 @import "tailwindcss";
 
 @theme inline {
   --font-sans: 'Inter', sans-serif;
   --font-display: 'Syne', sans-serif;
+  --font-serif: 'Instrument Serif', serif;
 
   --color-background: hsl(var(--background));
   --color-foreground: hsl(var(--foreground));
-  
+
   --color-card: hsl(var(--card));
   --color-card-foreground: hsl(var(--card-foreground));
-  
+
   --color-popover: hsl(var(--popover));
   --color-popover-foreground: hsl(var(--popover-foreground));
-  
+
   --color-primary: hsl(var(--primary));
   --color-primary-foreground: hsl(var(--primary-foreground));
-  
+
   --color-secondary: hsl(var(--secondary));
   --color-secondary-foreground: hsl(var(--secondary-foreground));
-  
+
   --color-muted: hsl(var(--muted));
   --color-muted-foreground: hsl(var(--muted-foreground));
-  
+
   --color-accent: hsl(var(--accent));
   --color-accent-foreground: hsl(var(--accent-foreground));
-  
+
+  --color-lime: hsl(var(--lime));
+  --color-lime-foreground: hsl(var(--lime-foreground));
+
   --color-destructive: hsl(var(--destructive));
   --color-destructive-foreground: hsl(var(--destructive-foreground));
-  
+
   --color-border: hsl(var(--border));
   --color-input: hsl(var(--input));
   --color-ring: hsl(var(--ring));
@@ -41,69 +45,75 @@
 }
 
 :root {
-  /* Warm off-white background */
-  --background: 60 14% 95%;
-  /* Near black foreground */
-  --foreground: 0 0% 5%;
-  
-  --card: 0 0% 100%;
-  --card-foreground: 0 0% 5%;
-  
-  --popover: 0 0% 100%;
-  --popover-foreground: 0 0% 5%;
-  
-  --primary: 0 0% 5%;
-  --primary-foreground: 60 14% 95%;
-  
-  --secondary: 0 0% 90%;
-  --secondary-foreground: 0 0% 5%;
-  
-  --muted: 0 0% 88%;
-  --muted-foreground: 0 0% 40%;
-  
-  /* Orange accent */
-  --accent: 31 86% 49%;
-  --accent-foreground: 0 0% 5%;
-  
+  /* Warm editorial cream */
+  --background: 42 22% 93%;
+  /* Rich near-black */
+  --foreground: 25 10% 8%;
+
+  --card: 40 28% 97%;
+  --card-foreground: 25 10% 8%;
+
+  --popover: 40 28% 97%;
+  --popover-foreground: 25 10% 8%;
+
+  --primary: 25 10% 8%;
+  --primary-foreground: 42 22% 93%;
+
+  --secondary: 38 18% 88%;
+  --secondary-foreground: 25 10% 8%;
+
+  --muted: 38 14% 85%;
+  --muted-foreground: 25 8% 42%;
+
+  /* Bold coral-orange accent */
+  --accent: 16 95% 54%;
+  --accent-foreground: 0 0% 100%;
+
+  /* Lime highlight for selective use */
+  --lime: 74 95% 52%;
+  --lime-foreground: 25 10% 8%;
+
   --destructive: 0 84% 60%;
-  --destructive-foreground: 60 14% 95%;
-  
-  --border: 0 0% 85%;
-  --input: 0 0% 85%;
-  --ring: 0 0% 5%;
-  
+  --destructive-foreground: 42 22% 93%;
+
+  --border: 38 12% 82%;
+  --input: 38 12% 82%;
+  --ring: 25 10% 8%;
+
   --radius: 0.75rem;
 }
 
 .dark {
-  --background: 0 0% 5%;
-  --foreground: 60 14% 95%;
-  
-  --card: 0 0% 8%;
-  --card-foreground: 60 14% 95%;
-  
-  --popover: 0 0% 8%;
-  --popover-foreground: 60 14% 95%;
-  
-  --primary: 60 14% 95%;
-  --primary-foreground: 0 0% 5%;
-  
-  --secondary: 0 0% 15%;
-  --secondary-foreground: 60 14% 95%;
-  
-  --muted: 0 0% 15%;
-  --muted-foreground: 0 0% 60%;
-  
-  /* Orange accent */
-  --accent: 31 86% 49%;
-  --accent-foreground: 0 0% 5%;
-  
+  --background: 25 10% 6%;
+  --foreground: 42 20% 92%;
+
+  --card: 25 10% 9%;
+  --card-foreground: 42 20% 92%;
+
+  --popover: 25 10% 9%;
+  --popover-foreground: 42 20% 92%;
+
+  --primary: 42 20% 92%;
+  --primary-foreground: 25 10% 6%;
+
+  --secondary: 25 10% 14%;
+  --secondary-foreground: 42 20% 92%;
+
+  --muted: 25 10% 14%;
+  --muted-foreground: 25 5% 58%;
+
+  --accent: 16 95% 54%;
+  --accent-foreground: 0 0% 100%;
+
+  --lime: 74 95% 52%;
+  --lime-foreground: 25 10% 8%;
+
   --destructive: 0 62.8% 30.6%;
-  --destructive-foreground: 60 14% 95%;
-  
-  --border: 0 0% 15%;
-  --input: 0 0% 15%;
-  --ring: 0 0% 80%;
+  --destructive-foreground: 42 20% 92%;
+
+  --border: 25 10% 16%;
+  --input: 25 10% 16%;
+  --ring: 42 20% 70%;
 }
 
 @layer base {
@@ -112,27 +122,54 @@
   }
   body {
     @apply bg-background text-foreground font-sans antialiased overflow-x-hidden;
-    /* Custom cursor feeling for premium vibe */
-    cursor: default;
   }
-  
+
   h1, h2, h3, h4, h5, h6 {
     @apply font-display tracking-tight;
   }
 
-  /* Smooth scrolling */
   html {
     scroll-behavior: smooth;
   }
 
-  /* Custom selection */
   ::selection {
     background-color: hsl(var(--accent));
     color: hsl(var(--accent-foreground));
   }
+
+  /* Focus visible styles for accessibility */
+  :focus-visible {
+    outline: 2px solid hsl(var(--accent));
+    outline-offset: 3px;
+  }
 }
 
-/* Utilities for noise/grain texture to add depth */
+/* ─── Marquee ────────────────────────────────────────────────── */
+@keyframes marquee-left {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+@keyframes marquee-right {
+  0%   { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+}
+.marquee-track--left {
+  animation: marquee-left 28s linear infinite;
+}
+.marquee-track--right {
+  animation: marquee-right 32s linear infinite;
+}
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+/* ─── Grain texture ──────────────────────────────────────────── */
 .bg-grain {
   position: relative;
 }
@@ -140,7 +177,7 @@
   content: "";
   position: absolute;
   inset: 0;
-  opacity: 0.4;
+  opacity: 0.35;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
   pointer-events: none;
   z-index: 10;
@@ -148,15 +185,36 @@
 }
 
 .dark .bg-grain::before {
-  opacity: 0.15;
+  opacity: 0.12;
   mix-blend-mode: overlay;
 }
 
-/* Hide scrollbar for clean horizontal scrolls */
-.no-scrollbar::-webkit-scrollbar {
-  display: none;
+/* ─── Utilities ──────────────────────────────────────────────── */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* serif italic utility */
+.font-serif { font-family: 'Instrument Serif', serif; }
+
+/* Hover underline grow */
+.hover-line {
+  position: relative;
 }
-.no-scrollbar {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+.hover-line::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 0;
+  height: 2px;
+  background: currentColor;
+  transition: width 0.3s cubic-bezier(0.22, 1, 0.36, 1);
 }
+.hover-line:hover::after { width: 100%; }
+
+/* Card project color tint variables */
+.project-card-turbo       { --card-tint: 214 76% 88%; }
+.project-card-ar          { --card-tint: 160 68% 85%; }
+.project-card-uf          { --card-tint: 33 90% 88%; }
+.project-card-tapply      { --card-tint: 270 70% 90%; }
+.project-card-hiskio      { --card-tint: 340 70% 88%; }
