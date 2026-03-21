@@ -1,8 +1,5 @@
 {
   "buildCommand": "pnpm --filter @workspace/portfolio run build",
   "outputDirectory": "artifacts/portfolio/dist/public",
-"routes": [
-    { "handle": "filesystem" },
-    { "src": "/(.*)", "dest": "/index.html" }
-  ]
+  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
 }
