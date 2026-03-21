@@ -1,0 +1,253 @@
+Build a highly polished personal portfolio website for a product designer / UI-UX designer with a background in web design, design systems, accessibility, higher education digital products, and interactive product experiences.
+
+The portfolio should feel bold, playful, modern, and highly art directed, with strong interaction design, smooth motion, and a premium visual point of view. It should feel custom and memorable, not like a generic portfolio template.
+
+DESIGN GOAL
+Create a portfolio that communicates:
+- strong visual taste
+- product thinking
+- interaction design craft
+- systems thinking
+- accessibility awareness
+- polished front-end sensibility
+
+The site should feel like a hybrid of:
+- a creative studio portfolio
+- an editorial design site
+- a modern product designer portfolio
+- a motion-forward interactive experience
+
+VISUAL DIRECTION
+Use a bold, playful, editorial art direction:
+- oversized typography
+- confident spacing
+- modular layouts
+- expressive composition
+- rounded pill buttons and badges
+- bold contrast
+- selective accent colors
+- asymmetrical but controlled sections
+- high-end motion and transitions
+- playful interactions that still feel refined
+
+The aesthetic should feel:
+- modern
+- internet-native
+- premium
+- slightly artsy
+- confident
+- polished
+- expressive but not messy
+
+Avoid:
+- generic SaaS blocks
+- boring case study layouts
+- cluttered dribbble-style visuals
+- overly corporate portfolio language
+- excessive gradients or effects everywhere
+- motion that feels gimmicky
+
+PERSONAL BRAND / POSITIONING
+The designer is a thoughtful product designer who cares about usability, clear systems, interaction design, and visual craft. She has experience designing and building digital experiences across websites, tools, research platforms, dashboards, and educational products.
+
+The portfolio should position her as someone who can:
+- shape product experiences end-to-end
+- design clean and compelling interfaces
+- think in systems and scalable patterns
+- balance visual design with usability
+- collaborate across stakeholders
+- care about accessibility and real-world implementation
+
+CONTENT TONE
+Use a voice that feels:
+- confident
+- thoughtful
+- clear
+- slightly playful
+- visually literate
+- not overly formal
+- not fake-startup or buzzword-heavy
+
+SITE MAP
+Create the following main sections/pages:
+1. Home
+2. Work
+3. About
+4. Resume / Experience
+5. Contact
+
+HOME PAGE
+The home page should make a strong first impression and include:
+- a bold hero statement
+- a short intro that frames the designer as a product/UI-UX designer building thoughtful digital experiences
+- a visually engaging selected work section
+- interactive cards for featured projects
+- a short “about” preview
+- a section highlighting strengths such as product thinking, systems, accessibility, and prototyping
+- a contact/footer CTA
+
+Suggested homepage vibe:
+Big headline, strong typography, playful composition, premium animation, interactive project previews, smooth scrolling.
+
+FEATURED WORK
+Show 3–5 selected projects. These should feel varied and realistic for this designer’s background, such as:
+- a research or learning platform
+- a dashboard or internal tool
+- a university / education digital platform redesign
+- an interactive or experimental concept project
+- a product workflow / service design case study
+
+Each project card should include:
+- title
+- short summary
+- role
+- timeline
+- key contribution
+- visual preview
+- polished hover interaction
+- transition into case study
+
+CASE STUDY STRUCTURE
+Each case study should be well-structured and easy to skim, while still feeling elevated and editorial.
+
+Include sections like:
+- overview
+- problem / context
+- users or audience
+- goals
+- constraints
+- process
+- information architecture or flows
+- design decisions
+- prototypes / UI exploration
+- accessibility or usability considerations
+- outcome / reflection
+
+The case study layout should feel premium and designed, not like a basic document. Use strong section dividers, thoughtful spacing, large headers, image framing, and motion.
+
+ABOUT PAGE
+The about page should feel personal, warm, and visually interesting without becoming too casual.
+
+Include:
+- short designer bio
+- philosophy on design
+- approach to product and collaboration
+- strengths or areas of focus
+- optional playful personal details
+- portrait or graphic element
+- clear CTA to connect
+
+The tone should communicate:
+This is a designer who is thoughtful, detail-oriented, visually strong, and easy to work with.
+
+RESUME / EXPERIENCE PAGE
+Create a visually refined experience page that presents:
+- current role
+- previous roles
+- teaching / mentoring experience
+- tools
+- skills
+- selected capabilities
+- downloadable resume CTA
+
+Do not make this page feel dry. Use layout, hierarchy, and motion to make it feel designed.
+
+INTERACTION DESIGN
+The portfolio should include smooth, premium interactive behavior:
+- animated page transitions
+- hover states with depth and motion
+- subtle scroll reveal
+- elegant section transitions
+- magnetic or reactive buttons
+- image reveal or mask animations
+- interactive project previews
+- polished navigation behavior
+- subtle parallax in selected areas
+- smooth anchor transitions where appropriate
+
+MOTION GUIDELINES
+Motion should feel:
+- premium
+- art directed
+- responsive
+- smooth
+- not overdone
+
+Focus motion on:
+- hero entrance
+- navigation
+- work cards
+- page transitions
+- section reveals
+- image transitions
+- call-to-action moments
+
+Avoid:
+- too much bouncing
+- excessive motion on every element
+- slow or heavy animations that hurt usability
+
+TYPOGRAPHY
+Typography should be a major design feature.
+Use:
+- oversized display type for major headlines
+- a clean, modern sans-serif for interface and body text
+- optionally a refined serif or high-contrast editorial font for contrast
+- strong scale differences
+- beautiful line breaks and spacing
+- editorial hierarchy
+
+COLOR SYSTEM
+Use a restrained but expressive palette:
+- one primary neutral base
+- one bold accent color
+- one secondary accent color or soft pastel accent
+- high contrast typography
+- graphic, curated color usage
+
+The colors should feel deliberate and brand-forward.
+
+UI COMPONENTS
+Create a reusable design system including:
+- navigation
+- buttons
+- pill tags
+- project cards
+- section headers
+- stat blocks
+- image containers
+- testimonial / quote blocks
+- footer CTA
+- mobile menu
+- contact form styling
+
+Make the system feel custom and polished.
+
+RESPONSIVE DESIGN
+The portfolio must be fully responsive across:
+- desktop
+- tablet
+- mobile
+
+On mobile, preserve the strong visual identity while simplifying motion and layout where needed.
+
+ACCESSIBILITY
+Keep the portfolio visually expressive, but still:
+- maintain good contrast
+- use semantic HTML structure
+- provide keyboard-friendly navigation
+- avoid unreadable small text
+- respect reduced motion preferences where possible
+
+TECH STACK
+Use:
+- Next.js or React
+- Tailwind CSS
+- Framer Motion or GSAP
+- reusable components
+- clean structure
+- performant front-end
+- optimized images
+
+DELIVERABLE
+Generate a premium interactive product design portfolio that feels bold, playful, editorial, and memorable. It should clearly present this designer as a thoughtful and visually strong product/UI-UX designer with strengths in interaction design, systems thinking, accessibility, and polished digital execution.

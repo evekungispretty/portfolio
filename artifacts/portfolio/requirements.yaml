@@ -1,0 +1,26 @@
+packages:
+  "framer-motion": "For cinematic page transitions, staggered text reveals, and complex interaction animations required by the bold editorial aesthetic."
+  "react-hook-form": "For robust handling of the contact form state and validation."
+  "@hookform/resolvers": "For integrating Zod validation with react-hook-form."
+
+images:
+  - path: "artifacts/portfolio/public/images/profile.png"
+    description: "Cinematic, high-contrast black and white portrait of a modern creative professional, slightly obscured or artistic angle, moody lighting"
+    aspect_ratio: "3:4"
+  - path: "artifacts/portfolio/public/images/project-scholar.png"
+    description: "Abstract, minimal interface composition representing a university academic research tool. Clean typography, muted tones, sophisticated layout"
+    aspect_ratio: "16:9"
+  - path: "artifacts/portfolio/public/images/project-meridian.png"
+    description: "Abstract data visualization dashboard concept in a sleek dark mode. Neon accents, geometric charts, premium fintech feel"
+    aspect_ratio: "16:9"
+  - path: "artifacts/portfolio/public/images/project-canvas.png"
+    description: "Modern, airy educational platform interface concept. Soft shadows, rounded cards, structured typographic hierarchy"
+    aspect_ratio: "16:9"
+  - path: "artifacts/portfolio/public/images/project-pulse.png"
+    description: "Fluid, dynamic motion graphics representation. Swirling neon green and black shapes, conveying energy and experimental interaction"
+    aspect_ratio: "16:9"
+
+notes:
+  - App is a frontend-only SPA portfolio.
+  - No backend API exists. All data is hardcoded in the frontend.
+  - Form submission is simulated with a timeout.
