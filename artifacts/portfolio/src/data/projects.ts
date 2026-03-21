@@ -611,4 +611,172 @@ export const projects: Project[] = [
       },
     ],
   },
+  // ─── 5. SPARC-P ──────────────────────────────────────────────────────
+{
+  id: "5",
+  slug: "sparc-p",
+  title: "SPARC-P",
+  subtitle: "Designing a New Interaction Paradigm for AI-Powered Clinical Communication Training",
+  shortDescription:
+    "UX/UI design for a Unity + web platform that trains practicing clinicians to improve HPV vaccination conversations through AI avatar simulations.",
+  description:
+    "SPARC (Standardized Patient Avatar for Reflective Communication Practice) is a University of Florida grant-funded platform that replaces expensive, hard-to-scale live training with asynchronous AI simulation. I designed both the web LMS container and the Unity training interface — including a navigation system for a genuinely novel interaction: a turn-based conversation with a lifelike avatar.",
+  role: "UI/UX Designer",
+  whatIDid: "Web UI Design, Unity Interface Design, Interaction Design, Prototyping",
+  timeline: "4 months (ongoing)",
+  team: "1 designer (me), 2–3 engineers, 1 instructional designer, 1 PI/researcher",
+  year: "2025",
+  tags: ["Healthcare EdTech", "Unity UI", "Interaction Design", "AI Simulation", "Prototyping"],
+  category: "Experience",
+  cardClass: "project-card-sparc",
+  imageUrl: `${import.meta.env.BASE_URL}images/project-sparcp.jpg`,
+  details: {
+    context:
+      "Traditional clinician communication training depends on live standardized patients and facilitators — effective but impossible to scale. SPARC is a UF-funded platform that makes experiential communication practice available asynchronously, starting with HPV vaccination conversations.",
+    problem:
+      "How do you design a UI for a genuinely novel interaction — a turn-based avatar conversation — that feels natural, sets clear expectations, and surfaces reference material without breaking the simulation's sense of presence?",
+    goals: [
+      "Design a web LMS container that orients clinicians before and after each session.",
+      "Design a Unity training interface where clinicians can converse with a 3D avatar without UI getting in the way.",
+      "Surface patient info, communication guides, and transcripts without overwhelming users mid-conversation.",
+      "Pace coaching feedback so clinicians can absorb it without feeling rushed or anxious.",
+    ],
+    outcome:
+      "Working React + Tailwind prototype shipped and presented to PIs. Bottom Menu navigation pattern selected and implemented in Unity. Platform in active development.",
+  },
+  caseStudy: [
+    {
+      id: "overview",
+      label: "Overview",
+      heading: "Scaling Clinical Communication Training with AI",
+      body: [
+        "A strong clinician recommendation is the single most consistent predictor of HPV vaccine uptake — yet many clinicians struggle with the complexity of navigating parental hesitancy, misinformation, and emotionally charged conversations. Training helps, but traditional methods require live facilitators and standardized patients, making them costly and hard to scale.",
+        "SPARC replaces that logistical overhead with an AI-driven simulation. Clinicians hold turn-based conversations with a lifelike 3D avatar patient or guardian, receive structured coaching feedback aligned to the validated C-LEAR framework (Counsel, Listen, Emphasize, Answer, Recommend), and practice entirely on their own schedule.",
+        "My role spanned two distinct design surfaces: the web container — the LMS shell housing onboarding, navigation, resources, and progress tracking — and the Unity training interface, where the actual avatar conversations happen.",
+      ],
+      images: [
+        {
+          alt: "SPARC-P home page — web LMS container",
+          caption: "Web container: home page built in React + Tailwind, orienting clinicians before they enter the Unity simulation.",
+          aspect: "wide",
+          placeholder:
+            "SPARC-P home page showing Welcome message, 'About the training' section with video, 'Launch Training' and 'Go through resources first' CTAs, and sidebar navigation with Home, Learning Resources, AI Practice, Progress, Settings",
+        },
+      ],
+    },
+    {
+      id: "role",
+      label: "My Role",
+      heading: "Designing Across Two Layers of One Experience",
+      body: [
+        "My scope covered the full experience surface — from the web-based LMS shell to the in-session Unity interface. These two layers serve very different purposes and have very different design constraints.",
+        "The web container sets expectations, provides context, and gives clinicians a home base before and after each session. It's built in React and Tailwind, and I was responsible for design and front-end implementation. The Unity interface is where the high-stakes design work lives: UI elements that must coexist with a photorealistic 3D avatar without disrupting the simulation's sense of presence.",
+      ],
+      highlights: [
+        "Web container: home, login, learning resources, progress tracking, session transitions",
+        "Unity interface: navigation system, coach feedback overlay, transcript panel, progress label, bottom menu",
+        "Built a working React prototype to present interaction flows to PIs and help the team visualize the platform",
+        "Collaborated with instructional designer and PI on feedback pacing and rubric alignment",
+      ],
+      images: [
+        {
+          alt: "SPARC-P training session interface — Unity UI with bottom navigation",
+          caption: "Training interface: avatar session with coach feedback overlay, transcript panel, and Bottom Menu navigation.",
+          aspect: "wide",
+          placeholder:
+            "Training session UI showing 3D avatar (Dr. Sarah Williams, Pediatrician) in medical office environment, 'Training Session - Part 1/2' label top-left, yellow Coach Feedback 1 card top-right with Next button, Transcript panel at bottom, and Patient Info / Guide / Caption bottom navigation bar",
+        },
+      ],
+    },
+    {
+      id: "challenges",
+      label: "Design Challenges",
+      heading: "Three Problems That Shaped the Entire Process",
+      body: [
+        "SPARC sits at an unusual intersection: medical training, conversational AI, and real-time avatar simulation. There's no established UI playbook for this. That made the design work genuinely exploratory — and surfaced three challenges that drove every major decision.",
+      ],
+      highlights: [
+        "No established pattern: avatar-based conversational training doesn't map cleanly to any existing UI model",
+        "Cognitive load: clinicians must speak, listen, process feedback, and reference materials — sometimes in rapid succession",
+        "Expectation-setting: time-pressured clinicians need to understand where they are in the training arc before they commit",
+      ],
+    },
+    {
+      id: "exploration",
+      label: "Navigation Exploration",
+      heading: "Three Patterns for an Unconventional Interface",
+      body: [
+        "The central design question for the Unity interface was how to make three types of reference material — Patient Info, Communication Guide, and Transcript — accessible during a live avatar session without undermining presence. I explored three distinct navigation patterns, each optimized for a different cognitive engagement model.",
+        "The Tooltip placed a fixed button in the corner that expanded to reveal tabbed content — minimal footprint, immediate dismissal, but limited content depth and poor scalability. The Sidebar used a collapsible right panel — better content capacity, but it competed with the avatar for horizontal space and visual attention even when closed. The Bottom Menu modeled itself on Zoom-style video call interfaces — items open as slide-up modals, creating a clear, deliberate shift between 'conversation mode' and 'reference mode.'",
+        "The key reframe that drove the decision: the question wasn't 'does this interfere with the avatar?' It was 'what kind of attention does each moment in training actually require?' A clinician looking up a patient detail is already pausing the conversation — the interface should honor that intentional task switch, not try to hide it.",
+      ],
+      quote:
+        "When a user opens reference material mid-session, they've already recognized a knowledge gap and made a conscious decision to pause. That's not a distraction — it's purposeful task-switching. The UI should support it, not fight it.",
+      images: [
+        {
+          alt: "Three navigation pattern explorations — Tooltip, Sidebar, Bottom Menu",
+          caption: "Navigation exploration deck presented to the team: three patterns mapped to three cognitive access models.",
+          aspect: "video",
+          placeholder:
+            "Three-panel comparison: Tooltip (top-right expandable button with tabs), Sidebar (collapsible right panel), Bottom Menu (Zoom-style bar with slide-up modals) — each with pros/cons annotations",
+        },
+      ],
+    },
+    {
+      id: "solution",
+      label: "The Training Interface",
+      heading: "Presence, Pacing, and Expectation-Setting",
+      body: [
+        "With the Bottom Menu selected, I designed the full training session UI around four interacting elements, each addressing a specific design challenge identified earlier in the process.",
+        "The 'Training Session – Part 1/2' label addresses the expectation-setting problem directly: clinicians know where they are in the arc before they say their first word. The Coach Feedback overlay — a yellow-bordered card that appears after each clinician turn — addresses pacing: it's user-controlled via a 'Next' button rather than auto-advancing, so feedback is absorbed at the clinician's own speed. The Transcript panel addresses accessibility: it can be shown or hidden by the user, giving clinicians control over their own cognitive load. And the Bottom Menu gives Patient Info, Guide, and Caption a permanent home that's always accessible without cluttering the primary view.",
+      ],
+      highlights: [
+        "Session label: 'Training Session – Part 1/2' sets temporal expectations before the first turn",
+        "Coach feedback: appears after each turn, user-controlled 'Next' prevents rushing",
+        "Transcript: persistent but hideable — clinicians choose their own cognitive load level",
+        "Bottom Menu: always accessible, zero visual clutter in the default state",
+      ],
+      images: [
+        {
+          alt: "Training session annotated — session label, coach feedback, transcript, bottom menu",
+          caption: "Annotated training session UI: four elements working together to balance presence, pacing, and access.",
+          aspect: "wide",
+          placeholder:
+            "Annotated training session screenshot with callouts: A = Session Progress Label, B = Coach Feedback Card with Next button, C = Transcript panel with hide option, D = Bottom Menu (Patient Info, Guide, Caption)",
+        },
+      ],
+    },
+    {
+      id: "prototype",
+      label: "Prototype",
+      heading: "Building It to Show It",
+      body: [
+        "Static mockups couldn't communicate what mattered most about this interface: how it feels in motion. How does the coach feedback card appear after a turn? How does the Bottom Menu modal animate in? Does the session label actually reduce anxiety, or is it just more text on screen?",
+        "I built a working prototype in React and Tailwind — not just Figma screens — and presented it to the PIs and engineering team. The interactive prototype turned a conversation about 'what it could be' into a direct evaluation of 'what it will feel like.' It accelerated design alignment by several rounds of feedback.",
+      ],
+      highlights: [
+        "Working prototype built in React + Tailwind",
+        "Presented to PIs and team to visualize the full platform concept",
+        "Prototype drove selection of Bottom Menu over Tooltip and Sidebar",
+        "Demonstrated coach feedback pacing and Bottom Menu modal animation in context",
+      ],
+    },
+    {
+      id: "outcome",
+      label: "Reflection",
+      heading: "What Designing the Unknown Taught Me",
+      body: [
+        "SPARC was the most conceptually novel interface challenge I've worked on. There was no existing pattern to follow for 'turn-based AI avatar conversation training for medical professionals.' That forced a kind of first-principles design thinking I found genuinely energizing.",
+        "The biggest lesson: reframing the problem unlocked better solutions. Shifting from 'how do we avoid interfering with the avatar?' to 'what kind of attention does each training moment require?' opened up three distinct design directions where there had previously been just one instinct toward minimalism.",
+        "Working in Unity also required designing with hard constraints — layout flexibility, animation tooling, and component reuse all have real limits compared to the web. Learning to design within those limits while still advocating for the right interaction was an important part of this project's growth.",
+      ],
+      highlights: [
+        "Bottom Menu pattern selected and in active Unity development",
+        "Working prototype accelerated team alignment by replacing static mockups with interactive flows",
+        "Next step: usability testing with practicing clinicians to validate the reference mode / conversation mode distinction under real conditions",
+        "Platform designed as flexible — same architecture will extend to tobacco treatment, cancer screening, and other clinical communication contexts",
+      ],
+    },
+  ],
+},
 ];

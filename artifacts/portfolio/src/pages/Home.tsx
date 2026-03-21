@@ -53,7 +53,7 @@ const marqueeRow2 = [
 ];
 
 // ─── Featured projects ────────────────────────────────────────────────────────
-const featuredSlugs = ["new-worlds-reading", "turbo", "tapply"];
+const featuredSlugs = ["sparc-p", "new-worlds-reading", "turbo", "tapply"];
 
 export default function Home() {
   const featuredProjects = featuredSlugs
@@ -237,16 +237,11 @@ export default function Home() {
           </motion.div>
         </div>
 
-        {/* Projects: first one full-width, next two in a 2-col grid */}
-        <div className="space-y-16 lg:space-y-20">
-          {featuredProjects[0] && (
-            <ProjectCard project={featuredProjects[0]} index={0} size="large" />
-          )}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-8 lg:gap-12">
-            {featuredProjects.slice(1).map((project, i) => (
-              <ProjectCard key={project.id} project={project} index={i + 1} size="default" />
-            ))}
-          </div>
+        {/* Projects: 2x2 grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-8 lg:gap-12">
+          {featuredProjects.map((project, i) => (
+            <ProjectCard key={project.id} project={project} index={i} size="default" />
+          ))}
         </div>
       </section>
 
@@ -397,31 +392,6 @@ export default function Home() {
         </motion.div>
       </section>
 
-      {/* ══════════════════════════════════════════════
-          CONTACT CTA BAND
-      ══════════════════════════════════════════════ */}
-      <section className="border-t border-border">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32 flex flex-col md:flex-row md:items-center justify-between gap-10">
-
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.15, duration: 0.5 }}
-            className="shrink-0"
-          >
-            <a
-              href="https://linkedin.com/in/evekung/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group inline-flex items-center gap-3 px-10 py-5 rounded-full bg-accent text-white font-display font-bold text-xl hover:scale-105 hover:shadow-xl transition-all duration-300"
-            >
-              Connect on LinkedIn
-              <ArrowUpRight className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-            </a>
-          </motion.div>
-        </div>
-      </section>
 
     </PageTransition>
   );
