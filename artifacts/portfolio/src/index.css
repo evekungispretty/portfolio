@@ -61,8 +61,8 @@
   --muted: 0 0% 88%;
   --muted-foreground: 0 0% 40%;
   
-  /* Electric Lime accent */
-  --accent: 76 100% 60%;
+  /* Orange accent */
+  --accent: 31 86% 49%;
   --accent-foreground: 0 0% 5%;
   
   --destructive: 0 84% 60%;
@@ -94,8 +94,8 @@
   --muted: 0 0% 15%;
   --muted-foreground: 0 0% 60%;
   
-  /* Electric Lime accent stays bright in dark mode */
-  --accent: 76 100% 60%;
+  /* Orange accent */
+  --accent: 31 86% 49%;
   --accent-foreground: 0 0% 5%;
   
   --destructive: 0 62.8% 30.6%;
