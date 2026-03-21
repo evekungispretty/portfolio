@@ -13,6 +13,15 @@ const fadeIn = (delay = 0) => ({
   transition: { duration: 0.6, delay },
 });
 
+// Each word slides up through an overflow-hidden clip — the helloelva.com style
+const headlineWords = [
+  { text: "Designing",    className: "",                                              delay: 0.05 },
+  { text: "experiences",  className: "text-muted-foreground",                         delay: 0.13 },
+  { text: "that",         className: "font-serif italic font-normal text-accent",     delay: 0.21 },
+  { text: "feel",         className: "",                                              delay: 0.29 },
+  { text: "effortless.",  className: "",                                              delay: 0.37 },
+];
+
 // ─── Capability pills data ────────────────────────────────────────────────────
 const capabilities = [
   { label: "Product Design", emoji: "✦" },
@@ -59,7 +68,7 @@ export default function Home() {
       ══════════════════════════════════════════════ */}
       <section className="min-h-[92vh] flex flex-col justify-center max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-40 pb-20">
         {/* Eyebrow */}
-        <motion.div {...fadeIn(0.1)} className="mb-8 flex items-center gap-3 flex-wrap">
+        <motion.div {...fadeIn(0.0)} className="mb-8 flex items-center gap-3 flex-wrap">
           <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-secondary text-sm font-medium text-foreground border border-border">
             <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
             Available for new opportunities
@@ -69,51 +78,31 @@ export default function Home() {
           </span>
         </motion.div>
 
-        {/* Big headline */}
-        <div className="overflow-hidden mb-4">
-          <motion.h1
-            initial={{ y: "100%", opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-            className="text-[clamp(3rem,10vw,9rem)] font-display font-bold leading-[0.88] tracking-tight"
-          >
-            Designing
-          </motion.h1>
-        </div>
-        <div className="overflow-hidden mb-4 flex flex-wrap items-baseline gap-x-5">
-          <motion.h1
-            initial={{ y: "100%", opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.9, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
-            className="text-[clamp(3rem,10vw,9rem)] font-display font-bold leading-[0.88] tracking-tight text-muted-foreground"
-          >
-            experiences
-          </motion.h1>
-          <motion.span
-            initial={{ y: "100%", opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.9, delay: 0.14, ease: [0.22, 1, 0.36, 1] }}
-            className="text-[clamp(3rem,10vw,9rem)] font-serif italic font-normal leading-[0.88] tracking-tight text-accent"
-          >
-            that
-          </motion.span>
-        </div>
-        <div className="overflow-hidden mb-12">
-          <motion.h1
-            initial={{ y: "100%", opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.9, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-            className="text-[clamp(3rem,10vw,9rem)] font-display font-bold leading-[0.88] tracking-tight"
-          >
-            feel effortless.
-          </motion.h1>
-        </div>
+        {/* Big headline — word-by-word masked reveal */}
+        <h1 className="text-[clamp(3rem,10vw,9rem)] font-display font-bold leading-[1.0] tracking-tight mb-12 flex flex-wrap gap-x-[0.22em] gap-y-0 items-baseline">
+          {headlineWords.map(({ text, className, delay }) => (
+            <span
+              key={text}
+              className="inline-block overflow-hidden pb-[0.06em]"
+              style={{ verticalAlign: "bottom" }}
+            >
+              <motion.span
+                className={`inline-block ${className}`}
+                initial={{ y: "110%" }}
+                animate={{ y: 0 }}
+                transition={{ duration: 1.05, delay, ease: [0.22, 1, 0.36, 1] }}
+              >
+                {text}
+              </motion.span>
+            </span>
+          ))}
+        </h1>
 
         {/* Sub + CTAs row */}
         <motion.div
           initial={{ opacity: 0, y: 28 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: 0.7, delay: 0.65, ease: [0.22, 1, 0.36, 1] }}
           className="flex flex-col md:flex-row md:items-end gap-8 md:gap-16"
         >
           <p className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-md">
@@ -158,7 +147,7 @@ export default function Home() {
       {/* ══════════════════════════════════════════════
           SELECTED WORK
       ══════════════════════════════════════════════ */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-28 lg:py-36">
+      <section className="max-w-7xl mx-auto px-8 sm:px-12 lg:px-20 py-28 lg:py-36">
         {/* Section header */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-16 lg:mb-20">
           <motion.div
@@ -375,13 +364,15 @@ export default function Home() {
             transition={{ delay: 0.15, duration: 0.5 }}
             className="shrink-0"
           >
-            <Link
-              href="/contact"
+            <a
+              href="https://linkedin.com/in/evekung/"
+              target="_blank"
+              rel="noopener noreferrer"
               className="group inline-flex items-center gap-3 px-10 py-5 rounded-full bg-accent text-white font-display font-bold text-xl hover:scale-105 hover:shadow-xl transition-all duration-300"
             >
-              Get in touch
+              Connect on LinkedIn
               <ArrowUpRight className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-            </Link>
+            </a>
           </motion.div>
         </div>
       </section>

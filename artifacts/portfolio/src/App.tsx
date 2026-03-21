@@ -1,4 +1,4 @@
-import { Switch, Route, Router as WouterRouter } from "wouter";
+import { Switch, Route, Router as WouterRouter, useLocation } from "wouter";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -25,14 +25,15 @@ const queryClient = new QueryClient();
 // Wrapper to handle scroll restoration and animation presence
 function RouterContent() {
   useScrollToTop();
-  
+  const [location] = useLocation();
+
   return (
     <div className="flex flex-col min-h-screen">
       <Navbar />
       <main className="flex-grow">
-        {/* AnimatePresence enables exit animations for components that are unmounted */}
+        {/* key={location} ensures AnimatePresence correctly triggers on back/forward navigation */}
         <AnimatePresence mode="wait">
-          <Switch>
+          <Switch key={location}>
             <Route path="/" component={Home} />
             <Route path="/work" component={Work} />
             <Route path="/work/:slug" component={CaseStudy} />

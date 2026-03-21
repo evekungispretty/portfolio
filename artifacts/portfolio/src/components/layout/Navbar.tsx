@@ -74,12 +74,6 @@ export function Navbar() {
               );
             })}
 
-            <Link
-              href="/contact"
-              className="ml-4 px-5 py-2.5 rounded-full bg-foreground text-background text-sm font-semibold hover:bg-accent hover:text-white transition-all duration-300 outline-none focus-visible:ring-2 ring-offset-2 ring-offset-background ring-foreground"
-            >
-              Let's Talk
-            </Link>
           </nav>
 
           {/* Mobile Menu Toggle */}
@@ -115,12 +109,6 @@ export function Navbar() {
             {link.label}
           </Link>
         ))}
-        <Link
-          href="/contact"
-          className="mt-4 px-8 py-4 rounded-full bg-accent text-white text-xl font-bold font-display"
-        >
-          Let's Talk
-        </Link>
       </motion.div>
     </header>
   );

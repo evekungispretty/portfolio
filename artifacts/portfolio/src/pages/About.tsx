@@ -323,13 +323,15 @@ export default function About() {
             </p>
           </div>
           <div className="flex flex-col sm:flex-row gap-4 shrink-0">
-            <Link
-              href="/contact"
+            <a
+              href="https://linkedin.com/in/evekung/"
+              target="_blank"
+              rel="noopener noreferrer"
               className="group inline-flex items-center gap-2 px-7 py-4 rounded-full bg-accent text-white font-display font-bold text-base hover:scale-105 transition-all duration-300"
             >
-              Get in touch
+              Connect on LinkedIn
               <ArrowUpRight className="w-4 h-4" />
-            </Link>
+            </a>
             <a
               href="https://linkedin.com/in/evekung/"
               target="_blank"

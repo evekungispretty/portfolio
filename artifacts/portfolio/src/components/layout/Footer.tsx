@@ -5,7 +5,6 @@ const navLinks = [
   { label: "Work", href: "/work" },
   { label: "About", href: "/about" },
   { label: "Resume", href: "/resume" },
-  { label: "Contact", href: "/contact" },
 ];
 
 const socialLinks = [
@@ -32,18 +31,14 @@ export function Footer() {
           </div>
 
           <div className="flex flex-col justify-between gap-8 md:items-end">
-            <Link
-              href="/contact"
+            <a
+              href="https://linkedin.com/in/evekung/"
+              target="_blank"
+              rel="noopener noreferrer"
               className="group self-start md:self-end inline-flex items-center gap-2 px-8 py-4 rounded-full bg-accent text-white font-display font-bold text-lg hover:scale-105 transition-all duration-300"
             >
-              Get in touch
+              Connect on LinkedIn
               <ArrowUpRight className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-            </Link>
-            <a
-              href="mailto:weirdcravings00@gmail.com"
-              className="text-base text-background/60 hover:text-accent transition-colors font-medium md:text-right"
-            >
-              weirdcravings00@gmail.com
             </a>
           </div>
         </div>
