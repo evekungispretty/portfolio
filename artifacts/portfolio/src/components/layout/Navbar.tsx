@@ -9,6 +9,26 @@ const links = [
   { label: "Resume", href: "/resume" },
 ];
 
+// Extracted so useRoute is called at the top level of a component, not inside .map()
+function NavLink({ label, href }: { label: string; href: string }) {
+  const [isActive] = useRoute(href);
+  return (
+    <Link
+      href={href}
+      className="relative px-5 py-2 text-sm font-medium rounded-full transition-colors hover:text-foreground text-muted-foreground outline-none focus-visible:ring-2 ring-accent"
+    >
+      {isActive && (
+        <motion.div
+          layoutId="nav-indicator"
+          className="absolute inset-0 rounded-full bg-secondary -z-10"
+          transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+        />
+      )}
+      <span className={isActive ? "text-foreground" : ""}>{label}</span>
+    </Link>
+  );
+}
+
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -54,26 +74,9 @@ export function Navbar() {
 
           {/* Desktop Nav */}
           <nav className="hidden md:flex items-center gap-1" aria-label="Main navigation">
-            {links.map((link) => {
-              const [isActive] = useRoute(link.href);
-              return (
-                <Link
-                  key={link.label}
-                  href={link.href}
-                  className="relative px-5 py-2 text-sm font-medium rounded-full transition-colors hover:text-foreground text-muted-foreground outline-none focus-visible:ring-2 ring-accent"
-                >
-                  {isActive && (
-                    <motion.div
-                      layoutId="nav-indicator"
-                      className="absolute inset-0 rounded-full bg-secondary -z-10"
-                      transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
-                    />
-                  )}
-                  <span className={isActive ? "text-foreground" : ""}>{link.label}</span>
-                </Link>
-              );
-            })}
-
+            {links.map((link) => (
+              <NavLink key={link.label} label={link.label} href={link.href} />
+            ))}
           </nav>
 
           {/* Mobile Menu Toggle */}
