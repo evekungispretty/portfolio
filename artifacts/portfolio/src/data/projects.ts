@@ -60,7 +60,7 @@ export const projects: Project[] = [
     tags: ["Information Architecture", "Web Design", "Higher Ed", "Accessibility"],
     category: "Web",
     cardClass: "project-card-uf",
-    imageUrl: `${import.meta.env.BASE_URL}images/project-uf.png`,
+    imageUrl: `${import.meta.env.BASE_URL}images/project-uf.gif`,
     details: {
       context: "University of Florida's College of Education needed a way for prospective students to explore and compare its 100+ graduate and undergraduate programs.",
       problem: "The existing directory was a flat, unfiltered list of programs with no way to narrow by degree type, interest area, or delivery format. Bounce rates were high.",
@@ -218,7 +218,7 @@ export const projects: Project[] = [
     tags: ["Product Design", "Onboarding", "Design Systems", "Prototyping"],
     category: "Product",
     cardClass: "project-card-tapply",
-    imageUrl: `${import.meta.env.BASE_URL}images/project-tapply.png`,
+    imageUrl: `${import.meta.env.BASE_URL}images/project-tapply.jpg`,
     details: {
       context: "Tapply was growing its user base but seeing high churn among first-time users who never reached their 'aha moment' with the product.",
       problem: "New users landed in a feature-rich product with no guidance, got overwhelmed, and left — often within the first session.",
@@ -352,7 +352,7 @@ export const projects: Project[] = [
     tags: ["AR Design", "EdTech", "Interaction Design", "Accessibility"],
     category: "Experience",
     cardClass: "project-card-ar",
-    imageUrl: `${import.meta.env.BASE_URL}images/project-ar.png`,
+    imageUrl: `${import.meta.env.BASE_URL}images/project-ar.jpg`,
     details: {
       context: "New Worlds Reading — a state-funded literacy initiative — wanted to explore augmented reality as a way to increase engagement with books for K–5 students, particularly in underserved communities.",
       problem: "How do you design an AR experience that's magical and engaging for a 7-year-old, while remaining accessible across a range of devices, literacy levels, and tech comfort levels in households?",
@@ -478,7 +478,7 @@ export const projects: Project[] = [
     tags: ["Product Design", "B2B", "Design Systems", "Interaction Design"],
     category: "Product",
     cardClass: "project-card-turbo",
-    imageUrl: `${import.meta.env.BASE_URL}images/project-turbo.png`,
+    imageUrl: `${import.meta.env.BASE_URL}images/project-turbo.jpg`,
     details: {
       context: "Sales teams were managing leads across a patchwork of CRMs, spreadsheets, and Slack threads. Turbo was built to unify the workflow into one fast, opinionated tool.",
       problem: "Existing sales tools were either too complex (enterprise CRMs) or too limited (basic pipelines). Sales reps needed something that matched the speed of their work without requiring constant data entry.",
