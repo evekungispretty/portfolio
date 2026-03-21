@@ -15,11 +15,11 @@ const fadeIn = (delay = 0) => ({
 
 // Each word slides up through an overflow-hidden clip — the helloelva.com style
 const headlineWords = [
-  { text: "Designing",    className: "",                                              delay: 0.05 },
-  { text: "experiences",  className: "text-muted-foreground",                         delay: 0.13 },
-  { text: "that",         className: "font-serif italic font-normal text-accent",     delay: 0.21 },
-  { text: "feel",         className: "",                                              delay: 0.29 },
-  { text: "effortless.",  className: "",                                              delay: 0.37 },
+  { text: "Designing",    className: "text-6xl",                                              delay: 0.05 },
+  { text: "experiences",  className: "text-muted-foreground text-6xl",                         delay: 0.13 },
+  { text: "that",         className: "font-serif italic font-normal text-accent text-6xl	",     delay: 0.21 },
+  { text: "feel",         className: "text-6xl",                                              delay: 0.29 },
+  { text: "effortless.",  className: "text-6xl",                                              delay: 0.37 },
 ];
 
 // ─── Capability pills data ────────────────────────────────────────────────────
@@ -66,9 +66,66 @@ export default function Home() {
       {/* ══════════════════════════════════════════════
           HERO
       ══════════════════════════════════════════════ */}
-      <section className="min-h-[92vh] flex flex-col justify-center max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-40 pb-20">
+      <section className="relative min-h-[92vh] overflow-hidden">
+
+        {/* ── Gradient orbs ── */}
+        <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
+          {/* Large warm amber blob — bottom-center */}
+          <motion.div
+            className="absolute rounded-full blur-[120px]"
+            style={{
+              width: "70vw",
+              height: "60vw",
+              background: "radial-gradient(circle, hsl(36 90% 62% / 0.45), hsl(28 80% 55% / 0.2) 60%, transparent 80%)",
+              bottom: "-20%",
+              left: "10%",
+            }}
+            animate={{
+              scale: [1, 1.08, 0.96, 1.05, 1],
+              x: [0, 30, -20, 10, 0],
+              y: [0, -20, 10, -10, 0],
+            }}
+            transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
+          />
+          {/* Coral-accent orb — top-right */}
+          <motion.div
+            className="absolute rounded-full blur-[100px]"
+            style={{
+              width: "40vw",
+              height: "40vw",
+              background: "radial-gradient(circle, hsl(16 95% 54% / 0.2), hsl(16 80% 60% / 0.08) 60%, transparent 80%)",
+              top: "-10%",
+              right: "-5%",
+            }}
+            animate={{
+              scale: [1, 1.12, 0.94, 1.06, 1],
+              x: [0, -25, 15, -10, 0],
+              y: [0, 30, -15, 20, 0],
+            }}
+            transition={{ duration: 18, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+          />
+          {/* Small accent ripple — mid-left */}
+          <motion.div
+            className="absolute rounded-full blur-[80px]"
+            style={{
+              width: "25vw",
+              height: "25vw",
+              background: "radial-gradient(circle, hsl(16 95% 54% / 0.12), transparent 70%)",
+              top: "35%",
+              left: "-5%",
+            }}
+            animate={{
+              scale: [1, 1.2, 0.9, 1.15, 1],
+              opacity: [0.7, 1, 0.6, 0.9, 0.7],
+            }}
+            transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+          />
+        </div>
+
+        {/* ── Content ── */}
+        <div className="relative min-h-[92vh] flex flex-col justify-center max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-40 pb-20">
         {/* Eyebrow */}
-        <motion.div {...fadeIn(0.0)} className="mb-8 flex items-center gap-3 flex-wrap">
+        {/* <motion.div {...fadeIn(0.0)} className="mb-8 flex items-center gap-3 flex-wrap">
           <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-secondary text-sm font-medium text-foreground border border-border">
             <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
             Available for new opportunities
@@ -76,7 +133,7 @@ export default function Home() {
           <span className="text-muted-foreground text-sm hidden sm:inline">
             Product Designer · Gainesville, FL
           </span>
-        </motion.div>
+        </motion.div> */}
 
         {/* Big headline — word-by-word masked reveal */}
         <h1 className="text-[clamp(3rem,10vw,9rem)] font-display font-bold leading-[1.0] tracking-tight mb-12 flex flex-wrap gap-x-[0.22em] gap-y-0 items-baseline">
@@ -126,6 +183,7 @@ export default function Home() {
             </Link>
           </div>
         </motion.div>
+        </div>
       </section>
 
       {/* ══════════════════════════════════════════════
