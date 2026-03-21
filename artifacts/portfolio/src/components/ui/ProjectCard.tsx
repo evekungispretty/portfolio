@@ -38,7 +38,7 @@ export function ProjectCard({ project, index, size = "default" }: ProjectCardPro
           <img
             src={project.imageUrl}
             alt={project.title}
-            className="absolute inset-0 w-full h-full object-cover transition-all duration-700 ease-out group-hover:scale-[1.03]"
+            className="absolute inset-0 w-full h-full object-cover transition-all duration-700 ease-out grayscale group-hover:grayscale-0 group-hover:scale-[1.05]"
             style={{ mixBlendMode: "multiply" }}
           />
 

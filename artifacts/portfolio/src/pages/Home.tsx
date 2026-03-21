@@ -15,11 +15,11 @@ const fadeIn = (delay = 0) => ({
 
 // Each word slides up through an overflow-hidden clip — the helloelva.com style
 const headlineWords = [
-  { text: "Designing",    className: "text-6xl",                                              delay: 0.05 },
-  { text: "experiences",  className: "text-muted-foreground text-6xl",                         delay: 0.13 },
-  { text: "that",         className: "font-serif italic font-normal text-accent text-6xl	",     delay: 0.21 },
-  { text: "feel",         className: "text-6xl",                                              delay: 0.29 },
-  { text: "effortless.",  className: "text-6xl",                                              delay: 0.37 },
+  { text: "Designing",    className: "",                                              delay: 0.05 },
+  { text: "experiences",  className: "text-muted-foreground",                         delay: 0.13 },
+  { text: "that",         className: "font-serif italic font-normal text-accent",     delay: 0.21 },
+  { text: "feel",         className: "",                                              delay: 0.29 },
+  { text: "effortless.",  className: "",                                              delay: 0.37 },
 ];
 
 // ─── Capability pills data ────────────────────────────────────────────────────
@@ -53,7 +53,7 @@ const marqueeRow2 = [
 ];
 
 // ─── Featured projects ────────────────────────────────────────────────────────
-const featuredSlugs = ["uf-program-directory", "tapply", "new-worlds-reading"];
+const featuredSlugs = ["new-worlds-reading", "turbo", "tapply"];
 
 export default function Home() {
   const featuredProjects = featuredSlugs
