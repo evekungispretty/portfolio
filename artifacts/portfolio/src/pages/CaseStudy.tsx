@@ -1,15 +1,57 @@
 import { useRoute, Link } from "wouter";
-import { PageTransition } from "@/components/ui/PageTransition";
 import { projects } from "@/data/projects";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
 import NotFound from "./not-found";
+
+function useActiveSection(sectionIds: string[]) {
+  const [activeId, setActiveId] = useState(sectionIds[0]);
+
+  useEffect(() => {
+    const observers: IntersectionObserver[] = [];
+
+    sectionIds.forEach((id) => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) setActiveId(id);
+        },
+        { rootMargin: "-20% 0px -60% 0px", threshold: 0 }
+      );
+      observer.observe(el);
+      observers.push(observer);
+    });
+
+    return () => observers.forEach((o) => o.disconnect());
+  }, [sectionIds]);
+
+  return activeId;
+}
+
+function scrollToSection(id: string) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const offset = 96;
+  const top = el.getBoundingClientRect().top + window.scrollY - offset;
+  window.scrollTo({ top, behavior: "smooth" });
+}
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 24 },
+  visible: (i = 0) => ({
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] },
+  }),
+};
 
 export default function CaseStudy() {
   const [, params] = useRoute("/work/:slug");
   const slug = params?.slug;
-  
-  const currentIndex = projects.findIndex(p => p.slug === slug);
+
+  const currentIndex = projects.findIndex((p) => p.slug === slug);
   const project = projects[currentIndex];
 
   if (!project) return <NotFound />;
@@ -17,135 +59,229 @@ export default function CaseStudy() {
   const nextProject = projects[(currentIndex + 1) % projects.length];
   const prevProject = projects[(currentIndex - 1 + projects.length) % projects.length];
 
+  const sectionIds = project.caseStudy.map((s) => s.id);
+  const activeId = useActiveSection(sectionIds);
+
   return (
-    <PageTransition className="pt-32 pb-16 bg-background">
-      {/* Top Nav inside page */}
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mb-12">
-        <Link href="/work" className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors font-medium">
-          <ArrowLeft className="w-4 h-4" /> Back to Work
+    <motion.div
+      key={slug}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.4 }}
+      className="bg-background min-h-screen"
+    >
+      {/* ── Back link ── */}
+      <div className="max-w-5xl mx-auto px-6 pt-28 pb-6">
+        <Link
+          href="/work"
+          className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+        >
+          <ArrowLeft className="w-3.5 h-3.5" />
+          All Projects
         </Link>
       </div>
 
-      {/* Hero */}
-      <header className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
-        <motion.h1 
+      {/* ── Tags ── */}
+      <div className="max-w-5xl mx-auto px-6 mb-5">
+        <motion.div
+          className="flex flex-wrap gap-2"
+          initial="hidden"
+          animate="visible"
+          variants={{ visible: { transition: { staggerChildren: 0.06 } } }}
+        >
+          {project.tags.map((tag) => (
+            <motion.span
+              key={tag}
+              variants={fadeUp}
+              className="px-3 py-1 text-xs font-medium rounded-full border border-border text-muted-foreground"
+            >
+              {tag}
+            </motion.span>
+          ))}
+        </motion.div>
+      </div>
+
+      {/* ── Title + subtitle ── */}
+      <div className="max-w-5xl mx-auto px-6 mb-10">
+        <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-5xl md:text-7xl font-display font-bold tracking-tight mb-8"
+          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          className="text-4xl md:text-5xl lg:text-6xl font-display font-bold tracking-tight leading-tight text-foreground mb-3"
         >
           {project.title}
         </motion.h1>
-        
-        <motion.div 
+        <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 0.2 }}
-          className="grid grid-cols-2 md:grid-cols-4 gap-8 py-8 border-y border-border"
+          transition={{ delay: 0.15, duration: 0.6 }}
+          className="text-xl text-muted-foreground"
         >
-          <div>
-            <span className="block text-sm text-muted-foreground mb-1">Role</span>
-            <strong className="font-semibold">{project.role}</strong>
-          </div>
-          <div>
-            <span className="block text-sm text-muted-foreground mb-1">Timeline</span>
-            <strong className="font-semibold">{project.timeline}</strong>
-          </div>
-          <div>
-            <span className="block text-sm text-muted-foreground mb-1">Year</span>
-            <strong className="font-semibold">{project.year}</strong>
-          </div>
-          <div>
-            <span className="block text-sm text-muted-foreground mb-1">Services</span>
-            <div className="flex flex-wrap gap-1">
-              {project.tags.map(tag => (
-                <span key={tag} className="text-sm font-semibold">{tag}</span>
-              ))}
-            </div>
-          </div>
-        </motion.div>
-      </header>
+          {project.subtitle}
+        </motion.p>
+      </div>
 
-      {/* Hero Image */}
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mb-24">
-        <motion.div 
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.3, duration: 0.8 }}
-          className="aspect-video w-full rounded-3xl overflow-hidden bg-muted"
+      {/* ── Metadata row ── */}
+      <div className="max-w-5xl mx-auto px-6 mb-14">
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2, duration: 0.6 }}
+          className="grid grid-cols-2 md:grid-cols-4 gap-x-8 gap-y-6 py-8 border-y border-border"
         >
-          <img 
-            src={project.imageUrl} 
-            alt={project.title} 
+          {[
+            { label: "My Role", value: project.role },
+            { label: "What I Did", value: project.whatIDid },
+            { label: "Timeline", value: project.timeline },
+            { label: "Team", value: project.team },
+          ].map(({ label, value }) => (
+            <div key={label}>
+              <span className="block text-xs uppercase tracking-widest text-muted-foreground mb-1.5">
+                {label}
+              </span>
+              <span className="text-sm font-medium text-foreground leading-snug">
+                {value}
+              </span>
+            </div>
+          ))}
+        </motion.div>
+      </div>
+
+      {/* ── Hero image ── */}
+      <div className="max-w-5xl mx-auto px-6 mb-20">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.97 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.25, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+          className="w-full rounded-2xl overflow-hidden aspect-[16/9] bg-muted"
+        >
+          <img
+            src={project.imageUrl}
+            alt={project.title}
             className="w-full h-full object-cover"
           />
         </motion.div>
       </div>
 
-      {/* Content Sections */}
-      <article className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 space-y-24">
-        <section>
-          <h2 className="text-3xl font-display font-bold mb-6">Overview & Context</h2>
-          <p className="text-lg text-muted-foreground leading-relaxed">
-            {project.details.context}
-          </p>
-          <p className="text-lg text-muted-foreground leading-relaxed mt-4">
-            {project.description}
-          </p>
-        </section>
+      {/* ── Two-column layout: sticky nav + content ── */}
+      <div className="max-w-5xl mx-auto px-6">
+        <div className="relative flex gap-16 lg:gap-24">
 
-        <section>
-          <h2 className="text-3xl font-display font-bold mb-6">The Problem</h2>
-          <div className="p-8 rounded-2xl bg-destructive/10 border border-destructive/20 text-destructive-foreground dark:text-foreground">
-            <p className="text-xl font-medium leading-relaxed">
-              "{project.details.problem}"
-            </p>
-          </div>
-        </section>
+          {/* Sticky left nav — hidden on mobile */}
+          <aside className="hidden lg:block w-44 shrink-0">
+            <nav className="sticky top-28 flex flex-col gap-1">
+              {project.caseStudy.map((section) => {
+                const isActive = activeId === section.id;
+                return (
+                  <button
+                    key={section.id}
+                    onClick={() => scrollToSection(section.id)}
+                    className={`text-left text-sm py-1 transition-all duration-200 ${
+                      isActive
+                        ? "text-foreground font-semibold"
+                        : "text-muted-foreground hover:text-foreground"
+                    }`}
+                  >
+                    {section.label}
+                  </button>
+                );
+              })}
+            </nav>
+          </aside>
 
-        <section>
-          <h2 className="text-3xl font-display font-bold mb-6">Goals & Objectives</h2>
-          <ul className="space-y-4">
-            {project.details.goals.map((goal, i) => (
-              <li key={i} className="flex gap-4 items-start text-lg text-muted-foreground">
-                <span className="flex items-center justify-center w-8 h-8 rounded-full bg-secondary text-foreground font-bold shrink-0">
-                  {i + 1}
-                </span>
-                <span className="pt-1">{goal}</span>
-              </li>
+          {/* Content sections */}
+          <main className="flex-1 min-w-0 pb-32 space-y-24">
+            {project.caseStudy.map((section, i) => (
+              <motion.section
+                key={section.id}
+                id={section.id}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-80px" }}
+                variants={{
+                  hidden: {},
+                  visible: { transition: { staggerChildren: 0.1 } },
+                }}
+              >
+                <motion.h2
+                  variants={fadeUp}
+                  className="text-2xl md:text-3xl font-display font-bold text-foreground mb-6 tracking-tight"
+                >
+                  {section.heading}
+                </motion.h2>
+
+                <div className="space-y-4">
+                  {section.body.map((para, j) => (
+                    <motion.p
+                      key={j}
+                      custom={j}
+                      variants={fadeUp}
+                      className="text-base md:text-[17px] text-muted-foreground leading-relaxed"
+                    >
+                      {para}
+                    </motion.p>
+                  ))}
+                </div>
+
+                {section.highlights && (
+                  <motion.ul
+                    variants={fadeUp}
+                    className="mt-8 space-y-3"
+                  >
+                    {section.highlights.map((h) => (
+                      <li key={h} className="flex items-start gap-3 text-sm text-foreground">
+                        <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-foreground shrink-0" />
+                        {h}
+                      </li>
+                    ))}
+                  </motion.ul>
+                )}
+
+                {section.quote && (
+                  <motion.blockquote
+                    variants={fadeUp}
+                    className="mt-10 pl-5 border-l-2 border-foreground/20 italic text-lg text-muted-foreground leading-relaxed"
+                  >
+                    {section.quote}
+                  </motion.blockquote>
+                )}
+
+                {/* Divider between sections — not after last */}
+                {i < project.caseStudy.length - 1 && (
+                  <motion.hr
+                    variants={fadeUp}
+                    className="mt-24 border-border"
+                  />
+                )}
+              </motion.section>
             ))}
-          </ul>
-        </section>
 
-        <section>
-          <h2 className="text-3xl font-display font-bold mb-6">Outcome</h2>
-          <div className="p-8 rounded-2xl bg-accent text-accent-foreground shadow-lg shadow-accent/20">
-            <p className="text-xl font-medium leading-relaxed">
-              {project.details.outcome}
-            </p>
-          </div>
-        </section>
-      </article>
+            {/* ── Project navigation ── */}
+            <div className="pt-16 border-t border-border flex justify-between items-start gap-4">
+              <Link href={`/work/${prevProject.slug}`} className="group max-w-[45%]">
+                <span className="block text-xs uppercase tracking-widest text-muted-foreground mb-2">
+                  Previous
+                </span>
+                <span className="flex items-center gap-2 text-base font-display font-semibold text-foreground group-hover:text-muted-foreground transition-colors">
+                  <ArrowLeft className="w-4 h-4 shrink-0 transition-transform group-hover:-translate-x-1" />
+                  <span className="truncate">{prevProject.title}</span>
+                </span>
+              </Link>
 
-      {/* Project Navigation */}
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mt-32 pt-16 border-t border-border">
-        <div className="flex justify-between items-center">
-          <Link href={`/work/${prevProject.slug}`} className="group max-w-[45%]">
-            <span className="block text-sm text-muted-foreground mb-2">Previous Project</span>
-            <span className="flex items-center gap-2 text-xl md:text-2xl font-display font-bold group-hover:text-accent transition-colors truncate">
-              <ArrowLeft className="w-5 h-5 transition-transform group-hover:-translate-x-2" />
-              <span className="truncate">{prevProject.title}</span>
-            </span>
-          </Link>
-          
-          <Link href={`/work/${nextProject.slug}`} className="group max-w-[45%] text-right">
-            <span className="block text-sm text-muted-foreground mb-2">Next Project</span>
-            <span className="flex items-center justify-end gap-2 text-xl md:text-2xl font-display font-bold group-hover:text-accent transition-colors truncate">
-              <span className="truncate">{nextProject.title}</span>
-              <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-2" />
-            </span>
-          </Link>
+              <Link href={`/work/${nextProject.slug}`} className="group max-w-[45%] text-right">
+                <span className="block text-xs uppercase tracking-widest text-muted-foreground mb-2">
+                  Next
+                </span>
+                <span className="flex items-center justify-end gap-2 text-base font-display font-semibold text-foreground group-hover:text-muted-foreground transition-colors">
+                  <span className="truncate">{nextProject.title}</span>
+                  <ArrowRight className="w-4 h-4 shrink-0 transition-transform group-hover:translate-x-1" />
+                </span>
+              </Link>
+            </div>
+          </main>
         </div>
       </div>
-    </PageTransition>
+    </motion.div>
   );
 }

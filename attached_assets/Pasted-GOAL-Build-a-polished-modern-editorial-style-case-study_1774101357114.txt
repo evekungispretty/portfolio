@@ -1,0 +1,146 @@
+GOAL
+Build a polished, modern, editorial-style case study page for a product designer. The page should feel clean, premium, and easy to skim, with strong visual hierarchy, thoughtful spacing, sticky in-page navigation, smooth scrolling, and subtle motion.
+
+REFERENCE STRUCTURE
+The case study is for an educational AR app project called “AR Expedition” / “New Worlds Reading AR Expeditions.”
+
+Recreate the page structure in this order:
+
+1. Top navigation
+- Simple, minimal nav
+- Designer name on the left
+- Links like About and Resume on the right
+
+2. Sticky in-page section navigation
+- Overview
+- The Challenge
+- Research & Approach
+- Designing the Experience
+- Design Iterations
+- Outcome & Reflection
+
+3. Hero / project intro
+- Project tags such as app design, ui design, user testing, AR
+- Large case study title
+- Supporting subtitle
+- Metadata section with:
+  - My Role
+  - What I Did
+  - Timeline
+  - Team
+
+4. Overview section
+- Intro paragraph
+- Optional demo video embed
+- Large hero image
+
+5. The Challenge section
+- Big problem statement
+- Supporting explanation
+- 3 challenge blocks
+
+6. Research & Approach section
+- Section heading
+- Short narrative intro
+- Key findings in bullet or card format
+- Supporting image rows
+
+7. Designing the Experience section
+- User flow explanation
+- First-time user flow
+- Returning user flow
+- Bubble Pop Quiz flow
+- Large framed images for each
+
+8. Design Iterations section
+- Core principles / design decisions
+- Repeated pattern of:
+  - image
+  - short insight title
+  - supporting text
+- Iteration subsection with constraints, stakeholder feedback, and design changes
+
+9. Outcome & Reflection section
+- Impact summary
+- Reflection paragraph
+- Final image gallery
+
+10. Footer
+- Simple designer footer
+
+VISUAL STYLE
+The page should feel:
+- editorial
+- clean
+- modern
+- high-taste
+- minimal but not plain
+- portfolio-quality
+- readable and structured
+
+Use:
+- large typography
+- generous whitespace
+- modular content blocks
+- image sections with rounded corners
+- subtle dividers
+- sticky side or top section nav
+- smooth anchor scrolling
+- tasteful fade/slide reveal on scroll
+- soft hover feedback where appropriate
+
+DO NOT make it look like a generic blog template.
+
+LAYOUT REQUIREMENTS
+- Max-width reading container for text
+- Wider media container for large images
+- Clear distinction between heading levels
+- Good rhythm between text and imagery
+- Mobile responsive
+- Sticky in-page nav should gracefully collapse on smaller screens
+- Embedded video should be responsive
+
+CONTENT MODEL
+Create the page so content is easy to swap out later.
+Use a structured JSON or JS object for:
+- title
+- subtitle
+- tags
+- metadata
+- sections
+- image blocks
+- quotes / insights
+- gallery items
+
+TECHNICAL REQUIREMENTS
+- Use React or Next.js
+- Use Tailwind CSS
+- Use Framer Motion for subtle scroll reveals and section transitions
+- Use semantic HTML
+- Use accessible heading hierarchy
+- Add smooth scrolling for anchor links
+- Optimize for readability and performance
+- Build reusable components:
+  - TopNav
+  - SectionNav
+  - HeroBlock
+  - MetadataGrid
+  - TextSection
+  - ImageBlock
+  - InsightBlock
+  - GalleryRow
+  - Footer
+
+ASSET HANDLING
+For now, use placeholder image paths or external URLs that can be replaced later.
+Set up the page so I can easily swap in my own assets.
+
+DELIVERABLE
+Generate:
+1. the case study page
+2. reusable components
+3. sample structured content data
+4. responsive styling
+5. subtle polished animation
+
+The final result should feel like a strong product design portfolio case study: elegant, readable, image-forward, and easy to update.

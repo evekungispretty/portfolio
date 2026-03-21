@@ -6,7 +6,6 @@ import { AnimatePresence } from "framer-motion";
 
 // Layout
 import { Navbar } from "@/components/layout/Navbar";
-import { Footer } from "@/components/layout/Footer";
 
 // Pages
 import Home from "@/pages/Home";
@@ -43,7 +42,6 @@ function RouterContent() {
           </Switch>
         </AnimatePresence>
       </main>
-      <Footer />
     </div>
   );
 }
