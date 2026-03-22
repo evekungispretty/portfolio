@@ -26,7 +26,7 @@ export function Footer() {
               <span className="text-accent">Let's build it.</span>
             </h2>
             <p className="text-lg text-background/50 max-w-sm leading-relaxed">
-              Open to full-time roles, freelance projects, and interesting collaborations.
+              Open to freelance projects and interesting collaborations.
             </p>
           </div>
 

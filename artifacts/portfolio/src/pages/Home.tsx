@@ -1,6 +1,7 @@
+import { useState, useEffect } from "react";
 import { Link } from "wouter";
 import { ArrowUpRight, ArrowRight } from "lucide-react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { PageTransition } from "@/components/ui/PageTransition";
 import { ProjectCard } from "@/components/ui/ProjectCard";
 import { Marquee } from "@/components/ui/Marquee";
@@ -15,11 +16,17 @@ const fadeIn = (delay = 0) => ({
 
 // Each word slides up through an overflow-hidden clip — the helloelva.com style
 const headlineWords = [
-  { text: "Designing",    className: "",                                              delay: 0.05 },
-  { text: "experiences",  className: "text-muted-foreground",                         delay: 0.13 },
-  { text: "that",         className: "",     delay: 0.21 },
-  { text: "is",         className: "",                                              delay: 0.29 },
-  { text: "effortless and fun.",  className: "font-serif italic font-normal text-accent",                                              delay: 0.37 },
+  { text: "Designing",    className: "",                          delay: 0.05 },
+  { text: "experience",  className: "text-muted-foreground",     delay: 0.13 },
+  { text: "that",         className: "",                          delay: 0.21 },
+  { text: "is",           className: "",                          delay: 0.29 },
+];
+
+const rotatingPhrases = [
+  "effortless and fun.",
+  "better for everyone.",
+  "engaging and smooth.",
+  "a joy to use.",
 ];
 
 // ─── Capability pills data ────────────────────────────────────────────────────
@@ -27,7 +34,7 @@ const capabilities = [
   { label: "Product Design", emoji: "✦" },
   { label: "Interaction Design", emoji: "⌖" },
   { label: "Design Systems", emoji: "⬡" },
-  { label: "UX Research", emoji: "◎" },
+  { label: "User Research", emoji: "◎" },
   { label: "Accessibility", emoji: "✿" },
   { label: "Front-End Dev", emoji: "⟨⟩" },
   { label: "Prototyping", emoji: "▷" },
@@ -39,23 +46,33 @@ const marqueeRow1 = [
   "Product Design",
   "Interaction Design",
   "Design Systems",
-  "Higher Education",
+  "Visual Design",
   "Accessibility",
-  "UX Research",
+  "User Research",
+  "SEO",
 ];
 const marqueeRow2 = [
   "Front-End Development",
   "Prototyping",
   "Information Architecture",
-  "EdTech",
-  "AR Experiences",
-  "Onboarding Design",
+  "Ed Tech",
+  "Website Design",
+  "WordPress Developmen and CMS",
 ];
 
 // ─── Featured projects ────────────────────────────────────────────────────────
 const featuredSlugs = ["sparc-p", "new-worlds-reading", "turbo", "tapply"];
 
 export default function Home() {
+  const [phraseIndex, setPhraseIndex] = useState(0);
+
+  useEffect(() => {
+    const id = setInterval(() => {
+      setPhraseIndex((i) => (i + 1) % rotatingPhrases.length);
+    }, 3000);
+    return () => clearInterval(id);
+  }, []);
+
   const featuredProjects = featuredSlugs
     .map((slug) => projects.find((p) => p.slug === slug))
     .filter(Boolean) as typeof projects;
@@ -153,6 +170,24 @@ export default function Home() {
               </motion.span>
             </span>
           ))}
+          {/* Rotating phrase */}
+          <span
+            className="inline-block overflow-hidden pb-[0.06em]"
+            style={{ verticalAlign: "bottom" }}
+          >
+            <AnimatePresence mode="wait">
+              <motion.span
+                key={phraseIndex}
+                className="inline-block font-serif italic font-normal text-accent"
+                initial={{ y: "110%" }}
+                animate={{ y: 0 }}
+                exit={{ y: "-110%" }}
+                transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+              >
+                {rotatingPhrases[phraseIndex]}
+              </motion.span>
+            </AnimatePresence>
+          </span>
         </h1>
 
         {/* Sub + CTAs row */}
