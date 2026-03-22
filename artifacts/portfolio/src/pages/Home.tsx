@@ -17,9 +17,9 @@ const fadeIn = (delay = 0) => ({
 const headlineWords = [
   { text: "Designing",    className: "",                                              delay: 0.05 },
   { text: "experiences",  className: "text-muted-foreground",                         delay: 0.13 },
-  { text: "that",         className: "font-serif italic font-normal text-accent",     delay: 0.21 },
-  { text: "feel",         className: "",                                              delay: 0.29 },
-  { text: "effortless.",  className: "",                                              delay: 0.37 },
+  { text: "that",         className: "",     delay: 0.21 },
+  { text: "is",         className: "",                                              delay: 0.29 },
+  { text: "effortless and fun.",  className: "font-serif italic font-normal text-accent",                                              delay: 0.37 },
 ];
 
 // ─── Capability pills data ────────────────────────────────────────────────────
