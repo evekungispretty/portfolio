@@ -245,7 +245,7 @@ export default function Home() {
       {/* ══════════════════════════════════════════════
           SELECTED WORK
       ══════════════════════════════════════════════ */}
-      <section className="sticky top-0 z-10 bg-background rounded-t-[28px] shadow-[0_-6px_32px_rgba(0,0,0,0.07)]">
+      <section className="relative z-10 bg-background rounded-t-[28px] shadow-[0_-6px_32px_rgba(0,0,0,0.07)]">
       <div className="max-w-7xl mx-auto px-8 sm:px-12 lg:px-20 py-28 lg:py-36">
         {/* Section header */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-16 lg:mb-20">
@@ -290,7 +290,7 @@ export default function Home() {
       {/* ══════════════════════════════════════════════
           ABOUT PREVIEW
       ══════════════════════════════════════════════ */}
-      <section className="sticky top-0 z-20 rounded-t-[28px] shadow-[0_-6px_32px_rgba(0,0,0,0.12)]" style={{ backgroundColor: "#3e1405" }}>
+      <section className="relative z-20 rounded-t-[28px] shadow-[0_-6px_32px_rgba(0,0,0,0.12)]" style={{ backgroundColor: "#3e1405" }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-28 lg:py-36">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
             <motion.div
@@ -367,7 +367,7 @@ export default function Home() {
       {/* ══════════════════════════════════════════════
           CAPABILITIES
       ══════════════════════════════════════════════ */}
-      <section className="sticky top-0 z-30 bg-background rounded-t-[28px] shadow-[0_-6px_32px_rgba(0,0,0,0.07)]">
+      <section className="relative z-30 bg-background rounded-t-[28px] shadow-[0_-6px_32px_rgba(0,0,0,0.07)]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-28 lg:py-36">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
