@@ -273,6 +273,35 @@ export default function CaseStudy() {
                   </motion.blockquote>
                 )}
 
+                {/* Links / buttons */}
+                {section.links && section.links.length > 0 && (
+                  <motion.div variants={fadeUp} className="mb-8 flex flex-wrap gap-3">
+                    {section.links.map((link) =>
+                      link.variant === "button" ? (
+                        <a
+                          key={link.url}
+                          href={link.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium bg-foreground text-background hover:opacity-80 transition-opacity"
+                        >
+                          {link.label}
+                        </a>
+                      ) : (
+                        <a
+                          key={link.url}
+                          href={link.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1.5 text-sm font-medium text-foreground underline underline-offset-4 hover:opacity-70 transition-opacity"
+                        >
+                          {link.label}
+                        </a>
+                      )
+                    )}
+                  </motion.div>
+                )}
+
                 {/* Images / placeholders */}
                 {section.images && section.images.length > 0 && (
                   <div className="mt-10 space-y-8">

@@ -6,6 +6,12 @@ export interface CaseStudyImage {
   placeholder: string;
 }
 
+export interface CaseStudyLink {
+  label: string;
+  url: string;
+  variant?: "button" | "link";
+}
+
 export interface CaseStudySection {
   id: string;
   label: string;
@@ -14,6 +20,7 @@ export interface CaseStudySection {
   highlights?: string[];
   quote?: string;
   images?: CaseStudyImage[];
+  links?: CaseStudyLink[];
 }
 
 export interface Project {
@@ -345,11 +352,11 @@ export const projects: Project[] = [
     shortDescription: "An AR-powered reading expedition experience that brings books to life for K–5 students.",
     description: "New Worlds Reading is a state literacy initiative at the University of Florida. The AR Expeditions feature was a bold new direction — bringing augmented reality into early childhood literacy in a way that was accessible, joyful, and educationally grounded.",
     role: "UX/UI Designer",
-    whatIDid: "Experience Design, AR Interaction Design, User Research, Accessibility, Motion Direction",
+    whatIDid: "Experience Design, Interaction Design, UI Design",
     timeline: "5 months",
     team: "1 designer (me), 3 engineers, 1 literacy researcher, 1 PM",
-    year: "2023",
-    tags: ["AR Design", "EdTech", "Interaction Design", "Accessibility"],
+    year: "2024",
+    tags: ["AR Design", "EdTech", "Interaction Design"],
     category: "Experience",
     cardClass: "project-card-ar",
     imageUrl: `${import.meta.env.BASE_URL}images/project-ar.jpg`,
@@ -381,6 +388,10 @@ export const projects: Project[] = [
             placeholder: "Hero illustration: child holding phone showing AR scene overlaid on book — characters and objects from the story appearing in their living room",
           },
         ],
+        links: [
+            { label: "View Demo", url: "https://player.vimeo.com/video/1066629586?h=68048087d2&dnt=1&app_id=122963", variant: "button" },
+        ]
+
       },
       {
         id: "research",
