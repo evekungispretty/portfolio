@@ -16,7 +16,7 @@ const fadeIn = (delay = 0) => ({
 
 // Each word slides up through an overflow-hidden clip — the helloelva.com style
 const headlineWords = [
-  { text: "Designing",    className: "",                          delay: 0.05 },
+  { text: "Designing",    className: "text-2xl",                          delay: 0.05 },
   { text: "experience",  className: "text-muted-foreground",     delay: 0.13 },
   { text: "that",         className: "",                          delay: 0.21 },
   { text: "is",           className: "",                          delay: 0.29 },
@@ -153,7 +153,7 @@ export default function Home() {
         </motion.div> */}
 
         {/* Big headline — word-by-word masked reveal */}
-        <h1 className="text-[clamp(3rem,10vw,9rem)] font-display font-bold leading-[1.0] tracking-tight mb-12 flex flex-wrap gap-x-[0.22em] gap-y-0 items-baseline">
+        <h1 className="text-[clamp(3rem,9vw,8rem)] font-display font-bold leading-[1.0] tracking-tight mb-12 flex flex-wrap gap-x-[0.22em] gap-y-0 items-baseline">
           {headlineWords.map(({ text, className, delay }) => (
             <span
               key={text}
@@ -273,7 +273,7 @@ export default function Home() {
         </div>
 
         {/* Projects: 2x2 grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-8 lg:gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 lg:gap-24">
           {featuredProjects.map((project, i) => (
             <ProjectCard key={project.id} project={project} index={i} size="default" />
           ))}
