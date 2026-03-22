@@ -5,6 +5,8 @@ import { ProjectCard } from "@/components/ui/ProjectCard";
 import { projects, categories } from "@/data/projects";
 import { motion, AnimatePresence } from "framer-motion";
 
+const masonryAspectRatios = ["4/3", "3/4", "1/1", "4/3", "3/4", "4/5"];
+
 export default function Work() {
   const [activeCategory, setActiveCategory] = useState("All");
 
@@ -41,22 +43,22 @@ export default function Work() {
       </section>
 
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div layout className="grid grid-cols-1 md:grid-cols-2 gap-y-16 gap-x-8 lg:gap-x-12">
-          <AnimatePresence mode="popLayout">
+        <div className="columns-1 sm:columns-2 lg:columns-3 gap-6">
+          <AnimatePresence>
             {filteredProjects.map((project, i) => (
               <motion.div
                 key={project.id}
-                layout
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.95 }}
                 transition={{ duration: 0.4, ease: "easeOut" }}
+                className="break-inside-avoid mb-6"
               >
-                <ProjectCard project={project} index={i} />
+                <ProjectCard project={project} index={i} aspectRatio={masonryAspectRatios[i % masonryAspectRatios.length]} />
               </motion.div>
             ))}
           </AnimatePresence>
-        </motion.div>
+        </div>
         
         {filteredProjects.length === 0 && (
           <div className="py-32 text-center text-muted-foreground">

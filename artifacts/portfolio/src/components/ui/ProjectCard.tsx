@@ -7,9 +7,10 @@ interface ProjectCardProps {
   project: Project;
   index: number;
   size?: "large" | "default";
+  aspectRatio?: string;
 }
 
-export function ProjectCard({ project, index, size = "default" }: ProjectCardProps) {
+export function ProjectCard({ project, index, size = "default", aspectRatio }: ProjectCardProps) {
   const isLarge = size === "large";
 
   return (
@@ -24,8 +25,9 @@ export function ProjectCard({ project, index, size = "default" }: ProjectCardPro
         {/* Image / preview area */}
         <div
           className={`relative w-full overflow-hidden rounded-2xl lg:rounded-3xl isolate ${
-            isLarge ? "aspect-[16/7]" : "aspect-[4/3]"
+            isLarge ? "aspect-[16/7]" : ""
           } ${project.cardClass}`}
+          style={!isLarge ? { aspectRatio: aspectRatio ?? "4/3" } : undefined}
         >
           {/* Project image */}
           <img
