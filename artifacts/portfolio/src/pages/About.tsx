@@ -104,10 +104,7 @@ export default function About() {
               <div className="w-10 h-10 rounded-full bg-accent/20 flex items-center justify-center text-lg shrink-0">
                 🌺
               </div>
-              <div>
-                <p className="text-sm font-semibold text-foreground">Based in Gainesville, FL</p>
-                <p className="text-xs text-muted-foreground">Open to remote &amp; hybrid roles</p>
-              </div>
+
             </motion.div>
           </div>
 

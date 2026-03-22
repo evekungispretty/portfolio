@@ -16,7 +16,7 @@ export interface CaseStudySection {
   id: string;
   label: string;
   heading: string;
-  body: string[];
+  body: (string | { text: string; subheading: true })[];
   highlights?: string[];
   quote?: string;
   images?: CaseStudyImage[];
@@ -399,7 +399,7 @@ export const projects: Project[] = [
         label: "The Challenge",
         heading: "How do we design an interface that encourages reading without overwhelming kids who struggle with reading?",
         body: [
-          "The paradox at the heart of AR Expeditions",
+          { text: "The paradox at the heart of AR Expeditions", subheading: true },
           "We're building an app to motivate reluctant readers, but every piece of text on screen is a potential barrier.",
         ],
         highlights: [

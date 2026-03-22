@@ -43,32 +43,21 @@ const fadeUp = {
   }),
 };
 
-// ── Aspect ratio map ────────────────────────────────────────────────────────
-const aspectMap: Record<string, string> = {
-  video:   "aspect-video",
-  wide:    "aspect-[21/9]",
-  square:  "aspect-square",
-  portrait: "aspect-[3/4]",
-};
-
 // ── Image / Placeholder block ───────────────────────────────────────────────
 function ImageBlock({ img }: { img: CaseStudyImage }) {
-  const aspectClass = aspectMap[img.aspect ?? "video"];
 
   return (
     <motion.figure variants={fadeUp} className="w-full">
       {img.src ? (
-        <div className={`w-full ${aspectClass} rounded-2xl overflow-hidden bg-muted`}>
-          <img
-            src={img.src}
-            alt={img.alt}
-            className="w-full h-full object-cover"
-          />
-        </div>
+        <img
+          src={img.src}
+          alt={img.alt}
+          className="w-full rounded-2xl"
+        />
       ) : (
         /* Placeholder */
         <div
-          className={`w-full ${aspectClass} rounded-2xl border-2 border-dashed border-border bg-muted/40 flex flex-col items-center justify-center gap-3 px-6 text-center`}
+          className="w-full aspect-video rounded-2xl border-2 border-dashed border-border bg-muted/40 flex flex-col items-center justify-center gap-3 px-6 text-center"
         >
           <ImageIcon className="w-7 h-7 text-muted-foreground/50" />
           <p className="text-sm text-muted-foreground/70 max-w-sm leading-relaxed">
@@ -241,23 +230,20 @@ export default function CaseStudy() {
 
                 {/* Body paragraphs */}
                 <div className="space-y-4 mb-8">
-                  {section.body.map((para, j) =>
-                    j === 0 ? (
+                  {section.body.map((para, j) => {
+                    const isSubheading = typeof para === "object" && para.subheading;
+                    const text = typeof para === "object" ? para.text : para;
+                    return (
                       <motion.p
                         key={j} custom={j} variants={fadeUp}
-                        className="text-lg md:text-xl font-semibold text-foreground leading-snug"
+                        className={isSubheading
+                          ? "text-lg md:text-xl font-semibold text-foreground leading-snug"
+                          : "text-base md:text-[17px] text-muted-foreground leading-relaxed"}
                       >
-                        {para}
+                        {text}
                       </motion.p>
-                    ) : (
-                      <motion.p
-                        key={j} custom={j} variants={fadeUp}
-                        className="text-base md:text-[17px] text-muted-foreground leading-relaxed"
-                      >
-                        {para}
-                      </motion.p>
-                    )
-                  )}
+                    );
+                  })}
                 </div>
 
                 {/* Highlights */}
