@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { Link } from "wouter";
 import { ArrowUpRight, ArrowRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import { PageTransition } from "@/components/ui/PageTransition";
 import { ProjectCard } from "@/components/ui/ProjectCard";
 import { Marquee } from "@/components/ui/Marquee";
 import { projects } from "@/data/projects";
@@ -78,7 +77,13 @@ export default function Home() {
     .filter(Boolean) as typeof projects;
 
   return (
-    <PageTransition className="pb-0">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+      className="pb-0"
+    >
 
       {/* ══════════════════════════════════════════════
           HERO
@@ -434,6 +439,6 @@ export default function Home() {
       </section>
 
 
-    </PageTransition>
+    </motion.div>
   );
 }
