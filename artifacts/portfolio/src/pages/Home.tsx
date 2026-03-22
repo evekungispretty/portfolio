@@ -285,7 +285,7 @@ export default function Home() {
       {/* ══════════════════════════════════════════════
           ABOUT PREVIEW
       ══════════════════════════════════════════════ */}
-      <section className="sticky top-0 z-20 border-t border-border bg-secondary/30 rounded-t-[28px] shadow-[0_-6px_32px_rgba(0,0,0,0.07)]">
+      <section className="sticky top-0 z-20 rounded-t-[28px] shadow-[0_-6px_32px_rgba(0,0,0,0.12)]" style={{ backgroundColor: "#3e1405" }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-28 lg:py-36">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
             <motion.div
@@ -294,16 +294,16 @@ export default function Home() {
               viewport={{ once: true, margin: "-80px" }}
               transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
             >
-              <span className="block text-xs uppercase tracking-widest text-muted-foreground mb-5 font-medium">
+              <span className="block text-xs uppercase tracking-widest mb-5 font-medium" style={{ color: "rgba(255,220,190,0.55)" }}>
                 About
               </span>
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold tracking-tight leading-[1.05] mb-8">
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold tracking-tight leading-[1.05] mb-8" style={{ color: "#fdf0e8" }}>
                 Designer. Developer.{" "}
                 <span className="font-serif italic font-normal text-accent">
                   Systems thinker.
                 </span>
               </h2>
-              <div className="space-y-4 text-lg text-muted-foreground leading-relaxed mb-10">
+              <div className="space-y-4 text-lg leading-relaxed mb-10" style={{ color: "rgba(255,220,190,0.7)" }}>
                 <p>
                   I'm a product and UI/UX designer based in Gainesville, Florida, with a background
                   spanning higher education digital products, design systems, and interactive
@@ -316,7 +316,8 @@ export default function Home() {
               </div>
               <Link
                 href="/about"
-                className="group inline-flex items-center gap-2 font-semibold text-foreground hover-line"
+                className="group inline-flex items-center gap-2 font-semibold hover-line"
+                style={{ color: "#fdf0e8" }}
               >
                 More about me
                 <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
@@ -342,12 +343,13 @@ export default function Home() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.08 + 0.2, duration: 0.5 }}
-                  className="rounded-2xl border border-border bg-card p-6 flex flex-col gap-2"
+                  className="rounded-2xl p-6 flex flex-col gap-2"
+                  style={{ backgroundColor: "rgba(255,255,255,0.07)", border: "1px solid rgba(255,220,190,0.15)" }}
                 >
                   <span className="text-4xl font-display font-bold text-accent leading-none">
                     {item.stat}
                   </span>
-                  <span className="text-sm text-muted-foreground leading-snug">
+                  <span className="text-sm leading-snug" style={{ color: "rgba(255,220,190,0.65)" }}>
                     {item.label}
                   </span>
                 </motion.div>
