@@ -16,7 +16,7 @@ const fadeIn = (delay = 0) => ({
 
 // Each word slides up through an overflow-hidden clip — the helloelva.com style
 const headlineWords = [
-  { text: "Designing",    className: "text-2xl",                          delay: 0.05 },
+  { text: "Designing",    className: "",                          delay: 0.05 },
   { text: "experience",  className: "text-muted-foreground",     delay: 0.13 },
   { text: "that",         className: "",                          delay: 0.21 },
   { text: "is",           className: "",                          delay: 0.29 },
