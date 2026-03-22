@@ -43,7 +43,7 @@ export default function Work() {
       </section>
 
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="columns-1 sm:columns-2 gap-8">
+        <div className="columns-1 sm:columns-2 lg:columns-3 gap-6">
           <AnimatePresence>
             {filteredProjects.map((project, i) => (
               <motion.div
@@ -52,7 +52,7 @@ export default function Work() {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.95 }}
                 transition={{ duration: 0.4, ease: "easeOut" }}
-                className="break-inside-avoid mb-8"
+                className="break-inside-avoid mb-6"
               >
                 <ProjectCard project={project} index={i} aspectRatio={masonryAspectRatios[i % masonryAspectRatios.length]} />
               </motion.div>

@@ -382,6 +382,7 @@ export const projects: Project[] = [
         ],
         images: [
           {
+            src: `${import.meta.env.BASE_URL}images/ar/ar-02.png`, 
             alt: "AR Expeditions feature — child interacting with augmented reality book scene",
             caption: "AR Expeditions: interactive 3D scenes that extend the world of each book.",
             aspect: "wide",
@@ -395,11 +396,11 @@ export const projects: Project[] = [
       },
       {
         id: "research",
-        label: "Research",
-        heading: "Designing for Young Readers",
+        label: "The Challenge",
+        heading: "How do we design an interface that encourages reading without overwhelming kids who struggle with reading?",
         body: [
-          "I conducted research sessions with elementary students and their caregivers, observed classroom reading sessions, and synthesized findings with our literacy researcher. Understanding how 6–8 year olds interact with mobile devices — and where they get confused or frustrated — was essential to every design decision.",
-          "Key constraint: the experience needed to work on older Android devices, many of which had limited AR capability. The design had to degrade gracefully and still deliver value on lower-end hardware.",
+          "The paradox at the heart of AR Expeditions",
+          "We're building an app to motivate reluctant readers, but every piece of text on screen is a potential barrier.",
         ],
         highlights: [
           "Tested with students ages 6–9 across 3 literacy levels",

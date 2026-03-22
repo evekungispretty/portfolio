@@ -241,14 +241,23 @@ export default function CaseStudy() {
 
                 {/* Body paragraphs */}
                 <div className="space-y-4 mb-8">
-                  {section.body.map((para, j) => (
-                    <motion.p
-                      key={j} custom={j} variants={fadeUp}
-                      className="text-base md:text-[17px] text-muted-foreground leading-relaxed"
-                    >
-                      {para}
-                    </motion.p>
-                  ))}
+                  {section.body.map((para, j) =>
+                    j === 0 ? (
+                      <motion.p
+                        key={j} custom={j} variants={fadeUp}
+                        className="text-lg md:text-xl font-semibold text-foreground leading-snug"
+                      >
+                        {para}
+                      </motion.p>
+                    ) : (
+                      <motion.p
+                        key={j} custom={j} variants={fadeUp}
+                        className="text-base md:text-[17px] text-muted-foreground leading-relaxed"
+                      >
+                        {para}
+                      </motion.p>
+                    )
+                  )}
                 </div>
 
                 {/* Highlights */}
