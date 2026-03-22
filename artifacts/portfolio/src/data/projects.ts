@@ -356,7 +356,7 @@ export const projects: Project[] = [
     timeline: "5 months",
     team: "1 designer (me), 3 engineers, 1 literacy researcher, 1 PM",
     year: "2024",
-    tags: ["AR Design", "EdTech", "Interaction Design"],
+    tags: ["AR Design", "App Design", "Interaction Design"],
     category: "Experience",
     cardClass: "project-card-ar",
     imageUrl: `${import.meta.env.BASE_URL}images/project-ar.jpg`,
@@ -419,8 +419,8 @@ export const projects: Project[] = [
       },
       {
         id: "design",
-        label: "Design",
-        heading: "Interaction Design for Tiny Hands",
+        label: "Research & Approach",
+        heading: "Understanding the 8-10 year old mindset",
         body: [
           "The core interaction model needed to be simple enough for a first-grader to use without help. I landed on a scan-and-discover pattern: students point the camera at a special page in their book, the AR scene appears, and they explore it by tapping characters and objects that trigger audio and animation.",
           "Text instructions were replaced with illustrated animated guides. All critical interactions were triggered by large, forgiving tap targets (minimum 64×64pt). I also designed a 'look-around' mechanic that rewarded natural physical movement — tilting and rotating the phone — making it feel genuinely magical.",
@@ -443,12 +443,13 @@ export const projects: Project[] = [
       },
       {
         id: "accessibility",
-        label: "Accessibility",
-        heading: "AR That Works for Everyone",
+        label: "Designing the Experience",
+        heading: "User Flow",
         body: [
-          "Accessibility in AR is uniquely challenging — screen readers can't describe a 3D scene, and motion sickness is a real concern. I worked with the literacy researcher and engineers to implement several inclusive design decisions: a non-AR 2D mode for devices that couldn't support it, reduced-motion settings, audio descriptions of each scene, and high-contrast UI elements over the camera feed.",
-          "We also made the caregiver experience a first-class concern — adding an 'about this activity' panel explaining the literacy goal behind each AR scene, so parents and teachers understood why it was there.",
+          "I started designing the flow for first-time users and returning users, while we figure out the flow for Aquarium editing space and Bubble Pop Quiz.",
+          "Each experience in AR Expeditions required careful flow design to balance three goals: make it fun, make it educational, and make it accessible. Here's how I structured the key user journeys:",
         ],
+        
         highlights: [
           "Full 2D fallback mode for non-AR-capable devices",
           "All scene interactions also triggered via audio (not just visual feedback)",
@@ -456,6 +457,22 @@ export const projects: Project[] = [
           "Caregiver 'about this activity' panel with literacy goal explanation",
           "High contrast: all UI elements over camera feed at 4.5:1 minimum",
         ],
+        images: [
+          {
+           src: `${import.meta.env.BASE_URL}images/ar/ar-flow1.png`, 
+            alt: "flowcahrt",
+            caption: "First-time users",
+            placeholder: "Research artifacts: observation notes, key quotes from kids, caregiver feedback themes, and device test results",
+          },
+          {
+           src: `${import.meta.env.BASE_URL}images/ar/ar-flow2.png`, 
+            alt: "Flowchart",
+            caption: "Home page for returning users",
+            aspect: "wide",
+            placeholder: "Annotated UI spec: tap target sizing, color contrast ratios, audio cue trigger points, and fall-back non-AR mode",
+          },
+        ],
+
       },
       {
         id: "outcome",
