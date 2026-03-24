@@ -3,7 +3,15 @@ export interface CaseStudyImage {
   alt: string;
   caption?: string;
   aspect?: "video" | "portrait" | "square" | "wide";
-  placeholder: string;
+  placeholder?: string;
+  layout?: "side-by-side";
+}
+
+export interface CaseStudyCard {
+  heading: string;
+  body?: string;
+  subheading?: string;
+  bullets?: string[];
 }
 
 export interface CaseStudyLink {
@@ -19,6 +27,7 @@ export interface CaseStudySection {
   body: (string | { text: string; subheading: true })[];
   highlights?: string[];
   quote?: string;
+  cards?: CaseStudyCard[];
   images?: CaseStudyImage[];
   links?: CaseStudyLink[];
 }
@@ -352,11 +361,11 @@ export const projects: Project[] = [
     shortDescription: "An AR-powered reading expedition experience that brings books to life for K–5 students.",
     description: "New Worlds Reading is a state literacy initiative at the University of Florida. The AR Expeditions feature was a bold new direction — bringing augmented reality into early childhood literacy in a way that was accessible, joyful, and educationally grounded.",
     role: "UX/UI Designer",
-    whatIDid: "Experience Design, Interaction Design, UI Design",
-    timeline: "5 months",
-    team: "1 designer (me), 3 engineers, 1 literacy researcher, 1 PM",
+    whatIDid: "Main menu and navigation system. Aquarium experience flow and edit interface. Bubble Pop quiz interaction design. In-game feedback cues and educational prompts",
+    timeline: "3 months, app is launched 2025",
+    team: "3D Artist, AR/VR Developer, Research Team",
     year: "2024",
-    tags: ["AR Design", "App Design", "Interaction Design"],
+    tags: ["AR", "App Design", "Interaction Design", "UI Design"],
     category: "Experience",
     cardClass: "project-card-ar",
     imageUrl: `${import.meta.env.BASE_URL}images/project-ar.jpg`,
@@ -402,20 +411,27 @@ export const projects: Project[] = [
           { text: "The paradox at the heart of AR Expeditions", subheading: true },
           "We're building an app to motivate reluctant readers, but every piece of text on screen is a potential barrier.",
         ],
-        highlights: [
-          "Tested with students ages 6–9 across 3 literacy levels",
-          "Device range: iPhone 12 to 4-year-old mid-range Android",
-          "Students could operate the AR camera feature independently — but needed audio cues, not text instructions",
-          "Caregivers needed to feel the AR feature was safe, not a distraction from reading",
-        ],
-        images: [
-          {
-            alt: "Research session photos and key insights from child testing",
-            caption: "Key findings from research sessions — what confused young users, what delighted them.",
-            aspect: "video",
-            placeholder: "Research artifacts: observation notes, key quotes from kids, caregiver feedback themes, and device test results",
-          },
-        ],
+        cards: [
+        {
+          heading: "Studied existing AR apps for kids",
+          body: "I analyzed popular AR educational apps to understand UI patterns that worked in 3D space.",
+          subheading: "Key Findings",
+          bullets: [
+            "Large, clear buttons with high contrast",
+            "Minimal text, maximum visual cues",
+            "Immediate feedback for every action",
+          ],
+        },
+        {
+          heading: "Understood the literacy challenge",
+          body: "Working with the research team, I learned about the specific barriers reluctant readers face.",
+          subheading: "Key Findings",
+          bullets: [
+            "Overwhelming text blocks cause anxiety",
+            "Need for audio support to build confidence",
+          ],
+        },
+      ],
       },
       {
         id: "design",
@@ -428,16 +444,18 @@ export const projects: Project[] = [
         quote: "If a 7-year-old can't figure it out in 10 seconds without reading, the design needs to change. That was our testing benchmark.",
         images: [
           {
-            alt: "AR interaction flow — scan trigger, scene reveal, and explore mode",
-            caption: "Core AR interaction loop: scan → scene appears → explore by tapping → hear story connection.",
+            alt: "Research session photos and key insights from child testing",
+            src: `${import.meta.env.BASE_URL}images/ar/ar-research.jpg`, 
             aspect: "video",
-            placeholder: "Interaction flow storyboard: page scan animation → AR scene reveal → tap to trigger character audio → look-around mechanic",
+            layout: "side-by-side",
+            placeholder: "Research artifacts: observation notes, key quotes from kids, caregiver feedback themes, and device test results",
           },
-          {
-            alt: "Tap target sizing and accessibility annotations for AR UI",
-            caption: "Accessibility-first UI: minimum 64pt tap targets, high-contrast labels, audio-first instruction design.",
-            aspect: "wide",
-            placeholder: "Annotated UI spec: tap target sizing, color contrast ratios, audio cue trigger points, and fall-back non-AR mode",
+           {
+            alt: "Research session photos and key insights from child testing",
+            src: `${import.meta.env.BASE_URL}images/ar/ar-research-2.jpg`, 
+            aspect: "video",
+            layout: "side-by-side",
+            placeholder: "Research artifacts: observation notes, key quotes from kids, caregiver feedback themes, and device test results",
           },
         ],
       },
@@ -448,14 +466,6 @@ export const projects: Project[] = [
         body: [
           "I started designing the flow for first-time users and returning users, while we figure out the flow for Aquarium editing space and Bubble Pop Quiz.",
           "Each experience in AR Expeditions required careful flow design to balance three goals: make it fun, make it educational, and make it accessible. Here's how I structured the key user journeys:",
-        ],
-        
-        highlights: [
-          "Full 2D fallback mode for non-AR-capable devices",
-          "All scene interactions also triggered via audio (not just visual feedback)",
-          "Reduced motion mode: disables parallax and camera movement",
-          "Caregiver 'about this activity' panel with literacy goal explanation",
-          "High contrast: all UI elements over camera feed at 4.5:1 minimum",
         ],
         images: [
           {
@@ -468,6 +478,53 @@ export const projects: Project[] = [
            src: `${import.meta.env.BASE_URL}images/ar/ar-flow2.png`, 
             alt: "Flowchart",
             caption: "Home page for returning users",
+            aspect: "wide",
+            placeholder: "Annotated UI spec: tap target sizing, color contrast ratios, audio cue trigger points, and fall-back non-AR mode",
+          },
+        ],
+
+      },
+        {
+        id: "iteration",
+        label: "Design Iterations",
+        heading: "Refining the Components",
+        body: [
+          "In order to make sure the app serves the right purposes, we have set some principles for designing across experiences.",
+          "At this point, we have already established some 3D elements created by our 3D Artist, so I went ahead and designed high fidelity wireframes for stakeholders to visualize the product.",
+        ],
+        cards: [
+        {
+          heading: "Consistent patterns create confidence",
+          body: "Every experience uses the same AR setup (find surface → place object). Once kids learn it in Aquarium, Bubble Pop feels familiar.",
+        },
+        {
+          heading: "Onboarding happens once, navigation stays simple",
+          body: "Research agreement and welcome only appear on first launch. Return users go straight to the experience.",
+         
+        },
+         {
+          heading: "Exit paths are always clear",
+          body: "Home button in top-left is persistent across all screens. Kids never feel trapped.",
+        },
+        {
+          heading: "Educational moments feel earned, not forced",
+          body: "In Bubble Pop, facts are rewards for correct answers. In Aquarium, info buttons are optional exploration. Learning feels like discovery, not homework.",
+         
+        },
+             
+      ],
+      
+        images: [
+          {
+           src: `${import.meta.env.BASE_URL}images/ar/ar-iteration01.png`, 
+            alt: "Design iteration",
+            caption: "Desgin iteration for home page message",
+            placeholder: "Research artifacts: observation notes, key quotes from kids, caregiver feedback themes, and device test results",
+          },
+          {
+           src: `${import.meta.env.BASE_URL}images/ar/ar-iteration-02.png`, 
+            alt: "Design iteration",
+            caption: "Design iteration for Aqarium experience",
             aspect: "wide",
             placeholder: "Annotated UI spec: tap target sizing, color contrast ratios, audio cue trigger points, and fall-back non-AR mode",
           },
