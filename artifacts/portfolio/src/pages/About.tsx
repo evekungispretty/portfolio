@@ -6,30 +6,30 @@ import { PageTransition } from "@/components/ui/PageTransition";
 
 const philosophy = [
   {
-    label: "Clarity over cleverness.",
-    body: "Every decision should serve the person using it. If I have to explain a design, I haven't finished designing it.",
+    label: "Stay true to the problem and your target users.",
+    body: "The best design solves the right problem for the right people. I start by understanding the needs, goals, and pain points of the users I'm designing for, and keep them at the center of my process.",
   },
   {
-    label: "Accessibility is craft, not compliance.",
-    body: "Building for everyone makes products better for everyone. WCAG guidelines are the floor, not the ceiling.",
+    label: "Design is always a work-in-progress.",
+    body: "The best products evolve over time. I design with the expectation that things will change, and try to make sure they can.",
   },
   {
     label: "Systems thinking enables scale.",
-    body: "The best design work creates patterns that multiply. I build components, not just screens.",
+    body: "The best design work creates patterns that multiply. I build components and think about how they fit together to create a cohesive experience.",
   },
   {
-    label: "Motion implies meaning.",
-    body: "Animation isn't decoration. Every transition communicates something about how the interface works.",
+    label: "Always evolving.",
+    body: "Design is a field that's always changing, and I want to change with it. I'm committed to learning new skills, exploring new tools, and staying curious about the world around me.",
   },
 ];
 
 const strengths = [
   { area: "Product Design", desc: "End-to-end experience design from research through shipped product" },
   { area: "Design Systems", desc: "Component libraries, token systems, and design language documentation" },
-  { area: "Accessibility", desc: "WCAG compliance, inclusive design patterns, and assistive technology" },
+  { area: "Rapid Prototyping", desc: "Fast, iterative prototyping to test and validate ideas" },
   { area: "Interaction Design", desc: "Motion, microinteractions, and tactile interface behavior" },
-  { area: "Front-End Dev", desc: "HTML, CSS, JavaScript, React, PHP, WordPress — design that ships" },
-  { area: "EdTech & Higher Ed", desc: "Deep domain knowledge in digital products for education" },
+  { area: "Front-End Dev", desc: "HTML, CSS, JavaScript, React, Tailwind CSS" },
+  { area: "Content Management", desc: "WordPress development and CMS management" },
 ];
 
 export default function About() {
@@ -94,18 +94,6 @@ export default function About() {
                 </motion.div>
               </div>
             </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5, duration: 0.6 }}
-              className="mt-6 p-5 rounded-2xl bg-secondary border border-border flex items-center gap-4"
-            >
-              <div className="w-10 h-10 rounded-full bg-accent/20 flex items-center justify-center text-lg shrink-0">
-                🌺
-              </div>
-
-            </motion.div>
           </div>
 
           {/* Text column */}
@@ -140,7 +128,7 @@ export default function About() {
             >
               <p>
                 I'm a product and UI/UX designer with a background in web design, design systems,
-                accessibility, and higher education digital products. Currently at the{" "}
+                accessibility, digital products and SEO. Currently at the{" "}
                 <span className="text-foreground font-medium">University of Florida</span>, where I
                 design and build digital experiences for the College of Education.
               </p>
@@ -294,7 +282,7 @@ export default function About() {
                 </p>
               </div>
               <div className="mt-10 flex flex-wrap gap-3">
-                {["🧶 Crochet", "💅 Gel nails", "🍰 Baking", "🐱 Cat memes", "📚 Design nerd"].map((tag) => (
+                {["🧶 Crochet", "💅 Gel nails", "🍰 Baking", "🐱 Cat memes", "💀 Humorously Sarcastic "].map((tag) => (
                   <span
                     key={tag}
                     className="px-4 py-2 rounded-full bg-secondary border border-border text-sm font-medium text-foreground"
@@ -309,7 +297,7 @@ export default function About() {
       </section>
 
       {/* ── CTA footer ────────────────────────────────────────── */}
-      <section className="border-t border-border bg-foreground text-background rounded-t-[2.5rem]">
+      {/* <section className="border-t border-border bg-foreground text-background rounded-t-[2.5rem]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-28 flex flex-col md:flex-row md:items-center justify-between gap-10">
           <div>
             <h2 className="text-4xl md:text-5xl font-display font-bold tracking-tight leading-tight mb-3">
@@ -340,7 +328,7 @@ export default function About() {
             </a>
           </div>
         </div>
-      </section>
+      </section> */}
 
     </PageTransition>
   );

@@ -1,7 +1,6 @@
 import { Download, ArrowUpRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { PageTransition } from "@/components/ui/PageTransition";
-import { Link } from "wouter";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -246,16 +245,18 @@ export default function Resume() {
               Want to talk about working together?
             </p>
             <p className="text-muted-foreground text-sm mt-1">
-              I'm open to full-time and freelance opportunities.
+              Let me know if you have any questions, or just want to chat about design, tech, or cats!
             </p>
           </div>
-          <Link
-            href="/contact"
+          <a
+            href="https://www.linkedin.com/in/evekung/"
+            target="_blank"
+            rel="noopener noreferrer"
             className="group inline-flex items-center gap-2 px-6 py-3 rounded-full bg-accent text-white font-semibold text-sm hover:scale-105 transition-all duration-300 shrink-0"
           >
             Get in touch
             <ArrowUpRight className="w-4 h-4" />
-          </Link>
+          </a>
         </motion.div>
 
       </section>

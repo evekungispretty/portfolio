@@ -54,7 +54,7 @@ const marqueeRow2 = [
   "Front-End Development",
   "Prototyping",
   "Information Architecture",
-  "Ed Tech",
+  "Learning Management Systems",
   "Website Design",
   "WordPress Developmen and CMS",
 ];
