@@ -310,8 +310,8 @@ export default function Home() {
               </h2>
               <div className="space-y-4 text-lg leading-relaxed mb-10" style={{ color: "rgba(255,220,190,0.7)" }}>
                 <p>
-                  I'm a product and UI/UX designer based in Gainesville, Florida, with a background
-                  spanning higher education digital products, design systems, and interactive
+                  I'm a product and UI/UX designer with a background
+                  spanning digital products, design systems, and interactive
                   experiences.
                 </p>
                 <p>
@@ -339,8 +339,8 @@ export default function Home() {
               {[
                 { stat: "4+", label: "Years of design experience" },
                 { stat: "MA", label: "Interaction Design & UI/UX — Academy of Art University" },
-                { stat: "100+", label: "Programs redesigned for UF College of Education" },
-                { stat: "23%", label: "Reduction in first-user incompletion at PicCollage" },
+                // { stat: "100+", label: "Programs redesigned for UF College of Education" },
+                // { stat: "23%", label: "Reduction in first-user incompletion at PicCollage" },
               ].map((item, i) => (
                 <motion.div
                   key={i}
