@@ -80,6 +80,7 @@ const skills = [
   "Design Systems", "Accessibility (WCAG 2.1)",
   "Information Architecture", "Wireframing & Prototyping",
   "Front-End Development", "Content Design", "Motion Design",
+  "Design Documentation", "Content Management Systems",
 ];
 
 export default function Resume() {

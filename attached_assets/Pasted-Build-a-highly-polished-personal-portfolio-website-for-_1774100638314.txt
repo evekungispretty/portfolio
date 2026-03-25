@@ -120,7 +120,6 @@ Include sections like:
 - information architecture or flows
 - design decisions
 - prototypes / UI exploration
-- accessibility or usability considerations
 - outcome / reflection
 
 The case study layout should feel premium and designed, not like a basic document. Use strong section dividers, thoughtful spacing, large headers, image framing, and motion.

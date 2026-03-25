@@ -34,7 +34,7 @@ const capabilities = [
   { label: "Interaction Design", emoji: "⌖" },
   { label: "Design Systems", emoji: "⬡" },
   { label: "User Research", emoji: "◎" },
-  { label: "Accessibility", emoji: "✿" },
+  { label: "Storytelling", emoji: "✿" },
   { label: "Front-End Dev", emoji: "⟨⟩" },
   { label: "Prototyping", emoji: "▷" },
   { label: "Information Architecture", emoji: "≡" },

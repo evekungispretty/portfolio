@@ -278,7 +278,7 @@ export default function About() {
                   to everything I make.
                 </p>
                 <p>
-                  Always up for a conversation about design, accessibility, or terrible cat memes.
+                  Always up for a conversation about design or terrible cat memes.
                 </p>
               </div>
               <div className="mt-10 flex flex-wrap gap-3">
