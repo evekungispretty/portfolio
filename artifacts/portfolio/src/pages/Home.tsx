@@ -23,7 +23,7 @@ const headlineWords = [
 
 const rotatingPhrases = [
   "effortless and fun.",
-  "better for everyone.",
+  "efficient and intuitive.",
   "engaging and smooth.",
   "a joy to use.",
 ];

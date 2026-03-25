@@ -20,16 +20,22 @@ export interface CaseStudyLink {
   variant?: "button" | "link";
 }
 
+export type BodyPara = string | { text: string; subheading: true } | { bullets: string[] };
+
+export type ContentItem =
+  | { type: "body"; paras: BodyPara[] }
+  | { type: "block"; body?: BodyPara[]; images?: CaseStudyImage[] }
+  | { type: "cards"; cards: CaseStudyCard[]; columns?: 2 | 3; variant?: "border" | "solid" }
+  | { type: "highlights"; items: string[] }
+  | { type: "quote"; text: string }
+  | { type: "images"; images: CaseStudyImage[] }
+  | { type: "links"; links: CaseStudyLink[] };
+
 export interface CaseStudySection {
   id: string;
   label: string;
   heading: string;
-  body: (string | { text: string; subheading: true })[];
-  highlights?: string[];
-  quote?: string;
-  cards?: CaseStudyCard[];
-  images?: CaseStudyImage[];
-  links?: CaseStudyLink[];
+  content: ContentItem[];
 }
 
 export interface Project {
@@ -93,126 +99,138 @@ export const projects: Project[] = [
         id: "overview",
         label: "Overview",
         heading: "The Program Discovery Problem",
-        body: [
-          "Prospective graduate students arrive at a university website with a goal: find the right program for their career. At UF's College of Education, that process was broken. The existing directory was a wall of text — 100+ programs listed alphabetically with no way to filter, compare, or explore.",
-          "I took on this project as designer and developer, owning everything from initial research and wireframes to building the production WordPress solution.",
-        ],
-        images: [
-          {
-            alt: "UF Program Directory — before and after comparison",
-            caption: "Before: a flat alphabetical list with no filtering. After: a faceted directory with smart discovery.",
-            aspect: "wide",
-            placeholder: "Before/after comparison: old flat list vs. new filterable directory with card-based layout",
-          },
+        content: [
+          { type: "body", paras: [
+            "Prospective graduate students arrive at a university website with a goal: find the right program for their career. At UF's College of Education, that process was broken. The existing directory was a wall of text — 100+ programs listed alphabetically with no way to filter, compare, or explore.",
+            "I took on this project as designer and developer, owning everything from initial research and wireframes to building the production WordPress solution.",
+          ]},
+          { type: "images", images: [
+            {
+              alt: "UF Program Directory — before and after comparison",
+              caption: "Before: a flat alphabetical list with no filtering. After: a faceted directory with smart discovery.",
+              aspect: "wide",
+              placeholder: "Before/after comparison: old flat list vs. new filterable directory with card-based layout",
+            },
+          ]},
         ],
       },
       {
         id: "research",
         label: "Research",
         heading: "Understanding How Students Search",
-        body: [
-          "I conducted informal interviews with prospective and current graduate students, supplemented by reviewing support ticket themes and analytics data. The patterns were clear: students arrived knowing their interest area but not knowing what degree type fit their goals.",
-          "Most users didn't scroll past the first screen of results. The flat list failed the majority of visitors before they even engaged.",
-        ],
-        highlights: [
-          "Most-used filter parameters: modality (online vs. in-person), degree level (master's, doctoral, certificate), and interest area",
-          "High bounce rate traced to lack of filtering — users felt overwhelmed by volume",
-          "Students often left the site to use Google to find the same programs",
-          "Non-technical staff needed to update content without developer help",
-        ],
-        images: [
-          {
-            alt: "User flow diagram and key filter mental models",
-            caption: "Key mental models driving the filtering system — aligned to how students actually think about programs.",
-            aspect: "video",
-            placeholder: "User flow and filter mental model map: degree level → modality → interest area",
-          },
+        content: [
+          { type: "body", paras: [
+            "I conducted informal interviews with prospective and current graduate students, supplemented by reviewing support ticket themes and analytics data. The patterns were clear: students arrived knowing their interest area but not knowing what degree type fit their goals.",
+            "Most users didn't scroll past the first screen of results. The flat list failed the majority of visitors before they even engaged.",
+          ]},
+          { type: "highlights", items: [
+            "Most-used filter parameters: modality (online vs. in-person), degree level (master's, doctoral, certificate), and interest area",
+            "High bounce rate traced to lack of filtering — users felt overwhelmed by volume",
+            "Students often left the site to use Google to find the same programs",
+            "Non-technical staff needed to update content without developer help",
+          ]},
+          { type: "images", images: [
+            {
+              alt: "User flow diagram and key filter mental models",
+              caption: "Key mental models driving the filtering system — aligned to how students actually think about programs.",
+              aspect: "video",
+              placeholder: "User flow and filter mental model map: degree level → modality → interest area",
+            },
+          ]},
         ],
       },
       {
         id: "ia",
         label: "Information Architecture",
         heading: "Building a Filterable Structure",
-        body: [
-          "The core design decision was moving from a list to a card-based directory with layered filters. Programs were tagged across three dimensions: degree level, delivery modality, and subject area. Users could apply any combination of these to narrow results in real time.",
-          "I defined the content model first — what data each program card needed, how it would be stored in the CMS, and how filters would map to those fields. This shaped both the design and the technical architecture.",
-        ],
-        highlights: [
-          "Faceted filtering: 3 independent filter dimensions, combinable",
-          "Consistent card structure: program name, degree, modality badge, CTA",
-          "Results count dynamically updated as filters applied",
-          "Empty state designed to guide users rather than dead-end them",
-        ],
-        images: [
-          {
-            alt: "IA diagram and content model for program cards",
-            caption: "Content model driving the card layout and CMS structure.",
-            aspect: "video",
-            placeholder: "IA diagram: filter taxonomy tree + content model fields for each program card",
-          },
-          {
-            alt: "Wireframes for filter panel and program card grid",
-            caption: "Early wireframes exploring filter placement — sidebar vs. top bar.",
-            aspect: "wide",
-            placeholder: "Wireframe explorations: top-bar filter layout vs. sidebar — with card grid below",
-          },
+        content: [
+          { type: "body", paras: [
+            "The core design decision was moving from a list to a card-based directory with layered filters. Programs were tagged across three dimensions: degree level, delivery modality, and subject area. Users could apply any combination of these to narrow results in real time.",
+            "I defined the content model first — what data each program card needed, how it would be stored in the CMS, and how filters would map to those fields. This shaped both the design and the technical architecture.",
+          ]},
+          { type: "highlights", items: [
+            "Faceted filtering: 3 independent filter dimensions, combinable",
+            "Consistent card structure: program name, degree, modality badge, CTA",
+            "Results count dynamically updated as filters applied",
+            "Empty state designed to guide users rather than dead-end them",
+          ]},
+          { type: "images", images: [
+            {
+              alt: "IA diagram and content model for program cards",
+              caption: "Content model driving the card layout and CMS structure.",
+              aspect: "video",
+              placeholder: "IA diagram: filter taxonomy tree + content model fields for each program card",
+            },
+            {
+              alt: "Wireframes for filter panel and program card grid",
+              caption: "Early wireframes exploring filter placement — sidebar vs. top bar.",
+              aspect: "wide",
+              placeholder: "Wireframe explorations: top-bar filter layout vs. sidebar — with card grid below",
+            },
+          ]},
         ],
       },
       {
         id: "design",
         label: "Design",
         heading: "Designing for Clarity and Trust",
-        body: [
-          "The visual design needed to feel trustworthy and institution-appropriate while still being warm and approachable for prospective students making a major life decision. I used the UF brand system as a foundation, extending it with clearer typographic hierarchy and accessible color contrast.",
-          "Each program card surfaces the most decision-relevant information: degree level, delivery format, and department — reducing the need to click into a page just to screen a program.",
-        ],
-        quote: "A prospective student shouldn't have to work hard to find the program that could change their career. That's a failure of the interface, not the student.",
-        images: [
-          {
-            alt: "Final program directory design with filters active",
-            caption: "Final filtered state — degree, modality, and subject filters active simultaneously.",
-            aspect: "video",
-            placeholder: "Final UI: program directory with active filters — card grid showing filtered results with modality and level badges",
-          },
+        content: [
+          { type: "body", paras: [
+            "The visual design needed to feel trustworthy and institution-appropriate while still being warm and approachable for prospective students making a major life decision. I used the UF brand system as a foundation, extending it with clearer typographic hierarchy and accessible color contrast.",
+            "Each program card surfaces the most decision-relevant information: degree level, delivery format, and department — reducing the need to click into a page just to screen a program.",
+          ]},
+          { type: "quote", text: "A prospective student shouldn't have to work hard to find the program that could change their career. That's a failure of the interface, not the student." },
+          { type: "images", images: [
+            {
+              alt: "Final program directory design with filters active",
+              caption: "Final filtered state — degree, modality, and subject filters active simultaneously.",
+              aspect: "video",
+              placeholder: "Final UI: program directory with active filters — card grid showing filtered results with modality and level badges",
+            },
+          ]},
         ],
       },
       {
         id: "development",
         label: "Build & Delivery",
         heading: "Designing and Building It Myself",
-        body: [
-          "With the design approved, I moved into development — building the filtering system in JavaScript (jQuery), connecting it to a WordPress/PHP backend with custom post types and taxonomy fields. The filters query the CMS in real time without page reloads.",
-          "I also built a set of reusable PHP page templates that non-technical staff could use to create new program pages and update content directly in the WordPress admin. The same template system was subsequently adopted for 5+ additional grant websites across the college.",
-        ],
-        highlights: [
-          "Vanilla JS / jQuery filtering — no React, no heavy bundle",
-          "Custom WordPress post type: `uf_program` with ACF taxonomy fields",
-          "PHP template system usable without code changes",
-          "WCAG 2.1 AA accessible: keyboard nav, ARIA labels, color contrast checked",
-          "Deployed to production — in use by the UF College of Education",
-        ],
-        images: [
-          {
-            alt: "Code snippet showing PHP template and JavaScript filter logic",
-            caption: "Reusable PHP template pattern — designed for maintainability by non-developers.",
-            aspect: "wide",
-            placeholder: "Code walkthrough: PHP template structure and JS filter logic side by side",
-          },
+        content: [
+          { type: "body", paras: [
+            "With the design approved, I moved into development — building the filtering system in JavaScript (jQuery), connecting it to a WordPress/PHP backend with custom post types and taxonomy fields. The filters query the CMS in real time without page reloads.",
+            "I also built a set of reusable PHP page templates that non-technical staff could use to create new program pages and update content directly in the WordPress admin. The same template system was subsequently adopted for 5+ additional grant websites across the college.",
+          ]},
+          { type: "highlights", items: [
+            "Vanilla JS / jQuery filtering — no React, no heavy bundle",
+            "Custom WordPress post type: `uf_program` with ACF taxonomy fields",
+            "PHP template system usable without code changes",
+            "WCAG 2.1 AA accessible: keyboard nav, ARIA labels, color contrast checked",
+            "Deployed to production — in use by the UF College of Education",
+          ]},
+          { type: "images", images: [
+            {
+              alt: "Code snippet showing PHP template and JavaScript filter logic",
+              caption: "Reusable PHP template pattern — designed for maintainability by non-developers.",
+              aspect: "wide",
+              placeholder: "Code walkthrough: PHP template structure and JS filter logic side by side",
+            },
+          ]},
         ],
       },
       {
         id: "outcome",
         label: "Outcome",
         heading: "Shipped, Used, and Reused",
-        body: [
-          "The redesigned directory launched within the project timeline and has been in use since. The reusable template system was adopted beyond the original brief — staff used it to spin up 5 additional grant sites without developer involvement.",
-          "The most meaningful outcome: prospective students can now find a program that fits their life in under two minutes, instead of leaving the site in frustration.",
-        ],
-        highlights: [
-          "Filterable directory live on UF College of Education website",
-          "5+ additional sites built using the same reusable template system",
-          "Accessibility audit passed: WCAG 2.1 AA compliant",
-          "Staff autonomy — non-developers can create and update program pages",
+        content: [
+          { type: "body", paras: [
+            "The redesigned directory launched within the project timeline and has been in use since. The reusable template system was adopted beyond the original brief — staff used it to spin up 5 additional grant sites without developer involvement.",
+            "The most meaningful outcome: prospective students can now find a program that fits their life in under two minutes, instead of leaving the site in frustration.",
+          ]},
+          { type: "highlights", items: [
+            "Filterable directory live on UF College of Education website",
+            "5+ additional sites built using the same reusable template system",
+            "Accessibility audit passed: WCAG 2.1 AA compliant",
+            "Staff autonomy — non-developers can create and update program pages",
+          ]},
         ],
       },
     ],
@@ -251,102 +269,112 @@ export const projects: Project[] = [
         id: "overview",
         label: "Overview",
         heading: "Onboarding as a Design Problem",
-        body: [
-          "First impressions in software are everything. When a new user opens Tapply for the first time, they're making a rapid judgment: Is this worth my time? Tapply's data said the answer was often no — users were leaving before completing their first meaningful action.",
-          "I joined the team as the sole designer with a clear mandate: design a tutorial system that gets users to their first success, without making the onboarding feel like homework.",
-        ],
-        images: [
-          {
-            alt: "Tapply tutorial system overview — onboarding flow and tooltip components",
-            caption: "The complete tutorial system: progressive onboarding, contextual tooltips, and milestone celebrations.",
-            aspect: "wide",
-            placeholder: "Overview: onboarding flow diagram showing step-by-step progression from empty state to first success",
-          },
+        content: [
+          { type: "body", paras: [
+            "First impressions in software are everything. When a new user opens Tapply for the first time, they're making a rapid judgment: Is this worth my time? Tapply's data said the answer was often no — users were leaving before completing their first meaningful action.",
+            "I joined the team as the sole designer with a clear mandate: design a tutorial system that gets users to their first success, without making the onboarding feel like homework.",
+          ]},
+          { type: "images", images: [
+            {
+              alt: "Tapply tutorial system overview — onboarding flow and tooltip components",
+              caption: "The complete tutorial system: progressive onboarding, contextual tooltips, and milestone celebrations.",
+              aspect: "wide",
+              placeholder: "Overview: onboarding flow diagram showing step-by-step progression from empty state to first success",
+            },
+          ]},
         ],
       },
       {
         id: "research",
         label: "Research",
         heading: "Finding the Drop-Off Points",
-        body: [
-          "I audited the existing first-run experience and mapped it against analytics data to find exactly where users were leaving. I also reviewed session recordings of first-time users and ran short interviews with recent sign-ups who hadn't engaged after day one.",
-          "The clearest finding: users didn't know what to do first. The product had a powerful feature set but no clear entry point. The empty state was a dead end.",
-        ],
-        highlights: [
-          "Primary drop-off: 68% of users who hit the empty state never created their first item",
-          "Users cited 'not knowing where to start' as the top reason for leaving",
-          "Session recordings showed users opening and closing menus without taking action",
-          "Competitor onboarding audit: Notion, Linear, and Figma all use progressive disclosure",
-        ],
-        images: [
-          {
-            alt: "Drop-off funnel analysis and session recording insights",
-            caption: "Annotated drop-off funnel — identifying the empty state as the critical intervention point.",
-            aspect: "video",
-            placeholder: "Funnel chart: user drop-off at each step with annotations on key exit points",
-          },
+        content: [
+          { type: "body", paras: [
+            "I audited the existing first-run experience and mapped it against analytics data to find exactly where users were leaving. I also reviewed session recordings of first-time users and ran short interviews with recent sign-ups who hadn't engaged after day one.",
+            "The clearest finding: users didn't know what to do first. The product had a powerful feature set but no clear entry point. The empty state was a dead end.",
+          ]},
+          { type: "highlights", items: [
+            "Primary drop-off: 68% of users who hit the empty state never created their first item",
+            "Users cited 'not knowing where to start' as the top reason for leaving",
+            "Session recordings showed users opening and closing menus without taking action",
+            "Competitor onboarding audit: Notion, Linear, and Figma all use progressive disclosure",
+          ]},
+          { type: "images", images: [
+            {
+              alt: "Drop-off funnel analysis and session recording insights",
+              caption: "Annotated drop-off funnel — identifying the empty state as the critical intervention point.",
+              aspect: "video",
+              placeholder: "Funnel chart: user drop-off at each step with annotations on key exit points",
+            },
+          ]},
         ],
       },
       {
         id: "design",
         label: "Design",
         heading: "Progressive Guidance, Not Mandatory Tutorials",
-        body: [
-          "The core design principle: guidance should feel helpful, not intrusive. I rejected a traditional 'linear tutorial' in favor of a progressive disclosure model — surfacing the right tip at the right moment based on what the user was trying to do.",
-          "I designed three layers of guidance: an interactive checklist for setup tasks, contextual tooltips triggered by user actions, and celebration moments when users hit key milestones. Together they created a scaffolded path without forcing a specific sequence.",
-        ],
-        quote: "The goal wasn't to teach users how to use the product. It was to help them see what they could do with it — as quickly as possible.",
-        images: [
-          {
-            alt: "Tutorial system UX patterns — checklist, tooltips, and celebrations",
-            caption: "Three guidance layers: setup checklist (persistent), contextual tooltips (triggered), milestone celebrations (momentary).",
-            aspect: "video",
-            placeholder: "Three-layer tutorial system: checklist panel, tooltip overlay, celebration animation — shown in context",
-          },
-          {
-            alt: "Tooltip and spotlight component variants",
-            caption: "Tooltip variants — standard, spotlight, and action-required — designed for reuse across the product.",
-            aspect: "wide",
-            placeholder: "Component library: tooltip variants with arrows, spotlight masks, and CTA button states",
-          },
+        content: [
+          { type: "body", paras: [
+            "The core design principle: guidance should feel helpful, not intrusive. I rejected a traditional 'linear tutorial' in favor of a progressive disclosure model — surfacing the right tip at the right moment based on what the user was trying to do.",
+            "I designed three layers of guidance: an interactive checklist for setup tasks, contextual tooltips triggered by user actions, and celebration moments when users hit key milestones. Together they created a scaffolded path without forcing a specific sequence.",
+          ]},
+          { type: "quote", text: "The goal wasn't to teach users how to use the product. It was to help them see what they could do with it — as quickly as possible." },
+          { type: "images", images: [
+            {
+              alt: "Tutorial system UX patterns — checklist, tooltips, and celebrations",
+              caption: "Three guidance layers: setup checklist (persistent), contextual tooltips (triggered), milestone celebrations (momentary).",
+              aspect: "video",
+              placeholder: "Three-layer tutorial system: checklist panel, tooltip overlay, celebration animation — shown in context",
+            },
+            {
+              alt: "Tooltip and spotlight component variants",
+              caption: "Tooltip variants — standard, spotlight, and action-required — designed for reuse across the product.",
+              aspect: "wide",
+              placeholder: "Component library: tooltip variants with arrows, spotlight masks, and CTA button states",
+            },
+          ]},
         ],
       },
       {
         id: "design-system",
         label: "Design System",
         heading: "Building Reusable Components",
-        body: [
-          "The tutorial system needed more than one-off screens — it needed a component library that engineers could implement consistently and that future designers could extend. I built a set of tutorial UI components in Figma with clearly documented variants, states, and usage guidelines.",
-          "Components included: tooltip/popover, spotlight overlay, progress indicator, checklist item, and empty state. Each component was designed with accessibility in mind — keyboard navigable, screen reader labeled, and high-contrast by default.",
-        ],
-        highlights: [
-          "6 core components built in Figma with documented variants and states",
-          "Tooltip component: 4 directions × 3 types (info, action-required, celebration)",
-          "Spotlight overlay with configurable cutout shape (rect, circle, rounded rect)",
-          "All components keyboard navigable, ARIA-labeled, and WCAG AA contrast compliant",
-        ],
-        images: [
-          {
-            alt: "Design system component documentation for tutorial system",
-            caption: "Component doc page for the Tooltip — variants, states, spacing specs, and usage guidance.",
-            aspect: "video",
-            placeholder: "Figma component page: tooltip component with variant matrix, do/don't examples, and spec annotations",
-          },
+        content: [
+          { type: "body", paras: [
+            "The tutorial system needed more than one-off screens — it needed a component library that engineers could implement consistently and that future designers could extend. I built a set of tutorial UI components in Figma with clearly documented variants, states, and usage guidelines.",
+            "Components included: tooltip/popover, spotlight overlay, progress indicator, checklist item, and empty state. Each component was designed with accessibility in mind — keyboard navigable, screen reader labeled, and high-contrast by default.",
+          ]},
+          { type: "highlights", items: [
+            "6 core components built in Figma with documented variants and states",
+            "Tooltip component: 4 directions × 3 types (info, action-required, celebration)",
+            "Spotlight overlay with configurable cutout shape (rect, circle, rounded rect)",
+            "All components keyboard navigable, ARIA-labeled, and WCAG AA contrast compliant",
+          ]},
+          { type: "images", images: [
+            {
+              alt: "Design system component documentation for tutorial system",
+              caption: "Component doc page for the Tooltip — variants, states, spacing specs, and usage guidance.",
+              aspect: "video",
+              placeholder: "Figma component page: tooltip component with variant matrix, do/don't examples, and spec annotations",
+            },
+          ]},
         ],
       },
       {
         id: "outcome",
         label: "Outcome",
         heading: "Getting Users to 'I Get It'",
-        body: [
-          "The tutorial system shipped to production within the project timeline. The design patterns I established were adopted as the standard for new feature introductions across the product, giving the team a reusable framework rather than one-off solutions.",
-          "The empty state redesign — guided by the checklist component — became the foundation for Tapply's entire onboarding experience.",
-        ],
-        highlights: [
-          "Tutorial system shipped and adopted product-wide",
-          "Design system components reused for new feature launches",
-          "Empty state redesign became the template for new user onboarding",
-          "Previous role at PicCollage: tutorial templates reduced first-user incompletion by 23%",
+        content: [
+          { type: "body", paras: [
+            "The tutorial system shipped to production within the project timeline. The design patterns I established were adopted as the standard for new feature introductions across the product, giving the team a reusable framework rather than one-off solutions.",
+            "The empty state redesign — guided by the checklist component — became the foundation for Tapply's entire onboarding experience.",
+          ]},
+          { type: "highlights", items: [
+            "Tutorial system shipped and adopted product-wide",
+            "Design system components reused for new feature launches",
+            "Empty state redesign became the template for new user onboarding",
+            "Previous role at PicCollage: tutorial templates reduced first-user incompletion by 23%",
+          ]},
         ],
       },
     ],
@@ -385,164 +413,263 @@ export const projects: Project[] = [
         id: "overview",
         label: "Overview",
         heading: "Books That Come to Life",
-        body: [
-          "New Worlds Reading is a Florida state literacy initiative that provides free books and digital resources to K–5 students. When the team approached me about AR Expeditions, the concept was exciting but the design challenge was significant: augmented reality for young children, across a range of devices, in service of literacy goals.",
-          "I was the sole designer on this feature, working closely with engineers, a literacy researcher, and the program's education team.",
-        ],
-        images: [
-          {
-            src: `${import.meta.env.BASE_URL}images/ar/ar-02.png`, 
-            alt: "AR Expeditions feature — child interacting with augmented reality book scene",
-            caption: "AR Expeditions: interactive 3D scenes that extend the world of each book.",
-            aspect: "wide",
-            placeholder: "Hero illustration: child holding phone showing AR scene overlaid on book — characters and objects from the story appearing in their living room",
-          },
-        ],
-        links: [
+        content: [
+          { type: "body", paras: [
+            "New Worlds Reading is a Florida state literacy initiative that provides free books and digital resources to K–5 students. When the team approached me about AR Expeditions, the concept was exciting but the design challenge was significant: augmented reality for young children, across a range of devices, in service of literacy goals.",
+            "I was the sole designer on this feature, working closely with engineers, a literacy researcher, and the program's education team.",
+          ]},
+          { type: "images", images: [
+            {
+              src: `${import.meta.env.BASE_URL}images/ar/ar-02.png`,
+              alt: "AR Expeditions feature — child interacting with augmented reality book scene",
+              caption: "AR Expeditions: interactive 3D scenes that extend the world of each book.",
+              aspect: "wide",
+              placeholder: "Hero illustration: child holding phone showing AR scene overlaid on book — characters and objects from the story appearing in their living room",
+            },
+          ]},
+          { type: "links", links: [
             { label: "View Demo", url: "https://player.vimeo.com/video/1066629586?h=68048087d2&dnt=1&app_id=122963", variant: "button" },
-        ]
-
+          ]},
+        ],
+      },
+      {
+        id: "problem",
+        label: "The Challenge",
+        heading: "How do we design an interface that encourages reading without overwhelming kids who struggle with reading?",
+        content: [
+          { type: "body", paras: [
+            { text: "The paradox at the heart of AR Expeditions", subheading: true },
+            "We're building an app to motivate reluctant readers, but every piece of text on screen is a potential barrier.",
+          ]},
+          { type: "cards", cards: [
+            {
+              heading: "Studied existing AR apps for kids",
+              body: "I analyzed popular AR educational apps to understand UI patterns that worked in 3D space.",
+              subheading: "Key Findings",
+              bullets: [
+                "Large, clear buttons with high contrast",
+                "Minimal text, maximum visual cues",
+                "Immediate feedback for every action",
+              ],
+            },
+            {
+              heading: "Understood the literacy challenge",
+              body: "Working with the research team, I learned about the specific barriers reluctant readers face.",
+              subheading: "Key Findings",
+              bullets: [
+                "Overwhelming text blocks cause anxiety",
+                "Need for audio support to build confidence",
+              ],
+            },
+          ]},
+        ],
       },
       {
         id: "research",
-        label: "The Challenge",
-        heading: "How do we design an interface that encourages reading without overwhelming kids who struggle with reading?",
-        body: [
-          { text: "The paradox at the heart of AR Expeditions", subheading: true },
-          "We're building an app to motivate reluctant readers, but every piece of text on screen is a potential barrier.",
-        ],
-        cards: [
-        {
-          heading: "Studied existing AR apps for kids",
-          body: "I analyzed popular AR educational apps to understand UI patterns that worked in 3D space.",
-          subheading: "Key Findings",
-          bullets: [
-            "Large, clear buttons with high contrast",
-            "Minimal text, maximum visual cues",
-            "Immediate feedback for every action",
-          ],
-        },
-        {
-          heading: "Understood the literacy challenge",
-          body: "Working with the research team, I learned about the specific barriers reluctant readers face.",
-          subheading: "Key Findings",
-          bullets: [
-            "Overwhelming text blocks cause anxiety",
-            "Need for audio support to build confidence",
-          ],
-        },
-      ],
-      },
-      {
-        id: "design",
         label: "Research & Approach",
         heading: "Understanding the 8-10 year old mindset",
-        body: [
-          "The core interaction model needed to be simple enough for a first-grader to use without help. I landed on a scan-and-discover pattern: students point the camera at a special page in their book, the AR scene appears, and they explore it by tapping characters and objects that trigger audio and animation.",
-          "Text instructions were replaced with illustrated animated guides. All critical interactions were triggered by large, forgiving tap targets (minimum 64×64pt). I also designed a 'look-around' mechanic that rewarded natural physical movement — tilting and rotating the phone — making it feel genuinely magical.",
-        ],
-        quote: "If a 7-year-old can't figure it out in 10 seconds without reading, the design needs to change. That was our testing benchmark.",
-        images: [
-          {
-            alt: "Research session photos and key insights from child testing",
-            src: `${import.meta.env.BASE_URL}images/ar/ar-research.jpg`, 
-            aspect: "video",
-            layout: "side-by-side",
-            placeholder: "Research artifacts: observation notes, key quotes from kids, caregiver feedback themes, and device test results",
-          },
-           {
-            alt: "Research session photos and key insights from child testing",
-            src: `${import.meta.env.BASE_URL}images/ar/ar-research-2.jpg`, 
-            aspect: "video",
-            layout: "side-by-side",
-            placeholder: "Research artifacts: observation notes, key quotes from kids, caregiver feedback themes, and device test results",
-          },
+        content: [
+          { type: "body", paras: [
+            "The core interaction model needed to be simple enough for a first-grader to use without help. I landed on a scan-and-discover pattern: students point the camera at a special page in their book, the AR scene appears, and they explore it by tapping characters and objects that trigger audio and animation.",
+            "Text instructions were replaced with illustrated animated guides. All critical interactions were triggered by large, forgiving tap targets (minimum 64×64pt). I also designed a 'look-around' mechanic that rewarded natural physical movement — tilting and rotating the phone — making it feel genuinely magical.",
+          ]},
+          { type: "quote", text: "If a 7-year-old can't figure it out in 10 seconds without reading, the design needs to change. That was our testing benchmark." },
+          { type: "images", images: [
+            {
+              alt: "Research session photos and key insights from child testing",
+              src: `${import.meta.env.BASE_URL}images/ar/ar-research.jpg`,
+              aspect: "video",
+              layout: "side-by-side",
+              placeholder: "Research artifacts: observation notes, key quotes from kids, caregiver feedback themes, and device test results",
+            },
+            {
+              alt: "Research session photos and key insights from child testing",
+              src: `${import.meta.env.BASE_URL}images/ar/ar-research-2.jpg`,
+              aspect: "video",
+              layout: "side-by-side",
+              placeholder: "Research artifacts: observation notes, key quotes from kids, caregiver feedback themes, and device test results",
+            },
+          ]},
         ],
       },
       {
         id: "accessibility",
-        label: "Designing the Experience",
+        label: "User Flow",
         heading: "User Flow",
-        body: [
-          "I started designing the flow for first-time users and returning users, while we figure out the flow for Aquarium editing space and Bubble Pop Quiz.",
-          "Each experience in AR Expeditions required careful flow design to balance three goals: make it fun, make it educational, and make it accessible. Here's how I structured the key user journeys:",
+        content: [
+          { type: "body", paras: [
+            "I started designing the flow for first-time users and returning users, while we figure out the flow for Aquarium editing space and Bubble Pop Quiz.",
+            "Each experience in AR Expeditions required careful flow design to balance three goals: make it fun, make it educational, and make it accessible. Here's how I structured the key user journeys:",
+          ]},
+          { type: "images", images: [
+            {
+              src: `${import.meta.env.BASE_URL}images/ar/ar-flow1.png`,
+              alt: "flowcahrt",
+              caption: "First-time users",
+              placeholder: "Research artifacts: observation notes, key quotes from kids, caregiver feedback themes, and device test results",
+            },
+            {
+              src: `${import.meta.env.BASE_URL}images/ar/ar-flow2.png`,
+              alt: "Flowchart",
+              caption: "Home page for returning users",
+              aspect: "wide",
+              placeholder: "Annotated UI spec: tap target sizing, color contrast ratios, audio cue trigger points, and fall-back non-AR mode",
+            },
+          ]},
         ],
-        images: [
-          {
-           src: `${import.meta.env.BASE_URL}images/ar/ar-flow1.png`, 
-            alt: "flowcahrt",
-            caption: "First-time users",
-            placeholder: "Research artifacts: observation notes, key quotes from kids, caregiver feedback themes, and device test results",
-          },
-          {
-           src: `${import.meta.env.BASE_URL}images/ar/ar-flow2.png`, 
-            alt: "Flowchart",
-            caption: "Home page for returning users",
-            aspect: "wide",
-            placeholder: "Annotated UI spec: tap target sizing, color contrast ratios, audio cue trigger points, and fall-back non-AR mode",
-          },
-        ],
-
       },
-        {
-        id: "iteration",
-        label: "Design Iterations",
+      {
+        id: "design",
+        label: "Designing the Experience",
         heading: "Refining the Components",
-        body: [
-          "In order to make sure the app serves the right purposes, we have set some principles for designing across experiences.",
-          "At this point, we have already established some 3D elements created by our 3D Artist, so I went ahead and designed high fidelity wireframes for stakeholders to visualize the product.",
+        content: [
+          { type: "body", paras: [
+            "In order to make sure the app serves the right purposes, we have set some principles for designing across experiences.",
+            "At this point, we have already established some 3D elements created by our 3D Artist, so I went ahead and designed high fidelity wireframes for stakeholders to visualize the product.",
+          ]},
+          { type: "cards", cards: [
+            {
+              heading: "Consistent patterns create confidence",
+              body: "Every experience uses the same AR setup (find surface → place object). Once kids learn it in Aquarium, Bubble Pop feels familiar.",
+            },
+            {
+              heading: "Onboarding happens once, navigation stays simple",
+              body: "Research agreement and welcome only appear on first launch. Return users go straight to the experience.",
+            },
+            {
+              heading: "Exit paths are always clear",
+              body: "Home button in top-left is persistent across all screens. Kids never feel trapped.",
+            },
+            {
+              heading: "Educational moments feel earned, not forced",
+              body: "In Bubble Pop, facts are rewards for correct answers. In Aquarium, info buttons are optional exploration. Learning feels like discovery, not homework.",
+            },
+          ]},
+          { type: "images", images: [
+            {
+              src: `${import.meta.env.BASE_URL}images/ar/ar-iteration01.png`,
+              alt: "Design iteration",
+              caption: "Desgin iteration for home page message",
+              placeholder: "Research artifacts: observation notes, key quotes from kids, caregiver feedback themes, and device test results",
+            },
+            {
+              src: `${import.meta.env.BASE_URL}images/ar/ar-iteration-02.png`,
+              alt: "Design iteration",
+              caption: "Design iteration for Aqarium experience",
+              aspect: "wide",
+              placeholder: "Annotated UI spec: tap target sizing, color contrast ratios, audio cue trigger points, and fall-back non-AR mode",
+            },
+          ]},
         ],
-        cards: [
-        {
-          heading: "Consistent patterns create confidence",
-          body: "Every experience uses the same AR setup (find surface → place object). Once kids learn it in Aquarium, Bubble Pop feels familiar.",
+      },
+      {
+        id: "iteration",
+        label: "Iterations",
+        heading: "Iterating with insights",
+        content: [
+          { type: "body", paras: [
+            "Soon after the first development is created, we discovered several improvements from stakeholder and focus group feedback:",
+            "At this point, we have already established some 3D elements created by our 3D Artist, so I went ahead and designed high fidelity wireframes for stakeholders to visualize the product.",
+          ]},
+          { type: "cards", columns: 3, variant: "solid", cards: [
+            { heading: "AR/ Unity constraints", body: "AR placement is based on surface detection and spatial mapping, not screen center. Also a more simplified UI would perform better across different devices." },
+            { heading: "Strengthening Educational Content Integration", body: "Stakeholders noted that while kids loved the AR interactions, we needed to emphasize educational content more prominently to meet learning objectives." },
+            { heading: "Breaking Bubble Pop Quiz Into Digestible Levels", body: "Focus groups revealed that the quiz activity felt too long. Kids would lose focus or exit mid-experience, thinking they'd never finish." },
+          ]},
+          { type: "block", 
+            body: [
+            { text: "Guiding Users When AR Content Loads Outside of View", subheading: true },
+            "**Edge arrows**: Small animated arrows appear at screen edges pointing toward off-screen objects such as: Your fish appeared! Look up!",
+            "**Single UI Canvas**: Previous design: Multiple overlays (side toolbar + selection grid + tooltips) = 3+ UI canvases New design: One toolbar + one carousel = 2 canvases Benefit: Fewer canvas renders = better frame rate, especially on older devices.",
+          ], 
+            images: [
+              {
+                src: `${import.meta.env.BASE_URL}images/ar/ar-iteration-03.png`,
+                alt: "Design iteration",
+                caption: "Single Canvas for Edit Mode",
+                aspect: "wide",
+                placeholder: "Annotated UI spec: tap target sizing, color contrast ratios, audio cue trigger points, and fall-back non-AR mode",
+              },
+              {
+                src: `${import.meta.env.BASE_URL}images/ar/ar-iteration-04.png`,
+                alt: "Action Hints for Off-Screen AR Content",
+                caption: "Action Hints for Off-Screen AR Content",
+                aspect: "wide",
+                placeholder: "Annotated UI spec: tap target sizing, color contrast ratios, audio cue trigger points, and fall-back non-AR mode",
+              },
+          ]
+          
         },
-        {
-          heading: "Onboarding happens once, navigation stays simple",
-          body: "Research agreement and welcome only appear on first launch. Return users go straight to the experience.",
-         
+        { type: "block", 
+            body: [
+            { text: "Strengthening Educational Content Integration", subheading: true },
+            "**Made facts more visible**: Increase Fact Card frequency and prominence.",
+            "**Added 'Did you know?' facts**: Auto-narrate when creatures are placed (passive learning while playing).",
+          ], 
+            images: [
+              {
+                src: `${import.meta.env.BASE_URL}images/ar/ar-iteration-05.png`,
+                alt: "Design iteration",
+                caption: "Fact Card Redesign",
+                aspect: "wide",
+                placeholder: "Annotated UI spec: tap target sizing, color contrast ratios, audio cue trigger points, and fall-back non-AR mode",
+              },
+          ]
+          
         },
-         {
-          heading: "Exit paths are always clear",
-          body: "Home button in top-left is persistent across all screens. Kids never feel trapped.",
-        },
-        {
-          heading: "Educational moments feel earned, not forced",
-          body: "In Bubble Pop, facts are rewards for correct answers. In Aquarium, info buttons are optional exploration. Learning feels like discovery, not homework.",
-         
-        },
-             
-      ],
-      
-        images: [
-          {
-           src: `${import.meta.env.BASE_URL}images/ar/ar-iteration01.png`, 
-            alt: "Design iteration",
-            caption: "Desgin iteration for home page message",
-            placeholder: "Research artifacts: observation notes, key quotes from kids, caregiver feedback themes, and device test results",
-          },
-          {
-           src: `${import.meta.env.BASE_URL}images/ar/ar-iteration-02.png`, 
-            alt: "Design iteration",
-            caption: "Design iteration for Aqarium experience",
-            aspect: "wide",
-            placeholder: "Annotated UI spec: tap target sizing, color contrast ratios, audio cue trigger points, and fall-back non-AR mode",
-          },
-        ],
+         { type: "block", 
+            body: [
+            { text: "Breaking Bubble Pop Quiz Into Digestible Levels", subheading: true },
+            "**3-5 questions per level**, instead of using a long session for the full quiz.",
+            "**Clear completion milestones**: Reward completion of each mini-quiz, giving kids a sense of progress and accomplishment.",
+          ], 
+            images: [
+              {
+                src: `${import.meta.env.BASE_URL}images/ar/ar-iteration-06.png`,
+                alt: "Design iteration",
+                caption: "New Bubble Pop Quiz Structure",
+                aspect: "wide",
+                placeholder: "Annotated UI spec: tap target sizing, color contrast ratios, audio cue trigger points, and fall-back non-AR mode",
+              },
 
+              {
+                src: `${import.meta.env.BASE_URL}images/ar/ar-iteration-07.png`,
+                alt: "Design iteration",
+                caption: "Mini-Quiz Design",
+                aspect: "wide",
+                placeholder: "Annotated UI spec: tap target sizing, color contrast ratios, audio cue trigger points, and fall-back non-AR mode",
+              },
+          ]
+          
+        },
+          
+        ],
       },
       {
         id: "outcome",
-        label: "Outcome",
-        heading: "Learning That Feels Like Adventure",
-        body: [
-          "AR Expeditions shipped as a feature within the New Worlds Reading app, distributed to K–5 students across Florida through the state literacy program. It was one of the more technically and creatively ambitious projects I've worked on — and one of the most rewarding.",
-          "Designing for children required a constant discipline of simplicity and empathy. Every decision had to be tested against the reality of a 7-year-old holding a phone at arm's length in their living room.",
-        ],
-        highlights: [
-          "Feature shipped within the New Worlds Reading app, available statewide",
-          "Works across a wide range of device capabilities with graceful degradation",
-          "Educator feedback: 'students are more excited to open their books'",
+        label: "Outcome & Reflections",
+        heading: "The Impact",
+        content: [
+          { type: "body", paras: [
+            "AR Expeditions app launched in Spring 2025 with Aquarium and Bubble Pop experiences live on iOS and Android. The app supports young readers in Florida and beyond, with additional themed experiences planned for future updates. Our journey does not stop here and the app is still currently a work-in-progress.",
+            "Early feedback indicates that Kids engage enthusiastically with the AR experiences. The simplified UI allows focus on content and interacting with the gaming elements.",
+          ]},
+          { type: "images", images: [
+            {
+              alt: "Research session photos and key insights from child testing",
+              src: `${import.meta.env.BASE_URL}images/ar/ar01.jpg`,
+              aspect: "video",
+              layout: "side-by-side",
+              placeholder: "Research artifacts: observation notes, key quotes from kids, caregiver feedback themes, and device test results",
+            },
+            {
+              alt: "Research session photos and key insights from child testing",
+              src: `${import.meta.env.BASE_URL}images/ar/ar02.jpg`,
+              aspect: "video",
+              layout: "side-by-side",
+              placeholder: "Research artifacts: observation notes, key quotes from kids, caregiver feedback themes, and device test results",
+            },
+          ]},
         ],
       },
     ],
@@ -581,288 +708,314 @@ export const projects: Project[] = [
         id: "overview",
         label: "Overview",
         heading: "The Sales Tool Problem",
-        body: [
-          "Sales reps move fast. They're on calls, in meetings, updating notes on the go. Most CRM tools were designed by product teams who never watched a sales rep work in real time. The result: tools that demanded constant attention when reps' attention was already elsewhere.",
-          "Turbo wanted to be different. I joined as the sole product designer to shape the core product from research through to shipped components.",
-        ],
-        images: [
-          {
-            alt: "Turbo sales platform — lead pipeline overview and contact detail view",
-            caption: "The Turbo lead pipeline: fast, keyboard-navigable, built around the rep's workflow.",
-            aspect: "wide",
-            placeholder: "Hero overview: Turbo pipeline board showing lead cards, status columns, and right-panel contact detail",
-          },
+        content: [
+          { type: "body", paras: [
+            "Sales reps move fast. They're on calls, in meetings, updating notes on the go. Most CRM tools were designed by product teams who never watched a sales rep work in real time. The result: tools that demanded constant attention when reps' attention was already elsewhere.",
+            "Turbo wanted to be different. I joined as the sole product designer to shape the core product from research through to shipped components.",
+          ]},
+          { type: "images", images: [
+            {
+              alt: "Turbo sales platform — lead pipeline overview and contact detail view",
+              caption: "The Turbo lead pipeline: fast, keyboard-navigable, built around the rep's workflow.",
+              aspect: "wide",
+              placeholder: "Hero overview: Turbo pipeline board showing lead cards, status columns, and right-panel contact detail",
+            },
+          ]},
         ],
       },
       {
         id: "research",
         label: "Research",
         heading: "Shadowing the Sales Workflow",
-        body: [
-          "I conducted 6 contextual inquiry sessions with sales reps across two companies — sitting with them during their actual work, watching how they moved between tools, and documenting the friction. I also interviewed sales managers to understand the reporting and visibility layer.",
-          "The most revealing moment: watching a rep update a lead status in a CRM, then immediately open Slack to tell their manager the same thing. Two tools, one update. The product had to collapse that.",
-        ],
-        highlights: [
-          "Sales reps switched apps an average of 12× per hour during active selling",
-          "Top complaints: slow load times, mandatory fields interrupting flow, no quick-add for notes",
-          "Managers needed pipeline visibility without interrupting reps",
-          "Power users wanted keyboard shortcuts — nobody on the team had built them in",
-        ],
-        images: [
-          {
-            alt: "Contextual inquiry session notes and workflow diagram",
-            caption: "Workflow map from contextual inquiry — showing where the friction lives in a rep's typical day.",
-            aspect: "video",
-            placeholder: "Workflow diagram: a sales rep's day mapped across tools — with friction points annotated at each context switch",
-          },
+        content: [
+          { type: "body", paras: [
+            "I conducted 6 contextual inquiry sessions with sales reps across two companies — sitting with them during their actual work, watching how they moved between tools, and documenting the friction. I also interviewed sales managers to understand the reporting and visibility layer.",
+            "The most revealing moment: watching a rep update a lead status in a CRM, then immediately open Slack to tell their manager the same thing. Two tools, one update. The product had to collapse that.",
+          ]},
+          { type: "highlights", items: [
+            "Sales reps switched apps an average of 12× per hour during active selling",
+            "Top complaints: slow load times, mandatory fields interrupting flow, no quick-add for notes",
+            "Managers needed pipeline visibility without interrupting reps",
+            "Power users wanted keyboard shortcuts — nobody on the team had built them in",
+          ]},
+          { type: "images", images: [
+            {
+              alt: "Contextual inquiry session notes and workflow diagram",
+              caption: "Workflow map from contextual inquiry — showing where the friction lives in a rep's typical day.",
+              aspect: "video",
+              placeholder: "Workflow diagram: a sales rep's day mapped across tools — with friction points annotated at each context switch",
+            },
+          ]},
         ],
       },
       {
         id: "ia",
         label: "Structure",
         heading: "Designing Around the Rep's Mental Model",
-        body: [
-          "The pipeline metaphor — columns representing stages, cards representing leads — was right. What was wrong about most implementations was the density of information on each card and the number of clicks to update a status.",
-          "I designed a compressed card format that showed only the four things reps needed to make a decision: company name, deal value, last activity, and next action. Status updates happened inline via drag or a single keyboard shortcut. Anything else was one click away in the side panel.",
-        ],
-        images: [
-          {
-            alt: "Lead card design explorations — information density iterations",
-            caption: "Lead card explorations: testing different levels of information density with reps.",
-            aspect: "wide",
-            placeholder: "Card design iterations: 4 variants from data-dense to minimal — with user preference annotations",
-          },
+        content: [
+          { type: "body", paras: [
+            "The pipeline metaphor — columns representing stages, cards representing leads — was right. What was wrong about most implementations was the density of information on each card and the number of clicks to update a status.",
+            "I designed a compressed card format that showed only the four things reps needed to make a decision: company name, deal value, last activity, and next action. Status updates happened inline via drag or a single keyboard shortcut. Anything else was one click away in the side panel.",
+          ]},
+          { type: "images", images: [
+            {
+              alt: "Lead card design explorations — information density iterations",
+              caption: "Lead card explorations: testing different levels of information density with reps.",
+              aspect: "wide",
+              placeholder: "Card design iterations: 4 variants from data-dense to minimal — with user preference annotations",
+            },
+          ]},
         ],
       },
       {
         id: "interaction",
         label: "Interaction Design",
         heading: "Built for Speed",
-        body: [
-          "The interaction model was built around two principles: the fastest path to completion, and no interruptions. Status updates triggered inline — no modal, no confirmation. Notes could be added from a persistent bottom bar. Keyboard shortcuts were first-class, not an afterthought.",
-          "I also designed a manager view with the same pipeline but a different information hierarchy — showing team performance, deal velocity, and risk flags. Same data model, different perspective.",
-        ],
-        highlights: [
-          "Inline status update: drag-and-drop + keyboard shortcut (no modal)",
-          "Quick-note bar: add notes without leaving the pipeline view",
-          "⌘K command palette for power-user navigation",
-          "Manager view toggle: switches information hierarchy without losing context",
-        ],
-        images: [
-          {
-            alt: "Interaction prototypes — inline status update and keyboard shortcut patterns",
-            caption: "Interaction prototype for inline status update — no modal, no friction.",
-            aspect: "video",
-            placeholder: "Prototype walkthrough: drag status update → quick note → keyboard shortcut sequence — shown in high-fidelity",
-          },
+        content: [
+          { type: "body", paras: [
+            "The interaction model was built around two principles: the fastest path to completion, and no interruptions. Status updates triggered inline — no modal, no confirmation. Notes could be added from a persistent bottom bar. Keyboard shortcuts were first-class, not an afterthought.",
+            "I also designed a manager view with the same pipeline but a different information hierarchy — showing team performance, deal velocity, and risk flags. Same data model, different perspective.",
+          ]},
+          { type: "highlights", items: [
+            "Inline status update: drag-and-drop + keyboard shortcut (no modal)",
+            "Quick-note bar: add notes without leaving the pipeline view",
+            "⌘K command palette for power-user navigation",
+            "Manager view toggle: switches information hierarchy without losing context",
+          ]},
+          { type: "images", images: [
+            {
+              alt: "Interaction prototypes — inline status update and keyboard shortcut patterns",
+              caption: "Interaction prototype for inline status update — no modal, no friction.",
+              aspect: "video",
+              placeholder: "Prototype walkthrough: drag status update → quick note → keyboard shortcut sequence — shown in high-fidelity",
+            },
+          ]},
         ],
       },
       {
         id: "design-system",
         label: "Design System",
         heading: "Components That Scale",
-        body: [
-          "With a small team moving fast, a shared component language was essential. I built Turbo's design system in Figma — establishing a token system for color, typography, and spacing, and building the 20 core components needed for the pipeline and detail views.",
-          "The system was designed to be opinionated — fewer variants, clearer decisions — so engineers weren't making design calls and designers weren't rebuilding the same things.",
-        ],
-        highlights: [
-          "Design token system: semantic color, type scale, spacing units",
-          "20 core components: card, badge, sidebar panel, table row, input, button, modal",
-          "Component documentation in Figma with usage guidelines and do/don't examples",
-          "Token-to-CSS handoff: clear variable naming matching engineering conventions",
-        ],
-        images: [
-          {
-            alt: "Turbo design system — component library and token documentation",
-            caption: "Core component library — tokens, buttons, cards, and pipeline-specific components.",
-            aspect: "video",
-            placeholder: "Design system overview: token page (colors, type, spacing) + component library page with pipeline components",
-          },
+        content: [
+          { type: "body", paras: [
+            "With a small team moving fast, a shared component language was essential. I built Turbo's design system in Figma — establishing a token system for color, typography, and spacing, and building the 20 core components needed for the pipeline and detail views.",
+            "The system was designed to be opinionated — fewer variants, clearer decisions — so engineers weren't making design calls and designers weren't rebuilding the same things.",
+          ]},
+          { type: "highlights", items: [
+            "Design token system: semantic color, type scale, spacing units",
+            "20 core components: card, badge, sidebar panel, table row, input, button, modal",
+            "Component documentation in Figma with usage guidelines and do/don't examples",
+            "Token-to-CSS handoff: clear variable naming matching engineering conventions",
+          ]},
+          { type: "images", images: [
+            {
+              alt: "Turbo design system — component library and token documentation",
+              caption: "Core component library — tokens, buttons, cards, and pipeline-specific components.",
+              aspect: "video",
+              placeholder: "Design system overview: token page (colors, type, spacing) + component library page with pipeline components",
+            },
+          ]},
         ],
       },
       {
         id: "outcome",
         label: "Outcome",
         heading: "A Tool Built for How People Actually Sell",
-        body: [
-          "The core Turbo product shipped with the lead pipeline, contact view, activity log, and manager view. The design system became the foundation for the product roadmap, giving the team a shared language as they added features.",
-          "The most meaningful validation: reps who tested the prototype said it was the first sales tool that didn't feel like it was designed for someone else.",
-        ],
-        highlights: [
-          "Core pipeline and contact detail views shipped to production",
-          "Design system adopted for all subsequent feature development",
-          "Keyboard shortcut system praised in early user testing",
-          "Manager view enabled one tool to serve two distinct user types",
+        content: [
+          { type: "body", paras: [
+            "The core Turbo product shipped with the lead pipeline, contact view, activity log, and manager view. The design system became the foundation for the product roadmap, giving the team a shared language as they added features.",
+            "The most meaningful validation: reps who tested the prototype said it was the first sales tool that didn't feel like it was designed for someone else.",
+          ]},
+          { type: "highlights", items: [
+            "Core pipeline and contact detail views shipped to production",
+            "Design system adopted for all subsequent feature development",
+            "Keyboard shortcut system praised in early user testing",
+            "Manager view enabled one tool to serve two distinct user types",
+          ]},
         ],
       },
     ],
   },
+
   // ─── 5. SPARC-P ──────────────────────────────────────────────────────
-{
-  id: "5",
-  slug: "sparc-p",
-  title: "SPARC-P",
-  subtitle: "Designing a New Interaction Paradigm for AI-Powered Clinical Communication Training",
-  shortDescription:
-    "UX/UI design for a Unity + web platform that trains practicing clinicians to improve HPV vaccination conversations through AI avatar simulations.",
-  description:
-    "SPARC (Standardized Patient Avatar for Reflective Communication Practice) is a University of Florida grant-funded platform that replaces expensive, hard-to-scale live training with asynchronous AI simulation. I designed both the web LMS container and the Unity training interface — including a navigation system for a genuinely novel interaction: a turn-based conversation with a lifelike avatar.",
-  role: "UI/UX Designer",
-  whatIDid: "Web UI Design, Unity Interface Design, Interaction Design, Prototyping",
-  timeline: "4 months (ongoing)",
-  team: "1 designer (me), 2–3 engineers, 1 instructional designer, 1 PI/researcher",
-  year: "2025",
-  tags: ["Healthcare EdTech", "Unity UI", "Interaction Design", "AI Simulation", "Prototyping"],
-  category: "Experience",
-  cardClass: "project-card-sparc",
-  imageUrl: `${import.meta.env.BASE_URL}images/project-sparcp.jpg`,
-  details: {
-    context:
-      "Traditional clinician communication training depends on live standardized patients and facilitators — effective but impossible to scale. SPARC is a UF-funded platform that makes experiential communication practice available asynchronously, starting with HPV vaccination conversations.",
-    problem:
-      "How do you design a UI for a genuinely novel interaction — a turn-based avatar conversation — that feels natural, sets clear expectations, and surfaces reference material without breaking the simulation's sense of presence?",
-    goals: [
-      "Design a web LMS container that orients clinicians before and after each session.",
-      "Design a Unity training interface where clinicians can converse with a 3D avatar without UI getting in the way.",
-      "Surface patient info, communication guides, and transcripts without overwhelming users mid-conversation.",
-      "Pace coaching feedback so clinicians can absorb it without feeling rushed or anxious.",
+  {
+    id: "5",
+    slug: "sparc-p",
+    title: "SPARC-P",
+    subtitle: "Designing a New Interaction Paradigm for AI-Powered Clinical Communication Training",
+    shortDescription:
+      "UX/UI design for a Unity + web platform that trains practicing clinicians to improve HPV vaccination conversations through AI avatar simulations.",
+    description:
+      "SPARC (Standardized Patient Avatar for Reflective Communication Practice) is a University of Florida grant-funded platform that replaces expensive, hard-to-scale live training with asynchronous AI simulation. I designed both the web LMS container and the Unity training interface — including a navigation system for a genuinely novel interaction: a turn-based conversation with a lifelike avatar.",
+    role: "UI/UX Designer",
+    whatIDid: "Web UI Design, Unity Interface Design, Interaction Design, Prototyping",
+    timeline: "4 months (ongoing)",
+    team: "1 designer (me), 2–3 engineers, 1 instructional designer, 1 PI/researcher",
+    year: "2025",
+    tags: ["Healthcare EdTech", "Unity UI", "Interaction Design", "AI Simulation", "Prototyping"],
+    category: "Experience",
+    cardClass: "project-card-sparc",
+    imageUrl: `${import.meta.env.BASE_URL}images/project-sparcp.jpg`,
+    details: {
+      context:
+        "Traditional clinician communication training depends on live standardized patients and facilitators — effective but impossible to scale. SPARC is a UF-funded platform that makes experiential communication practice available asynchronously, starting with HPV vaccination conversations.",
+      problem:
+        "How do you design a UI for a genuinely novel interaction — a turn-based avatar conversation — that feels natural, sets clear expectations, and surfaces reference material without breaking the simulation's sense of presence?",
+      goals: [
+        "Design a web LMS container that orients clinicians before and after each session.",
+        "Design a Unity training interface where clinicians can converse with a 3D avatar without UI getting in the way.",
+        "Surface patient info, communication guides, and transcripts without overwhelming users mid-conversation.",
+        "Pace coaching feedback so clinicians can absorb it without feeling rushed or anxious.",
+      ],
+      outcome:
+        "Working React + Tailwind prototype shipped and presented to PIs. Bottom Menu navigation pattern selected and implemented in Unity. Platform in active development.",
+    },
+    caseStudy: [
+      {
+        id: "overview",
+        label: "Overview",
+        heading: "Scaling Clinical Communication Training with AI",
+        content: [
+          { type: "body", paras: [
+            "A strong clinician recommendation is the single most consistent predictor of HPV vaccine uptake — yet many clinicians struggle with the complexity of navigating parental hesitancy, misinformation, and emotionally charged conversations. Training helps, but traditional methods require live facilitators and standardized patients, making them costly and hard to scale.",
+            "SPARC replaces that logistical overhead with an AI-driven simulation. Clinicians hold turn-based conversations with a lifelike 3D avatar patient or guardian, receive structured coaching feedback aligned to the validated C-LEAR framework (Counsel, Listen, Emphasize, Answer, Recommend), and practice entirely on their own schedule.",
+            "My role spanned two distinct design surfaces: the web container — the LMS shell housing onboarding, navigation, resources, and progress tracking — and the Unity training interface, where the actual avatar conversations happen.",
+          ]},
+          { type: "images", images: [
+            {
+              alt: "SPARC-P home page — web LMS container",
+              caption: "Web container: home page built in React + Tailwind, orienting clinicians before they enter the Unity simulation.",
+              aspect: "wide",
+              placeholder:
+                "SPARC-P home page showing Welcome message, 'About the training' section with video, 'Launch Training' and 'Go through resources first' CTAs, and sidebar navigation with Home, Learning Resources, AI Practice, Progress, Settings",
+            },
+          ]},
+        ],
+      },
+      {
+        id: "role",
+        label: "My Role",
+        heading: "Designing Across Two Layers of One Experience",
+        content: [
+          { type: "body", paras: [
+            "My scope covered the full experience surface — from the web-based LMS shell to the in-session Unity interface. These two layers serve very different purposes and have very different design constraints.",
+            "The web container sets expectations, provides context, and gives clinicians a home base before and after each session. It's built in React and Tailwind, and I was responsible for design and front-end implementation. The Unity interface is where the high-stakes design work lives: UI elements that must coexist with a photorealistic 3D avatar without disrupting the simulation's sense of presence.",
+          ]},
+          { type: "highlights", items: [
+            "Web container: home, login, learning resources, progress tracking, session transitions",
+            "Unity interface: navigation system, coach feedback overlay, transcript panel, progress label, bottom menu",
+            "Built a working React prototype to present interaction flows to PIs and help the team visualize the platform",
+            "Collaborated with instructional designer and PI on feedback pacing and rubric alignment",
+          ]},
+          { type: "images", images: [
+            {
+              alt: "SPARC-P training session interface — Unity UI with bottom navigation",
+              caption: "Training interface: avatar session with coach feedback overlay, transcript panel, and Bottom Menu navigation.",
+              aspect: "wide",
+              placeholder:
+                "Training session UI showing 3D avatar (Dr. Sarah Williams, Pediatrician) in medical office environment, 'Training Session - Part 1/2' label top-left, yellow Coach Feedback 1 card top-right with Next button, Transcript panel at bottom, and Patient Info / Guide / Caption bottom navigation bar",
+            },
+          ]},
+        ],
+      },
+      {
+        id: "challenges",
+        label: "Design Challenges",
+        heading: "Three Problems That Shaped the Entire Process",
+        content: [
+          { type: "body", paras: [
+            "SPARC sits at an unusual intersection: medical training, conversational AI, and real-time avatar simulation. There's no established UI playbook for this. That made the design work genuinely exploratory — and surfaced three challenges that drove every major decision.",
+          ]},
+          { type: "highlights", items: [
+            "No established pattern: avatar-based conversational training doesn't map cleanly to any existing UI model",
+            "Cognitive load: clinicians must speak, listen, process feedback, and reference materials — sometimes in rapid succession",
+            "Expectation-setting: time-pressured clinicians need to understand where they are in the training arc before they commit",
+          ]},
+        ],
+      },
+      {
+        id: "exploration",
+        label: "Navigation Exploration",
+        heading: "Three Patterns for an Unconventional Interface",
+        content: [
+          { type: "body", paras: [
+            "The central design question for the Unity interface was how to make three types of reference material — Patient Info, Communication Guide, and Transcript — accessible during a live avatar session without undermining presence. I explored three distinct navigation patterns, each optimized for a different cognitive engagement model.",
+            "The Tooltip placed a fixed button in the corner that expanded to reveal tabbed content — minimal footprint, immediate dismissal, but limited content depth and poor scalability. The Sidebar used a collapsible right panel — better content capacity, but it competed with the avatar for horizontal space and visual attention even when closed. The Bottom Menu modeled itself on Zoom-style video call interfaces — items open as slide-up modals, creating a clear, deliberate shift between 'conversation mode' and 'reference mode.'",
+            "The key reframe that drove the decision: the question wasn't 'does this interfere with the avatar?' It was 'what kind of attention does each moment in training actually require?' A clinician looking up a patient detail is already pausing the conversation — the interface should honor that intentional task switch, not try to hide it.",
+          ]},
+          { type: "quote", text: "When a user opens reference material mid-session, they've already recognized a knowledge gap and made a conscious decision to pause. That's not a distraction — it's purposeful task-switching. The UI should support it, not fight it." },
+          { type: "images", images: [
+            {
+              alt: "Three navigation pattern explorations — Tooltip, Sidebar, Bottom Menu",
+              caption: "Navigation exploration deck presented to the team: three patterns mapped to three cognitive access models.",
+              aspect: "video",
+              placeholder:
+                "Three-panel comparison: Tooltip (top-right expandable button with tabs), Sidebar (collapsible right panel), Bottom Menu (Zoom-style bar with slide-up modals) — each with pros/cons annotations",
+            },
+          ]},
+        ],
+      },
+      {
+        id: "solution",
+        label: "The Training Interface",
+        heading: "Presence, Pacing, and Expectation-Setting",
+        content: [
+          { type: "body", paras: [
+            "With the Bottom Menu selected, I designed the full training session UI around four interacting elements, each addressing a specific design challenge identified earlier in the process.",
+            "The 'Training Session – Part 1/2' label addresses the expectation-setting problem directly: clinicians know where they are in the arc before they say their first word. The Coach Feedback overlay — a yellow-bordered card that appears after each clinician turn — addresses pacing: it's user-controlled via a 'Next' button rather than auto-advancing, so feedback is absorbed at the clinician's own speed. The Transcript panel addresses accessibility: it can be shown or hidden by the user, giving clinicians control over their own cognitive load. And the Bottom Menu gives Patient Info, Guide, and Caption a permanent home that's always accessible without cluttering the primary view.",
+          ]},
+          { type: "highlights", items: [
+            "Session label: 'Training Session – Part 1/2' sets temporal expectations before the first turn",
+            "Coach feedback: appears after each turn, user-controlled 'Next' prevents rushing",
+            "Transcript: persistent but hideable — clinicians choose their own cognitive load level",
+            "Bottom Menu: always accessible, zero visual clutter in the default state",
+          ]},
+          { type: "images", images: [
+            {
+              alt: "Training session annotated — session label, coach feedback, transcript, bottom menu",
+              caption: "Annotated training session UI: four elements working together to balance presence, pacing, and access.",
+              aspect: "wide",
+              placeholder:
+                "Annotated training session screenshot with callouts: A = Session Progress Label, B = Coach Feedback Card with Next button, C = Transcript panel with hide option, D = Bottom Menu (Patient Info, Guide, Caption)",
+            },
+          ]},
+        ],
+      },
+      {
+        id: "prototype",
+        label: "Prototype",
+        heading: "Building It to Show It",
+        content: [
+          { type: "body", paras: [
+            "Static mockups couldn't communicate what mattered most about this interface: how it feels in motion. How does the coach feedback card appear after a turn? How does the Bottom Menu modal animate in? Does the session label actually reduce anxiety, or is it just more text on screen?",
+            "I built a working prototype in React and Tailwind — not just Figma screens — and presented it to the PIs and engineering team. The interactive prototype turned a conversation about 'what it could be' into a direct evaluation of 'what it will feel like.' It accelerated design alignment by several rounds of feedback.",
+          ]},
+          { type: "highlights", items: [
+            "Working prototype built in React + Tailwind",
+            "Presented to PIs and team to visualize the full platform concept",
+            "Prototype drove selection of Bottom Menu over Tooltip and Sidebar",
+            "Demonstrated coach feedback pacing and Bottom Menu modal animation in context",
+          ]},
+        ],
+      },
+      {
+        id: "outcome",
+        label: "Reflection",
+        heading: "What Designing the Unknown Taught Me",
+        content: [
+          { type: "body", paras: [
+            "SPARC was the most conceptually novel interface challenge I've worked on. There was no existing pattern to follow for 'turn-based AI avatar conversation training for medical professionals.' That forced a kind of first-principles design thinking I found genuinely energizing.",
+            "The biggest lesson: reframing the problem unlocked better solutions. Shifting from 'how do we avoid interfering with the avatar?' to 'what kind of attention does each training moment require?' opened up three distinct design directions where there had previously been just one instinct toward minimalism.",
+            "Working in Unity also required designing with hard constraints — layout flexibility, animation tooling, and component reuse all have real limits compared to the web. Learning to design within those limits while still advocating for the right interaction was an important part of this project's growth.",
+          ]},
+          { type: "highlights", items: [
+            "Bottom Menu pattern selected and in active Unity development",
+            "Working prototype accelerated team alignment by replacing static mockups with interactive flows",
+            "Next step: usability testing with practicing clinicians to validate the reference mode / conversation mode distinction under real conditions",
+            "Platform designed as flexible — same architecture will extend to tobacco treatment, cancer screening, and other clinical communication contexts",
+          ]},
+        ],
+      },
     ],
-    outcome:
-      "Working React + Tailwind prototype shipped and presented to PIs. Bottom Menu navigation pattern selected and implemented in Unity. Platform in active development.",
   },
-  caseStudy: [
-    {
-      id: "overview",
-      label: "Overview",
-      heading: "Scaling Clinical Communication Training with AI",
-      body: [
-        "A strong clinician recommendation is the single most consistent predictor of HPV vaccine uptake — yet many clinicians struggle with the complexity of navigating parental hesitancy, misinformation, and emotionally charged conversations. Training helps, but traditional methods require live facilitators and standardized patients, making them costly and hard to scale.",
-        "SPARC replaces that logistical overhead with an AI-driven simulation. Clinicians hold turn-based conversations with a lifelike 3D avatar patient or guardian, receive structured coaching feedback aligned to the validated C-LEAR framework (Counsel, Listen, Emphasize, Answer, Recommend), and practice entirely on their own schedule.",
-        "My role spanned two distinct design surfaces: the web container — the LMS shell housing onboarding, navigation, resources, and progress tracking — and the Unity training interface, where the actual avatar conversations happen.",
-      ],
-      images: [
-        {
-          alt: "SPARC-P home page — web LMS container",
-          caption: "Web container: home page built in React + Tailwind, orienting clinicians before they enter the Unity simulation.",
-          aspect: "wide",
-          placeholder:
-            "SPARC-P home page showing Welcome message, 'About the training' section with video, 'Launch Training' and 'Go through resources first' CTAs, and sidebar navigation with Home, Learning Resources, AI Practice, Progress, Settings",
-        },
-      ],
-    },
-    {
-      id: "role",
-      label: "My Role",
-      heading: "Designing Across Two Layers of One Experience",
-      body: [
-        "My scope covered the full experience surface — from the web-based LMS shell to the in-session Unity interface. These two layers serve very different purposes and have very different design constraints.",
-        "The web container sets expectations, provides context, and gives clinicians a home base before and after each session. It's built in React and Tailwind, and I was responsible for design and front-end implementation. The Unity interface is where the high-stakes design work lives: UI elements that must coexist with a photorealistic 3D avatar without disrupting the simulation's sense of presence.",
-      ],
-      highlights: [
-        "Web container: home, login, learning resources, progress tracking, session transitions",
-        "Unity interface: navigation system, coach feedback overlay, transcript panel, progress label, bottom menu",
-        "Built a working React prototype to present interaction flows to PIs and help the team visualize the platform",
-        "Collaborated with instructional designer and PI on feedback pacing and rubric alignment",
-      ],
-      images: [
-        {
-          alt: "SPARC-P training session interface — Unity UI with bottom navigation",
-          caption: "Training interface: avatar session with coach feedback overlay, transcript panel, and Bottom Menu navigation.",
-          aspect: "wide",
-          placeholder:
-            "Training session UI showing 3D avatar (Dr. Sarah Williams, Pediatrician) in medical office environment, 'Training Session - Part 1/2' label top-left, yellow Coach Feedback 1 card top-right with Next button, Transcript panel at bottom, and Patient Info / Guide / Caption bottom navigation bar",
-        },
-      ],
-    },
-    {
-      id: "challenges",
-      label: "Design Challenges",
-      heading: "Three Problems That Shaped the Entire Process",
-      body: [
-        "SPARC sits at an unusual intersection: medical training, conversational AI, and real-time avatar simulation. There's no established UI playbook for this. That made the design work genuinely exploratory — and surfaced three challenges that drove every major decision.",
-      ],
-      highlights: [
-        "No established pattern: avatar-based conversational training doesn't map cleanly to any existing UI model",
-        "Cognitive load: clinicians must speak, listen, process feedback, and reference materials — sometimes in rapid succession",
-        "Expectation-setting: time-pressured clinicians need to understand where they are in the training arc before they commit",
-      ],
-    },
-    {
-      id: "exploration",
-      label: "Navigation Exploration",
-      heading: "Three Patterns for an Unconventional Interface",
-      body: [
-        "The central design question for the Unity interface was how to make three types of reference material — Patient Info, Communication Guide, and Transcript — accessible during a live avatar session without undermining presence. I explored three distinct navigation patterns, each optimized for a different cognitive engagement model.",
-        "The Tooltip placed a fixed button in the corner that expanded to reveal tabbed content — minimal footprint, immediate dismissal, but limited content depth and poor scalability. The Sidebar used a collapsible right panel — better content capacity, but it competed with the avatar for horizontal space and visual attention even when closed. The Bottom Menu modeled itself on Zoom-style video call interfaces — items open as slide-up modals, creating a clear, deliberate shift between 'conversation mode' and 'reference mode.'",
-        "The key reframe that drove the decision: the question wasn't 'does this interfere with the avatar?' It was 'what kind of attention does each moment in training actually require?' A clinician looking up a patient detail is already pausing the conversation — the interface should honor that intentional task switch, not try to hide it.",
-      ],
-      quote:
-        "When a user opens reference material mid-session, they've already recognized a knowledge gap and made a conscious decision to pause. That's not a distraction — it's purposeful task-switching. The UI should support it, not fight it.",
-      images: [
-        {
-          alt: "Three navigation pattern explorations — Tooltip, Sidebar, Bottom Menu",
-          caption: "Navigation exploration deck presented to the team: three patterns mapped to three cognitive access models.",
-          aspect: "video",
-          placeholder:
-            "Three-panel comparison: Tooltip (top-right expandable button with tabs), Sidebar (collapsible right panel), Bottom Menu (Zoom-style bar with slide-up modals) — each with pros/cons annotations",
-        },
-      ],
-    },
-    {
-      id: "solution",
-      label: "The Training Interface",
-      heading: "Presence, Pacing, and Expectation-Setting",
-      body: [
-        "With the Bottom Menu selected, I designed the full training session UI around four interacting elements, each addressing a specific design challenge identified earlier in the process.",
-        "The 'Training Session – Part 1/2' label addresses the expectation-setting problem directly: clinicians know where they are in the arc before they say their first word. The Coach Feedback overlay — a yellow-bordered card that appears after each clinician turn — addresses pacing: it's user-controlled via a 'Next' button rather than auto-advancing, so feedback is absorbed at the clinician's own speed. The Transcript panel addresses accessibility: it can be shown or hidden by the user, giving clinicians control over their own cognitive load. And the Bottom Menu gives Patient Info, Guide, and Caption a permanent home that's always accessible without cluttering the primary view.",
-      ],
-      highlights: [
-        "Session label: 'Training Session – Part 1/2' sets temporal expectations before the first turn",
-        "Coach feedback: appears after each turn, user-controlled 'Next' prevents rushing",
-        "Transcript: persistent but hideable — clinicians choose their own cognitive load level",
-        "Bottom Menu: always accessible, zero visual clutter in the default state",
-      ],
-      images: [
-        {
-          alt: "Training session annotated — session label, coach feedback, transcript, bottom menu",
-          caption: "Annotated training session UI: four elements working together to balance presence, pacing, and access.",
-          aspect: "wide",
-          placeholder:
-            "Annotated training session screenshot with callouts: A = Session Progress Label, B = Coach Feedback Card with Next button, C = Transcript panel with hide option, D = Bottom Menu (Patient Info, Guide, Caption)",
-        },
-      ],
-    },
-    {
-      id: "prototype",
-      label: "Prototype",
-      heading: "Building It to Show It",
-      body: [
-        "Static mockups couldn't communicate what mattered most about this interface: how it feels in motion. How does the coach feedback card appear after a turn? How does the Bottom Menu modal animate in? Does the session label actually reduce anxiety, or is it just more text on screen?",
-        "I built a working prototype in React and Tailwind — not just Figma screens — and presented it to the PIs and engineering team. The interactive prototype turned a conversation about 'what it could be' into a direct evaluation of 'what it will feel like.' It accelerated design alignment by several rounds of feedback.",
-      ],
-      highlights: [
-        "Working prototype built in React + Tailwind",
-        "Presented to PIs and team to visualize the full platform concept",
-        "Prototype drove selection of Bottom Menu over Tooltip and Sidebar",
-        "Demonstrated coach feedback pacing and Bottom Menu modal animation in context",
-      ],
-    },
-    {
-      id: "outcome",
-      label: "Reflection",
-      heading: "What Designing the Unknown Taught Me",
-      body: [
-        "SPARC was the most conceptually novel interface challenge I've worked on. There was no existing pattern to follow for 'turn-based AI avatar conversation training for medical professionals.' That forced a kind of first-principles design thinking I found genuinely energizing.",
-        "The biggest lesson: reframing the problem unlocked better solutions. Shifting from 'how do we avoid interfering with the avatar?' to 'what kind of attention does each training moment require?' opened up three distinct design directions where there had previously been just one instinct toward minimalism.",
-        "Working in Unity also required designing with hard constraints — layout flexibility, animation tooling, and component reuse all have real limits compared to the web. Learning to design within those limits while still advocating for the right interaction was an important part of this project's growth.",
-      ],
-      highlights: [
-        "Bottom Menu pattern selected and in active Unity development",
-        "Working prototype accelerated team alignment by replacing static mockups with interactive flows",
-        "Next step: usability testing with practicing clinicians to validate the reference mode / conversation mode distinction under real conditions",
-        "Platform designed as flexible — same architecture will extend to tobacco treatment, cancer screening, and other clinical communication contexts",
-      ],
-    },
-  ],
-},
 ];

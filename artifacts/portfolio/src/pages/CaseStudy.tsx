@@ -167,12 +167,16 @@ function groupImages(images: CaseStudyImage[]): Array<CaseStudyImage | [CaseStud
 }
 
 // ── Text card grid ───────────────────────────────────────────────────────────
-function CardGrid({ cards }: { cards: CaseStudyCard[] }) {
+function CardGrid({ cards, columns = 2, variant = "border" }: { cards: CaseStudyCard[]; columns?: 2 | 3; variant?: "border" | "solid" }) {
+  const colClass = columns === 3 ? "sm:grid-cols-3" : "sm:grid-cols-2";
+  const cardClass = variant === "solid"
+    ? "rounded-2xl bg-muted p-6 flex flex-col gap-3"
+    : "rounded-2xl border border-border bg-background p-6 flex flex-col gap-3";
   return (
     <motion.div variants={fadeUp} className="mb-8">
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <div className={`grid grid-cols-1 ${colClass} gap-4`}>
         {cards.map((card, i) => (
-          <div key={i} className="rounded-2xl border border-border bg-background p-6 flex flex-col gap-3">
+          <div key={i} className={cardClass}>
             <p className="font-semibold text-foreground leading-snug">{card.heading}</p>
             {card.body && (
               <p className="text-sm text-muted-foreground leading-relaxed">{card.body}</p>
@@ -353,92 +357,161 @@ export default function CaseStudy() {
                   {section.heading}
                 </motion.h2>
 
-                {/* Body paragraphs */}
-                <div className="space-y-4 mb-8">
-                  {section.body.map((para, j) => {
-                    const isSubheading = typeof para === "object" && para.subheading;
-                    const text = typeof para === "object" ? para.text : para;
+                {/* Content items rendered in data order */}
+                {section.content.map((item, k) => {
+                  if (item.type === "body") {
                     return (
-                      <motion.p
-                        key={j} custom={j} variants={fadeUp}
-                        className={isSubheading
-                          ? "text-lg md:text-xl font-semibold text-foreground leading-snug"
-                          : "text-base md:text-[17px] text-muted-foreground leading-relaxed"}
-                      >
-                        {text}
-                      </motion.p>
+                      <div key={k} className="space-y-4 mb-8">
+                        {item.paras.map((para, j) => {
+                          if (typeof para === "object" && "bullets" in para) {
+                            return (
+                              <motion.ul key={j} custom={j} variants={fadeUp} className="space-y-1 pl-1">
+                                {para.bullets.map((b, bi) => (
+                                  <li key={bi} className="flex items-start gap-3 text-base md:text-[15px] text-muted-foreground leading-relaxed">
+                                    <span className="mt-2 w-1.5 h-1.5 rounded-full bg-muted-foreground shrink-0" />
+                                    <span dangerouslySetInnerHTML={{ __html: b.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>") }} />
+                                  </li>
+                                ))}
+                              </motion.ul>
+                            );
+                          }
+                          const isSubheading = typeof para === "object" && para.subheading;
+                          const text = typeof para === "object" ? para.text : para;
+                          return (
+                            <motion.p
+                              key={j} custom={j} variants={fadeUp}
+                              className={isSubheading
+                                ? "text-lg md:text-xl font-semibold text-foreground leading-snug"
+                                : "text-base md:text-[15px] text-muted-foreground leading-relaxed"}
+                              dangerouslySetInnerHTML={{ __html: (text as string).replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>") }}
+                            />
+                          );
+                        })}
+                      </div>
                     );
-                  })}
-                </div>
+                  }
 
-                {/* Highlights */}
-                {section.highlights && (
-                  <motion.ul variants={fadeUp} className="mb-8 space-y-3">
-                    {section.highlights.map((h) => (
-                      <li key={h} className="flex items-start gap-3 text-sm text-foreground">
-                        <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-foreground shrink-0" />
-                        {h}
-                      </li>
-                    ))}
-                  </motion.ul>
-                )}
+                  if (item.type === "block") {
+                    return (
+                      <div key={k}>
+                        {item.body && item.body.length > 0 && (
+                          <div className="space-y-4 mb-8">
+                            {item.body.map((para, j) => {
+                              if (typeof para === "object" && "bullets" in para) {
+                                return (
+                                  <motion.ul key={j} custom={j} variants={fadeUp} className="space-y-1 pl-1">
+                                    {para.bullets.map((b: string, bi: number) => (
+                                      <li key={bi} className="flex items-start gap-3 text-base md:text-[15px] text-muted-foreground leading-relaxed">
+                                        <span className="mt-2 w-1.5 h-1.5 rounded-full bg-muted-foreground shrink-0" />
+                                        <span dangerouslySetInnerHTML={{ __html: b.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>") }} />
+                                      </li>
+                                    ))}
+                                  </motion.ul>
+                                );
+                              }
+                              const isSubheading = typeof para === "object" && para.subheading;
+                              const text = typeof para === "object" ? para.text : para;
+                              return (
+                                <motion.p
+                                  key={j} custom={j} variants={fadeUp}
+                                  className={isSubheading
+                                    ? "text-lg md:text-xl font-semibold text-foreground leading-snug"
+                                    : "text-base md:text-[15px] text-muted-foreground leading-relaxed"}
+                                  dangerouslySetInnerHTML={{ __html: (text as string).replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>") }}
+                                />
+                              );
+                            })}
+                          </div>
+                        )}
+                        {item.images && item.images.length > 0 && (
+                          <div className="mt-6 mb-10 space-y-8">
+                            {groupImages(item.images).map((group, m) =>
+                              Array.isArray(group) ? (
+                                <ImagePair key={m} imgs={group} onOpen={(src, alt) => setLightbox({ src, alt })} />
+                              ) : (
+                                <ImageBlock key={m} img={group} onOpen={(src, alt) => setLightbox({ src, alt })} />
+                              )
+                            )}
+                          </div>
+                        )}
+                      </div>
+                    );
+                  }
 
-                {/* Cards */}
-                {section.cards && section.cards.length > 0 && (
-                  <CardGrid cards={section.cards} />
-                )}
+                  if (item.type === "highlights") {
+                    return (
+                      <motion.ul key={k} variants={fadeUp} className="mb-8 space-y-3">
+                        {item.items.map((h) => (
+                          <li key={h} className="flex items-start gap-3 text-sm text-foreground">
+                            <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-foreground shrink-0" />
+                            {h}
+                          </li>
+                        ))}
+                      </motion.ul>
+                    );
+                  }
 
-                {/* Pull quote */}
-                {section.quote && (
-                  <motion.blockquote
-                    variants={fadeUp}
-                    className="mb-8 pl-5 border-l-2 border-foreground/20 italic text-lg text-muted-foreground leading-relaxed"
-                  >
-                    {section.quote}
-                  </motion.blockquote>
-                )}
+                  if (item.type === "cards") {
+                    return <CardGrid key={k} cards={item.cards} columns={item.columns} variant={item.variant} />;
+                  }
 
-                {/* Links / buttons */}
-                {section.links && section.links.length > 0 && (
-                  <motion.div variants={fadeUp} className="mb-8 flex flex-wrap gap-3">
-                    {section.links.map((link) =>
-                      link.variant === "button" ? (
-                        <a
-                          key={link.url}
-                          href={link.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium bg-foreground text-background hover:opacity-80 transition-opacity"
-                        >
-                          {link.label}
-                        </a>
-                      ) : (
-                        <a
-                          key={link.url}
-                          href={link.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1.5 text-sm font-medium text-foreground underline underline-offset-4 hover:opacity-70 transition-opacity"
-                        >
-                          {link.label}
-                        </a>
-                      )
-                    )}
-                  </motion.div>
-                )}
+                  if (item.type === "quote") {
+                    return (
+                      <motion.blockquote
+                        key={k} variants={fadeUp}
+                        className="mb-8 pl-5 border-l-2 border-foreground/20 italic text-lg text-muted-foreground leading-relaxed"
+                      >
+                        {item.text}
+                      </motion.blockquote>
+                    );
+                  }
 
-                {/* Images / placeholders */}
-                {section.images && section.images.length > 0 && (
-                  <div className="mt-10 space-y-8">
-                    {groupImages(section.images).map((group, k) =>
-                      Array.isArray(group) ? (
-                        <ImagePair key={k} imgs={group} onOpen={(src, alt) => setLightbox({ src, alt })} />
-                      ) : (
-                        <ImageBlock key={k} img={group} onOpen={(src, alt) => setLightbox({ src, alt })} />
-                      )
-                    )}
-                  </div>
-                )}
+                  if (item.type === "images") {
+                    return (
+                      <div key={k} className="mt-10 space-y-8 mb-8">
+                        {groupImages(item.images).map((group, m) =>
+                          Array.isArray(group) ? (
+                            <ImagePair key={m} imgs={group} onOpen={(src, alt) => setLightbox({ src, alt })} />
+                          ) : (
+                            <ImageBlock key={m} img={group} onOpen={(src, alt) => setLightbox({ src, alt })} />
+                          )
+                        )}
+                      </div>
+                    );
+                  }
+
+                  if (item.type === "links") {
+                    return (
+                      <motion.div key={k} variants={fadeUp} className="mb-8 flex flex-wrap gap-3">
+                        {item.links.map((link) =>
+                          link.variant === "button" ? (
+                            <a
+                              key={link.url}
+                              href={link.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium bg-foreground text-background hover:opacity-80 transition-opacity"
+                            >
+                              {link.label}
+                            </a>
+                          ) : (
+                            <a
+                              key={link.url}
+                              href={link.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center gap-1.5 text-sm font-medium text-foreground underline underline-offset-4 hover:opacity-70 transition-opacity"
+                            >
+                              {link.label}
+                            </a>
+                          )
+                        )}
+                      </motion.div>
+                    );
+                  }
+
+                  return null;
+                })}
 
                 {/* Section divider */}
                 {i < project.caseStudy.length - 1 && (
