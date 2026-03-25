@@ -680,18 +680,18 @@ export const projects: Project[] = [
     id: "4",
     slug: "turbo",
     title: "Turbo",
-    subtitle: "Reimagining the Sales Ecosystem for Modern Revenue Teams",
+    subtitle: "From Scattered Tools to Smart Workflows: ‍Designing Turbo's AI-Powered Sales Platform",
     shortDescription: "End-to-end product design for a sales lead management platform built for speed and clarity.",
-    description: "Turbo is a sales lead platform designed to help revenue teams move faster. I led the end-to-end product design — from initial research and IA through interaction design, prototyping, and component specifications.",
+    description: "Turbo is a sales lead platform designed to help revenue teams move faster. I led the end-to-end product design, from initial research and IA through interaction design, prototyping, and component specifications.",
     role: "Product Designer",
-    whatIDid: "End-to-End Product Design, UX Research, Interaction Design, Design System, Prototyping",
-    timeline: "4 months",
-    team: "1 designer (me), 3 engineers, 1 PM",
+    whatIDid: "End-to-End Product Design, UX Research, Dashboard Design, Prototyping",
+    timeline: "6 months",
+    team: "1 designer (me), 3 engineers, CEO",
     year: "2023",
-    tags: ["Product Design", "B2B", "Design Systems", "Interaction Design"],
+    tags: ["Product Design", "SAAS", "Interaction Design", "Web App UI"],
     category: "Product",
     cardClass: "project-card-turbo",
-    imageUrl: `${import.meta.env.BASE_URL}images/project-turbo.jpg`,
+    imageUrl: `${import.meta.env.BASE_URL}images/turbo/hero.jpg`,
     details: {
       context: "Sales teams were managing leads across a patchwork of CRMs, spreadsheets, and Slack threads. Turbo was built to unify the workflow into one fast, opinionated tool.",
       problem: "Existing sales tools were either too complex (enterprise CRMs) or too limited (basic pipelines). Sales reps needed something that matched the speed of their work without requiring constant data entry.",
@@ -707,26 +707,49 @@ export const projects: Project[] = [
       {
         id: "overview",
         label: "Overview",
-        heading: "The Sales Tool Problem",
+        heading: "What does Turbo offer?",
         content: [
-          { type: "body", paras: [
-            "Sales reps move fast. They're on calls, in meetings, updating notes on the go. Most CRM tools were designed by product teams who never watched a sales rep work in real time. The result: tools that demanded constant attention when reps' attention was already elsewhere.",
-            "Turbo wanted to be different. I joined as the sole product designer to shape the core product from research through to shipped components.",
-          ]},
-          { type: "images", images: [
-            {
-              alt: "Turbo sales platform — lead pipeline overview and contact detail view",
-              caption: "The Turbo lead pipeline: fast, keyboard-navigable, built around the rep's workflow.",
-              aspect: "wide",
-              placeholder: "Hero overview: Turbo pipeline board showing lead cards, status columns, and right-panel contact detail",
-            },
-          ]},
+           { type: "block", 
+            body: [
+            { text: "AI-Powered Lead Discovery", subheading: true },
+            "Tell Turbo who you're looking for, and AI generates a qualified list of accounts that match your ideal customer profile—no more hours spent filtering through thousands of irrelevant results.",
+          ], 
+           images: [
+              {
+                src: `${import.meta.env.BASE_URL}images/turbo/overview-01.jpg`,
+                alt: "Design iteration",
+                caption: "Single Canvas for Edit Mode",
+                aspect: "wide",
+                placeholder: "Annotated UI spec: tap target sizing, color contrast ratios, audio cue trigger points, and fall-back non-AR mode",
+              },
+             
+          ]
+          
+        },
+          { type: "block", 
+            body: [
+            { text: "Saved Prompts & Projects", subheading: true },
+               "ave your best searches as reusable templates and share them with your team, ensuring everyone targets the same high-quality accounts without rebuilding criteria from scratch.",
+
+          ], 
+            images: [
+              {
+                src: `${import.meta.env.BASE_URL}images/turbo/overview-02.jpg`,
+                alt: "Action Hints for Off-Screen AR Content",
+                caption: "Action Hints for Off-Screen AR Content",
+                aspect: "wide",
+                placeholder: "Annotated UI spec: tap target sizing, color contrast ratios, audio cue trigger points, and fall-back non-AR mode",
+              },
+          ]
+          
+        },
+          
         ],
       },
       {
-        id: "research",
-        label: "Research",
-        heading: "Shadowing the Sales Workflow",
+        id: "background",
+        label: "Background",
+        heading: "Sales reps struggle with information overload and fragmented tools across the entire sales cycle",
         content: [
           { type: "body", paras: [
             "I conducted 6 contextual inquiry sessions with sales reps across two companies — sitting with them during their actual work, watching how they moved between tools, and documenting the friction. I also interviewed sales managers to understand the reporting and visibility layer.",
@@ -749,8 +772,8 @@ export const projects: Project[] = [
         ],
       },
       {
-        id: "ia",
-        label: "Structure",
+        id: "problem",
+        label: "The Problem",
         heading: "Designing Around the Rep's Mental Model",
         content: [
           { type: "body", paras: [
